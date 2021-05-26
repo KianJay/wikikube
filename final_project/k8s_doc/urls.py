@@ -1,6 +1,5 @@
 from django.urls import path
-
-from . import views
+from k8s_doc import views
 
 urlpatterns = [
     path('postView/<int:post_id>', views.viewPost, name='viewPost'),

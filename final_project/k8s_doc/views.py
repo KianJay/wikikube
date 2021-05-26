@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from final_project.final_project.models import User, Comment, Post
-from final_project.final_project.forms import CommentForm
+from k8s_doc.models import User, Comment, Post
+from k8s_doc.forms import CommentForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 

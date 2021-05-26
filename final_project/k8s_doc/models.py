@@ -13,7 +13,7 @@ class User(models.Model):
         return self.user_name
 
 class Bookmark(models.Model):
-    book_user =  models.ForeignKey(User, on_delete=SET_DEFAULT, null=False)
+    book_user =  models.ForeignKey(User, on_delete=CASCADE, null=False)
     book_board_url = models.CharField(max_length=500, null=False)
 
 # 게시글에 대한 작성자확인이 필요할까? 모든 게시글은 admin이 작성할 것인데
@@ -31,8 +31,8 @@ class Comment(models.Model):
     # 고유번호는 comment.id로 참조 : id = models.AutoField(primary_key=True)
     comment_content = models.CharField(max_length=500, null=False)
     com_board_url = models.CharField(max_length=500, null=False)
-    user_id = models.ForeignKey(User, on_delete=SET_DEFAULT, null=False)
-    post_id = models.ForeignKey(Post, on_delete=SET_DEFAULT, null=False)
+    user_id = models.ForeignKey(User, on_delete=CASCADE, null=False)
+    post_id = models.ForeignKey(Post, on_delete=CASCADE, null=False)
     com_create_date = models.DateTimeField(auto_now_add=True, null=False)
 
     def __str__(self):
