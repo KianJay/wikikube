@@ -1,6 +1,9 @@
 from django.db import models
 from django.db.models.deletion import CASCADE, SET_DEFAULT
+from django.contrib.auth.models import User
 
+# django에서 지원하는 User model 사용
+'''
 # Create your models here.
 class User(models.Model):
     user_id = models.CharField(max_length=200, null=False, primary_key=True)
@@ -11,7 +14,7 @@ class User(models.Model):
 
     def __str__(self):
         return self.user_name
-
+'''
 class Bookmark(models.Model):
     book_user =  models.ForeignKey(User, on_delete=CASCADE, null=False)
     book_board_url = models.CharField(max_length=500, null=False)

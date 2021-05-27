@@ -1,9 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from k8s_doc.models import User, Comment, Post
-from k8s_doc.forms import CommentForm
+from django.views.generic.base import TemplateView
+from k8s_doc.models import Comment, Post, Bookmark #User
+from k8s_doc.forms import CommentForm, LoginForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
+from .forms import CreateUserForm
+from django.urls import reverse_lazy
+
 
 
 """
@@ -67,3 +74,89 @@ def viewPost(request, post_id):
     context = { "post":post, "imgSrc" : imgSrc, "comment_list":comment_list }
     return render(request, "postDetail.html", context)
 
+
+def homeview(request):
+    return render(request, 'homeview.html')
+
+
+# joeunvit
+
+# 회원가입 
+# html : signup.html / login.html
+# POST : login_id / login_pw / pw_confirm / login_name / login_birth
+class CreateUserView(CreateView):
+    template_name = 'registration/signup.html'
+    form_class = CreateUserForm
+
+    success_url = reverse_lazy('create_user_done')
+
+class RegisteredView(TemplateView):
+    template_name = 'registration/signup_done.html'
+
+
+
+'''  
+    if request.method == 'POST':
+        
+        if User.objects.filter(user_id=request.POST['login_id']).exists(): # 아이디 중복 체크 
+            messages.warning(request, "이미 존재하는 아이디입니다.")
+            return redirect('signup.html')
+
+        elif request.POST['login_pw'] == request.POST['pw_confirm']: # 비밀번호, 비밀번호 재입력란 일치하면 (아이디 중복 아니고)
+            user = User.objects.create(user_id=request.POST['login_id'], user_name=request.POST['login_name'], user_password=request.POST['login_pw'], user_dob=request.POST['login_birth'])
+            user.save()
+            return render(request, "login.html")
+
+        else: # 비밀번호, 비밀번호 재입력란 일치하지 않으면
+            messages.warning(request, "비밀번호가 서로 다릅니다")
+            return redirect('signup.html')
+
+    return render(request, 'signup.html')
+'''
+
+
+
+
+
+
+
+
+# django의 account.contrib.auth를 사용하면서 view가 필요없어졌는데, db를 위해서 django에서 지원하는 view를 상속하는 
+'''
+def login(request):
+    username = request.POST['login_name']
+    password = request.POST['login_pw']
+
+    user = authenticate(request, username=username, password=password)
+
+    try:
+        
+    if user is not None:
+        
+        login(request, user)
+        return HttpResponseRedirect("/board/boardList/1")
+    elif:    
+
+    if form.is_valid():
+        login_id = form.cleaned_data["login_id"]
+        login_pw = form.cleaned_data["login_pw"]
+        print(login_id, login_pw)
+
+        try:
+            user = User.objects.get(pk=login_id, user_password=login_pw)
+            print(user)
+            if user:
+                request.session["loginuser"] = user.user_name
+                request.session["loginid"] = user.user_id
+                return HttpResponseRedirect("/board/boardList/1")
+            else:
+                messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
+                return redirect('/board/login/')
+
+        except(User.DoesNotExist):
+                messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
+                return redirect('/board/login/')
+    else :
+        messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
+        return redirect('/board/login/')
+'''        

@@ -31,14 +31,18 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'k8s_doc.apps.K8SDocConfig',    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'k8s_doc.apps.K8SDocConfig',
 ]
+
+LOGIN_REDIRECT_URL = '../../docs/homeview'
+
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
