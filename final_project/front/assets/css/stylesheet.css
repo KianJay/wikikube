@@ -18,8 +18,7 @@
 		3.3 Section Divider
 	4. Header
 		4.1 Main Navigation
-	5 Elements
-		5.1 List Style
+	5 Elements  
 		5.2 Changelog
 		5.3 Accordion & Toggle
 		5.4 Nav
@@ -2306,7 +2305,7 @@ hr {
 #footer {
   background: #fff;
   color: #252b33;
-  margin-left: 260px;
+  margin-left: 140px;
   padding: 66px 0px;
   padding: 4.125rem 0;
 }
