@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +22,7 @@
 <link rel="stylesheet" type="text/css" href="assets/vendor/highlight.js/styles/github.css" />
 <!-- Custom Stylesheet -->
 <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css" />
-<link rel="stylesheet" type="text/css" href="assets/css/sidebar.css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
 </head>
 
 <body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
@@ -70,7 +70,6 @@
                     <li><a class="dropdown-item" href="feature-header-dark.html">Another Action</a></li>
                     <li><a class="dropdown-item" href="feature-header-primary.html">Something Else Here</a></li>
                     <li><a class="dropdown-item" href="index-2.html">Another Link</a></li>
-
                   </ul>
                 </li>
                 <li><a class="dropdown-item" href="#">Another Action</a>
@@ -102,93 +101,105 @@
   <!-- Content
   ============================ -->
   <div id="content" role="main">
-    
-	<!-- Sidebar Navigation
-	============================ -->
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <span data-feather="home"></span>
-                Dashboard <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="test.html">
-                <span data-feather="file"></span>
-                Orders
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="test.html">
-                <span data-feather="shopping-cart"></span>
-                Products
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="test.html">
-                <span data-feather="users"></span>
-                Customers
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="test.html">
-                <span data-feather="bar-chart-2"></span>
-                Reports
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="layers"></span>
-                Integrations
-              </a>
-            </li>
-          </ul>
 
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Saved reports</span>
-            <a class="d-flex align-items-center text-muted" href="#">
-              <span data-feather="plus-circle"></span>
-            </a>
-          </h6>
-          <ul class="nav flex-column mb-2">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Current month
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Last quarter
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Social engagement
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Year-end sale
-              </a>
-            </li>
+    <!-- Sidebar Navigation
+    ============================ -->
+    <div class="sidebar bg-light">
+      <ul class="nav flex-column ">
+        <li class="nav-item"><a class="nav-link active" href="test.html">Getting Started</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="test.html">Installation</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">HTML Structure</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Sass</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Color Schemes</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Customization</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Logo Settings</a></li>
           </ul>
-        </div>
-      </nav>
-    
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_layout">Layout</a>
+          <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="#idocs_header">Header</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_navbar">Navbar</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_sidebar">Sidebar</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_footer">Footer</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_box_layout">Box Layout</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_content">Content</a>
+      <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#idocs_typography">Typography</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_code">Code</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_table">Table</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_icons">Icons</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_image">Image</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_video">Video</a></li>
+          </ul>
+    </li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_components">Components</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#idocs_accordion">Accordion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_tabs">Tabs</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_social_icon">Social Icon</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_helper_classes">Helper Classes</a></li>
+          </ul>
+        </li>
+    <li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_source_credits">Source & Credits</a></li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_support">Support</a></li>
+    <li class="nav-item"><a class="nav-link" href="#idocs_templates">More Templates</a></li>
+    <li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
+      <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#v1-1">v1.1</a></li>
+            <li class="nav-item"><a class="nav-link" href="#v1-0">v1.0</a></li>
+          </ul>
+    </li>
+      </ul>
+    </div>
+
     <!-- Docs Content
 	============================ -->
-  <div class="idocs-content">
-    <div class="container"> 
-      <h1> Multi page testing </h1>
-     </div></div>
+
+      <div class="idocs-content">
+        <div class="container"> 
+          <h1>쿠버네티스란 ?</h1>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container pb-cmnt-container">
+          <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                  <div class="panel panel-info">
+                      <div class="panel-body">
+                          <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
+                          <form class="form-inline">
+                            <button class="btn btn-secondary pull-right" type="button">쓰기</button>
+                            <button class="btn btn-secondary pull-right" type="button">수정</button>
+                            <button class="btn btn-secondary pull-right" type="button">삭제</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        </div>
   <!-- Content end --> 
   
   <!-- Footer
