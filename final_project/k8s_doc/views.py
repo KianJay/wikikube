@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from .forms import CreateUserForm
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 
 """
@@ -20,7 +21,7 @@ is_valid() 함수가 호출되면 값이 유효하다면 참이 리턴되고 cle
 def addComment(request, post_id):
     form = CommentForm(request.POST)
 
-    if not request.session.get("loginuser"):                # 로그인이 안돼있을 경우
+    if not request.session.get("loginuser"):              # 로그인이 안돼있을 경우
         return HttpResponseRedirect("accounts/login/")
     else :
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
@@ -28,7 +29,7 @@ def addComment(request, post_id):
 
             # 댓글 작성
             # POST를 통해 댓글 내용을 업로드하고, get으로 게시글의 id와 유저 id를 가져옴
-            comment = Comment.objects.create(comment_content=request.POST['comment_content'], com_board=Board.objects.get(pk=board_id), com_user=User.objects.get(pk=user_id))
+            comment = Comment.objects.create(comment_content=request.POST['comment_content'], com_board_url=Post.objects.get(pk=post_id), com_user=User.get_username())
             comment.save()                                  # 댓글 저장
             return HttpResponseRedirect('docs/postView/' + str(post_id))
 
@@ -37,8 +38,8 @@ def addComment(request, post_id):
 
 
 def editComment(request, comment_id):
-    comment = Comment.objects.get(pk=comment_id)                        # 댓글 id 호출
-    if comment.user_id == request.session.get("loginid"):           # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
+    comment = Comment.objects.get(pk=comment_id)                        # 댓글 호출
+    if comment.user_id == request.session.get("loginid"):               # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
         if request.method == "POST":
             comment.comment_content = request.POST['comment_content']   # 작성한 댓글 내용 업로드
             comment.save()                                              # 댓글 저장
@@ -70,7 +71,7 @@ def viewPost(request, post_id):
     # if not request.session.get("loginuser"):
     #     return HttpResponseRedirect("/board/login")
     # 로그인을 안해도 페이지 열람가능
-    post = Post.objects.get(pk = post_id)
+    post = Post.objects.get(pk=post_id)
     comment_list = Comment.objects.all()
     imgSrc = "my_app/" + post.content
     context = { "post":post, "imgSrc": imgSrc, "comment_list":comment_list }
@@ -79,6 +80,9 @@ def viewPost(request, post_id):
 
 def homeview(request):
     return render(request, 'homeview.html')
+
+def test(request):
+    return render(request, 'test.html')
 
 
 # joeunvit
