@@ -21,7 +21,7 @@ is_valid() 함수가 호출되면 값이 유효하다면 참이 리턴되고 cle
 def addComment(request, post_id):
     form = CommentForm(request.POST)
 
-    if not request.session.get("loginuser"):              # 로그인이 안돼있을 경우
+    if not request.user:              # 로그인이 안돼있을 경우
         return HttpResponseRedirect("accounts/login/")
     else :
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
@@ -39,7 +39,7 @@ def addComment(request, post_id):
 
 def editComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)                        # 댓글 호출
-    if comment.user_id == request.session.get("loginid"):               # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
+    if comment.user_id == request.user:               # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
         if request.method == "POST":
             comment.comment_content = request.POST['comment_content']   # 작성한 댓글 내용 업로드
             comment.save()                                              # 댓글 저장
@@ -60,7 +60,7 @@ def editComment(request, comment_id):
 def deleteComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)
     post_id = comment.post_id
-    if comment.user_id == request.session.get("loginid"):  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
+    if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
         comment.delete()
     else:
         messages.error(request, '댓글삭제권한이 없습니다')
@@ -78,8 +78,8 @@ def viewPost(request, post_id):
     return render(request, "postDetail.html", context)
 
 
-def homeview(request):
-    return render(request, 'homeview.html')
+def viewIndex(request):
+    return render(request, 'index.html')
 
 def test(request):
     return render(request, 'test.html')
@@ -98,6 +98,42 @@ class CreateUserView(CreateView):
 
 class RegisteredView(TemplateView):
     template_name = 'registration/signup_done.html'
+
+
+# def login(request):
+#     # username = request.POST['login_name']
+#     # password = request.POST['login_pw']
+#     #
+#     # user = authenticate(request, username=username, password=password)
+#
+#     form = LoginForm(request.POST)
+#
+#     if form.is_valid():
+#         login_id = form.cleaned_data["login_id"]
+#         login_pw = form.cleaned_data["login_pw"]
+#         print(login_id, login_pw)
+#
+#         # if user is not None:
+#         #     login(request, user)
+#         #     return HttpResponseRedirect("/doc/viewIndex/")
+#
+#         try:
+#             user = User.objects.get(pk=login_id, user_password=login_pw)
+#             print(user)
+#             if user:
+#                 request.session["loginuser"] = user.user_name
+#                 request.session["loginid"] = user.user_id
+#                 return HttpResponseRedirect("/doc/viewIndex/")
+#             else:
+#                 messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
+#                 return redirect('/accounts/login/')
+#
+#         except(User.DoesNotExist):
+#             messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
+#             return redirect('/accounts/login/')
+#     else:
+#         messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
+#         return redirect('/accounts/login/')
 
 
 
@@ -119,50 +155,3 @@ class RegisteredView(TemplateView):
 
     return render(request, 'signup.html')
 '''
-
-
-
-
-
-
-
-
-# django의 account.contrib.auth를 사용하면서 view가 필요없어졌는데, db를 위해서 django에서 지원하는 view를 상속하는 
-'''
-def login(request):
-    username = request.POST['login_name']
-    password = request.POST['login_pw']
-
-    user = authenticate(request, username=username, password=password)
-
-    try:
-        
-    if user is not None:
-        
-        login(request, user)
-        return HttpResponseRedirect("/board/boardList/1")
-    elif:    
-
-    if form.is_valid():
-        login_id = form.cleaned_data["login_id"]
-        login_pw = form.cleaned_data["login_pw"]
-        print(login_id, login_pw)
-
-        try:
-            user = User.objects.get(pk=login_id, user_password=login_pw)
-            print(user)
-            if user:
-                request.session["loginuser"] = user.user_name
-                request.session["loginid"] = user.user_id
-                return HttpResponseRedirect("/board/boardList/1")
-            else:
-                messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
-                return redirect('/board/login/')
-
-        except(User.DoesNotExist):
-                messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
-                return redirect('/board/login/')
-    else :
-        messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
-        return redirect('/board/login/')
-'''        
