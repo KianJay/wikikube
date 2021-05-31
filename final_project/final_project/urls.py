@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', include('k8s_doc.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', views.viewIndex, name="viewIndex"),
+    path('', views.index, name="index"),
     path('markdownx/', include('markdownx.urls')),
     path('docs/index', views.index, name="index" ),
 ]
