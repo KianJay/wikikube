@@ -1,6 +1,9 @@
 from django.urls import path
 from k8s_doc import views
+# from . import views
 from django.contrib.auth import views as auth_views
+
+app_name = 'docs'
 
 urlpatterns = [
     path('postView/<int:post_id>', views.viewPost, name='viewPost'),
