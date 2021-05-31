@@ -117,6 +117,15 @@ def index(request):
     # return render(request, 'index.html', context)
     return render(request, 'index.html')
 
+def feedback(request):
+    # post_list = Post.objects.all().order_by('-id')[0:10]
+    # post = post_list[0]
+    # context = {"post":post}
+
+    # context = {"post_list" : post_list}
+    # return render(request, 'index.html', context)
+    return render(request, 'feedback.html')
+
 
 @login_required
 def change_password(request):

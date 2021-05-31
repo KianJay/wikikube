@@ -72,10 +72,16 @@
             </div>
           </div>
           <div class="controls">
+            {% if form.errors %}
+            <p style="color:red;">양식에 맞게 작성해주세요.</p>
+            {% endif %}
             <input type="submit" class="fadeIn fourth" value="register">
+            
           </div>
+   
         </form>
 
+<<<<<<< HEAD
         {% if form.errors %}
         <p style="color:red">잘못 입력하셨습니다. 양식에 맞게 작성해주세요.</p>
         <div style="font-size: 0.8rem;">
@@ -89,6 +95,9 @@
         </div>
       </br>
         {% endif %}
+=======
+
+>>>>>>> 41772074bac84c81990445bbd5b0aea98eeadd03
 
       </div>
     </div>
