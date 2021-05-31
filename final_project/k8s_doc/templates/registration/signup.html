@@ -21,29 +21,42 @@
         <form class="form-horizontal" method="post" action="{% url 'signup' %}">
           {% csrf_token %}
           <div class="control-group">
-            <!-- Username -->
+            <!-- Username(ID) -->
             <label class="control-label"  for="username">Username</label>
             <div class="controls">
               <input type="text" id="username" name="username" class="input-xlarge form-control" value="{{ form.subject.value|default_if_none:''}}">
-              
             </div>
           </div>
       
           <div class="control-group">
-            <!-- E-mail -->
+            <!-- name -->
             <label class="control-label" for="name">name</label>
             <div class="controls">
               <input type="text" id="name" name="name" class="input-xlarge form-control">
-
             </div>
           </div>
+
+          <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="email">e-mail</label>
+            <div class="controls">
+              <input type="text" id="email" name="email" class="input-xlarge form-control">
+            </div>
+          </div>
+
+          <!-- <div class="control-group"> -->
+            <!-- date of birth -->
+            <!-- <label class="control-label" for="dob">date of birth</label>
+            <div class="controls">
+              <input type="date" id="dob" name="dob" class="input-xlarge form-control">
+            </div>
+          </div> -->
       
           <div class="control-group">
             <!-- Password-->
             <label class="control-label" for="password1">Password</label>
             <div class="controls">
               <input type="password" id="password1" name="password1" class="input-xlarge form-control">
-
             </div>
           </div>
       
@@ -58,6 +71,11 @@
             <input type="submit" class="fadeIn fourth" value="register">
           </div>
         </form>
+
+        {% if form.errors %}
+        <p style="color:red;">양식에 맞게 작성해주세요.</p>
+        {% endif %}
+
       </div>
     </div>
   </body>

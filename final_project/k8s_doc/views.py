@@ -75,9 +75,9 @@ def viewPost(request, post_id):
     #     return HttpResponseRedirect("/board/login")
     # 로그인을 안해도 페이지 열람가능
     post = Post.objects.get(pk=post_id)
-    comment_list = Comment.objects.all()
-    imgSrc = "my_app/" + post.content
-    context = { "post":post, "imgSrc": imgSrc, "comment_list":comment_list }
+    # comment_list = Comment.objects.all()
+    # imgSrc = "my_app/" + post.content
+    context = { "post":post }
     return render(request, "postDetail.html", context)
 
 
@@ -96,7 +96,6 @@ def viewLogin(request):
 class CreateUserView(CreateView):
     template_name = 'registration/signup.html'
     form_class = CreateUserForm
-
     success_url = reverse_lazy('create_user_done')
 
 
@@ -106,6 +105,12 @@ class RegisteredView(TemplateView):
 
 
 def index(request):
+    # post_list = Post.objects.all().order_by('-id')[0:10]
+    # post = post_list[0]
+    # context = {"post":post}
+
+    # context = {"post_list" : post_list}
+    # return render(request, 'index.html', context)
     return render(request, 'index.html')
 
 

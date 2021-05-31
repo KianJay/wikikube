@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" />
 <!-- Font Awesome Icon -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}" />
-<!-- Magnific Popup -->{
+<!-- Magnific Popup -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/magnific-popup/magnific-popup.min.css' %}" />
 <!-- Highlight Syntax -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/highlight.js/styles/github.css' %}" />
@@ -87,14 +87,17 @@
           
         </div>
 
-        <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
-          {% if user.is_active %}
+
+          <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+            {% if user.is_active %}
             <a class="nav-link">{{user.username}}</a>
             <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'logout' %}?next=/docs/index">logout</a>
-          {% else %}
+            {% else %}
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'signup' %}"> Sign up</a>&nbsp&nbsp
             <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'login' %}"> Login</a>
-          {% endif %}
-        </ul>
+          </ul>
+            {% endif %}
+        
 
       </div>
       

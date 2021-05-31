@@ -21,7 +21,7 @@
       <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <input type="text" id="{{ form.username.id_for_label }}" class="fadeIn second form-control" name="{{ form.username.html_name }}" placeholder="ID">
-        <input type="text" id="{{ form.password.id_for_label }}" class="fadeIn third form-control" name="{{ form.password.html_name }}" placeholder="password">
+        <input type="password" id="{{ form.password.id_for_label }}" class="fadeIn third form-control" name="{{ form.password.html_name }}" placeholder="password">
         <input type="submit" class="fadeIn fourth" value="Log In">
       </form>
 
