@@ -160,3 +160,9 @@ searchButton.addEventListener('click', () => {
   const inputValue = searchInput.value;
   alert(inputValue);
 });
+
+$( "#feedback" ).click(function() {
+	$( "#comment" ).toggle( "slow", function() {
+	  // Animation complete.
+	});
+  });
