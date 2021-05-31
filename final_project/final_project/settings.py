@@ -60,7 +60,7 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
 # joeunvit add start
 
 LOGIN_REDIRECT_URL = '../../docs/index'
-LOGIN_REDIRECT_URL = '../../docs/index'
+LOGOUT_REDIRECT_URL = '../../docs/index'
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
 

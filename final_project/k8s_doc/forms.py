@@ -25,6 +25,13 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username", "name", "password1", "password2") #, "dob"
+        # widgets = {
+        #     'username' : forms.TextInput(attrs={'class': 'form-control id'}),
+        #     'name' : forms.TextInput(attrs={'class': 'form-control name'}),
+        #     'password1' : forms.TextInput(attrs={'class': 'form-control password1'}),
+        #     'password2' : forms.TextInput(attrs={'class': 'form-control password2'}),
+
+        # }
 
     def save(self, commit=True): # 저장하는 부분 오버라이딩
         user = super(CreateUserForm, self).save(commit=False) # 본인의 부모를 호출해서 저장하겠다.

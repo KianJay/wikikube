@@ -3,46 +3,62 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- 부트스트랩 추가 (Add Bootstrap) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
-    <title>Site Name</title>
-
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
   </head>
 
   <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
 
-    <!-- 내비게이션에 login 링크 추가 -->
-    <ul class="nav justify-content-end">
-        {% if user.is_active %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">{{user.username}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">logout</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{%url 'login' %}"> Login</a>
-        </li>
-        {% endif %}
-      </ul>
+        <div class="fadeIn first">
+          <a href="{% url 'index' %}" >  <img src="{% static 'assets/images/logo.png' %}" id="icon" alt="User Icon" /></a>
+        </div>
+        <form class="form-horizontal" method="post" action="{% url 'signup' %}">
+          {% csrf_token %}
+          <div class="control-group">
+            <!-- Username -->
+            <label class="control-label"  for="username">Username</label>
+            <div class="controls">
+              <input type="text" id="username" name="username" class="input-xlarge form-control" value="{{ form.subject.value|default_if_none:''}}">
+              
+            </div>
+          </div>
+      
+          <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="name">name</label>
+            <div class="controls">
+              <input type="text" id="name" name="name" class="input-xlarge form-control">
 
-    <br>  
-    <p><a href="{% url 'signup'%}">Sign up</a></p>
+            </div>
+          </div>
+      
+          <div class="control-group">
+            <!-- Password-->
+            <label class="control-label" for="password1">Password</label>
+            <div class="controls">
+              <input type="password" id="password1" name="password1" class="input-xlarge form-control">
 
-    <!-- edit -->
-
-    <form method="post" action="{% url 'signup' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">회원가입</button>
+            </div>
+          </div>
+      
+          <div class="control-group">
+            <!-- Password -->
+            <label class="control-label"  for="password2">Password (Confirm)</label>
+            <div class="controls">
+              <input type="password" id="password2" name="password2" class="input-xlarge form-control">
+            </div>
+          </div>
+          <div class="controls">
+            <input type="submit" class="fadeIn fourth" value="register">
+          </div>
         </form>
-
-    <!-- edit -->
-
+      </div>
+    </div>
   </body>
-<!-- JavaScript -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
-
 </html>
