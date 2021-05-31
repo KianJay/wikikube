@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 from django.views.generic.base import TemplateView
 from k8s_doc.models import Comment, Post, Bookmark #User
 from k8s_doc.forms import CommentForm, LoginForm
@@ -22,8 +23,9 @@ def addComment(request, post_id):
     form = CommentForm(request.POST)
 
     if not request.user:              # 로그인이 안돼있을 경우
+        # return HttpResponseRedirect('docs/login/')
         return render(request, 'login.html')
-    else :
+    else:
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
             user_id = request.session.get('loginid')        # 유저 아이디 호출
 
@@ -33,7 +35,7 @@ def addComment(request, post_id):
             comment.save()                                  # 댓글 저장
             return HttpResponseRedirect('docs/postView/' + str(post_id))
 
-        else :
+        else:
             return HttpResponseRedirect('docs/postView/' + str(post_id))
 
 
@@ -42,6 +44,7 @@ def editComment(request, comment_id):
     if comment.user_id == request.user:               # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
         if request.method == "POST":
             comment.comment_content = request.POST['comment_content']   # 작성한 댓글 내용 업로드
+            # comment.com_create_date = timezone.now()
             comment.save()                                              # 댓글 저장
             post_id = comment.post_id
             return redirect('docs/postView/' + str(post_id))             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
@@ -54,7 +57,7 @@ def editComment(request, comment_id):
         메시지 출력 방법은 https://ssungkang.tistory.com/entry/Djangomessage-framework-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 참고
         """
         messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
-        return redirect(...)
+        return redirect('docs/postView/' + str(comment.post_id))
 
 
 def deleteComment(request, comment_id):
