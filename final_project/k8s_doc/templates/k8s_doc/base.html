@@ -90,9 +90,9 @@
         <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
           {% if user.is_active %}
             <a class="nav-link">{{user.username}}</a>
-            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'logout' %}">logout</a>
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'logout' %}?next=/docs/index">logout</a>
           {% else %}
-            <a class="btn btn-outline-dark my-2 my-sm-0" href="{%url 'login' %}"> Login</a>
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'login' %}"> Login</a>
           {% endif %}
         </ul>
 
