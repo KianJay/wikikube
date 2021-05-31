@@ -75,9 +75,10 @@ def viewPost(request, post_id):
     #     return HttpResponseRedirect("/board/login")
     # 로그인을 안해도 페이지 열람가능
     post = Post.objects.get(pk=post_id)
-    # comment_list = Comment.objects.all()
+    comments = Comment.objects.filter(post=post.id)
+    content = post.content
     # imgSrc = "my_app/" + post.content
-    context = { "post":post }
+    context = {'content': content, 'comments': comments}
     return render(request, "postDetail.html", context)
 
 
