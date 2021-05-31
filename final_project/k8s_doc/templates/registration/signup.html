@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- 부트스트랩 추가 (Add Bootstrap) -->
     <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
 
   <body>
@@ -21,7 +22,7 @@
           {% csrf_token %}
           <div class="control-group">
             <!-- Username(ID) -->
-            <label class="control-label"  for="username">Username</label>
+            <label class="control-label" for="username">ID</label>
             <div class="controls">
               <input type="text" id="username" name="username" class="input-xlarge form-control" value="{{ form.subject.value|default_if_none:''}}">
             </div>
@@ -72,7 +73,18 @@
         </form>
 
         {% if form.errors %}
-        <p style="color:red;">양식에 맞게 작성해주세요.</p>
+        <p style="color:red">잘못 입력하셨습니다. 양식에 맞게 작성해주세요.</p>
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">작성요령</button>
+        <div id="demo" class="collapse" style="font-size: 0.8rem;">
+          < ID > </br>
+          - 150 characters of fewer. Letters, digits and @ . + = _ only.</br>
+          < Password ></br>
+          - Your password can't be too similar to your other personal information.</br>
+          - Your password must contain at least 8 characters.</br>
+          - Your password can't be a commonly used password.</br>
+          - Your password can't be entirely numeric.&nbsp;
+        </div>
+      </br>
         {% endif %}
 
       </div>

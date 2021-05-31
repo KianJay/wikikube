@@ -23,7 +23,7 @@ class Bookmark(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100, null=False)
     category = models.CharField(max_length=100, null=False)
-    content = models.CharField(max_length=500, null=False)
+    content = models.TextField(max_length=5000, null=False)
     # writer_id = models.ForeignKey(User, on_delete=SET_DEFAULT, default="")
     post_time = models.DateTimeField(auto_now_add=True)
 
