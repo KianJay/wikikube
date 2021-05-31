@@ -22,21 +22,18 @@
         {% csrf_token %}
         <input type="text" id="{{ form.username.id_for_label }}" class="fadeIn second form-control" name="{{ form.username.html_name }}" placeholder="ID">
         <input type="password" id="{{ form.password.id_for_label }}" class="fadeIn third form-control" name="{{ form.password.html_name }}" placeholder="password">
-        {% if form.errors %}
-        <p style="color:red;">아이디, 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
-        {% endif %}
         <input type="submit" class="fadeIn fourth" value="Log In">
-
       </form>
 
       {# Assumes you setup the password_reset view in your URLconf #}
       <div id="formFooter">
         <a class="underlineHover" href="{% url 'signup'%}">Sign up</a>
         <a class="underlineHover" href="password.html">Forgot Password</a>
-        
       </div>
 
-
+      {% if form.errors %}
+      <p style="color:red;">아이디, 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
+      {% endif %}
 
     </div>
 
