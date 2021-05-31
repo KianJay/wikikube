@@ -1,5 +1,3 @@
 # wikikube
-Team3
+Team 3  
 Working on wikikube team project
-
-abc...

@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% load doc_filter %}
+    <div class="test">
+        {{ "**마크다운 문법으로 작성해 봅니다.**"|formatted_markdown }}
+    </div>
+</body>
+</html>

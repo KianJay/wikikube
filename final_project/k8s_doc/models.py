@@ -35,7 +35,7 @@ class Comment(models.Model):
     comment_content = models.CharField(max_length=500, null=False)
     com_board_url = models.CharField(max_length=500, null=False)
     user_id = models.ForeignKey(User, on_delete=CASCADE, null=False)
-    post_id = models.ForeignKey(Post, on_delete=CASCADE, null=False)
+    post_id = models.ForeignKey(Post, on_delete=CASCADE, null=False)    # 게시글 고유번호
     com_create_date = models.DateTimeField(auto_now_add=True, null=False)
 
     def __str__(self):

@@ -106,16 +106,14 @@
     ============================ -->
     <div class="sidebar bg-light">
       <ul class="nav flex-column ">
-        <li class="nav-item"><a class="nav-link active" href="test.html">Getting Started</a>
-          <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="test.html">Installation</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">HTML Structure</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Sass</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Color Schemes</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Customization</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Logo Settings</a></li>
-          </ul>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="index.html">home</a>
+          <li class="nav-item"><a class="nav-link active" href="kubernetes._main.html">쿠버네티스 이해하기</a>
+            <ul class="nav flex-column">
+              <li class="nav-item"><a class="nav-link " href="kubernetes._main.html">쿠버네티스란</a></li>
+              <li class="nav-item"><a class="nav-link active" href="kubernetes._second.html">쿠버네티스 구성 요소</a></li>
+              <li class="nav-item"><a class="nav-link" href="kubernetes._third.html">쿠버네티스 용어 정리</a></li>
+            </ul>
+          </li>
         <li class="nav-item"><a class="nav-link" href="#idocs_layout">Layout</a>
           <ul class="nav flex-column">
       <li class="nav-item"><a class="nav-link" href="#idocs_header">Header</a></li>
@@ -161,26 +159,9 @@
 
       <div class="idocs-content">
         <div class="container"> 
-          <h1>쿠버네티스란 ?</h1>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
+          <h1>쿠버네티스 구성 요소</h1>
+          <p></p>
+        <hr>
           </div>
         </div>
         <div class="container pb-cmnt-container">
@@ -188,9 +169,9 @@
               <div class="col-md-6 col-md-offset-3">
                   <div class="panel panel-info">
                       <div class="panel-body">
-                          <form class="form-inline" method="post" action="{% url 'addComment' %}">
-                            <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
-                            <button class="btn btn-secondary pull-right" type="submit">제출</button>
+                          <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
+                          <form class="form-inline">
+                            <button class="btn btn-secondary pull-right" type="button">쓰기</button>
                             <button class="btn btn-secondary pull-right" type="button">수정</button>
                             <button class="btn btn-secondary pull-right" type="button">삭제</button>
                           </form>
