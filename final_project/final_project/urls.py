@@ -16,11 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from k8s_doc import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', include('k8s_doc.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup', views.CreateUserView.as_view(), name="signup"),
+    
+    # path('accounts/signup/done', views.RegisteredView.as_view(), name="create_user_done"),
+    # path('', views.index, name="create_user_done"),
+    path('accounts/login/', auth_views.LoginView.as_view(), name="create_user_done"),
+
     path('', views.index, name="index"),
     path('markdownx/', include('markdownx.urls')),
     path('docs/index', views.index, name="index" ),
