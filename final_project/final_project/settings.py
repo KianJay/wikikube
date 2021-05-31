@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os.path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.ㅅ
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,9 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# joeunvit add start
+
 LOGIN_REDIRECT_URL = '../../docs/homeview'
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
+
+STATIC_ROOT = ''
+STATIC_URL = '/front/'
+STATICFILES_DIRS = ( os.path.join('front'), )
+
+# joeunvit add finish
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,4 +131,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
