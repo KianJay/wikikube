@@ -23,6 +23,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.viewIndex, name="viewIndex"),
     path('markdownx/', include('markdownx.urls')),
+    path('docs/index', views.index, name="index" ),
 ]
 
 

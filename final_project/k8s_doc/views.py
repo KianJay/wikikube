@@ -100,6 +100,9 @@ class CreateUserView(CreateView):
 class RegisteredView(TemplateView):
     template_name = 'registration/signup_done.html'
 
+def index(request):
+    return render(request, 'index.html')
+
 
 # def login(request):
 #     # username = request.POST['login_name']

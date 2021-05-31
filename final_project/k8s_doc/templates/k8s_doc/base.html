@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
-<link href="assets/images/favicon.png" rel="icon" />
+{% load static %}
+<link href="{% static 'assets/images/favicon.png' %}" rel="icon" />
 <title>Documentation | Your ThemeForest item Name</title>
 <meta name="description" content="Your ThemeForest item Name and description">
 <meta name="author" content="harnishdesign.net">
@@ -13,15 +13,15 @@
 <!-- Stylesheet
 ============================== -->
 <!-- Bootstrap -->
-<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" />
 <!-- Font Awesome Icon -->
-<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css" />
-<!-- Magnific Popup -->
-<link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}" />
+<!-- Magnific Popup -->{
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/magnific-popup/magnific-popup.min.css' %}" />
 <!-- Highlight Syntax -->
-<link rel="stylesheet" type="text/css" href="assets/vendor/highlight.js/styles/github.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/highlight.js/styles/github.css' %}" />
 <!-- Custom Stylesheet -->
-<link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/stylesheet.css' %}" />
 
 </head>
 
@@ -52,7 +52,7 @@
 		<button id="sidebarCollapse" class="navbar-toggler d-block d-md-none" type="button"><span></span><span class="w-75"></span><span></span></button>
 		
 		<!-- Logo --> 
-        <a class="logo ml-md-3 "  href="index.html" title="iDocs Template"> <img src="assets/images/logo.png" height="auto" width="160px" alt="iDocs Template"/> </a> 
+        <a class="logo ml-md-3 "  href="index.html" title="iDocs Template"> <img src="{% static 'assets/images/logo.png' %}" height="auto" width="160px" alt="iDocs Template"/> </a> 
 		<span class="text-2 ml-2">v1.0</span> 
         <!-- Logo End -->
         
@@ -106,15 +106,17 @@
     ============================ -->
     <div class="sidebar bg-light">
       <ul class="nav flex-column ">
-        <li class="nav-item"><a class="nav-link" href="index.html">home</a>
-          <li class="nav-item"><a class="nav-link active" href="kubernetes._main.html">쿠버네티스 이해하기</a>
-            <ul class="nav flex-column">
-              <li class="nav-item"><a class="nav-link active" href="kubernetes._main.html">쿠버네티스란</a></li>
-              <li class="nav-item"><a class="nav-link" href="kubernetes._second.html">쿠버네티스 구성 요소</a></li>
-              <li class="nav-item"><a class="nav-link" href="kubernetes._third.html">쿠버네티스 용어 정리</a></li>
-            </ul>
-          </li>
-        <li class="nav-item"><a class="nav-link" href="#idocs_layout">Layout</a>
+        <li class="nav-item"><a class="nav-link active" href="index.html">home</a></li>
+        <li class="nav-item"><a class="nav-link " href="kubernetes._main.html">쿠버네티스 이해하기</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="test.html">Installation</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">HTML Structure</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Sass</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Color Schemes</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Customization</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Logo Settings</a></li>
+          </ul>
+        </li>
           <ul class="nav flex-column">
       <li class="nav-item"><a class="nav-link" href="#idocs_header">Header</a></li>
       <li class="nav-item"><a class="nav-link" href="#idocs_navbar">Navbar</a></li>
@@ -157,30 +159,10 @@
     <!-- Docs Content
 	============================ -->
 
-      <div class="idocs-content">
-        <div class="container"> 
-          <h1>쿠버네티스란 ?</h1>
-          <p></p>
-        <hr>
-          </div>
-        </div>
-        <div class="container pb-cmnt-container">
-          <div class="row">
-              <div class="col-md-6 col-md-offset-3">
-                  <div class="panel panel-info">
-                      <div class="panel-body">
-                          <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea"></textarea>
-                          <form class="form-inline">
-                            <button class="btn btn-secondary pull-right" type="button">쓰기</button>
-                            <button class="btn btn-secondary pull-right" type="button">수정</button>
-                            <button class="btn btn-secondary pull-right" type="button">삭제</button>
-                          </form>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-        </div>
+  {% block content %}
+
+  {% endblock %}
+
   <!-- Content end --> 
   
   <!-- Footer
@@ -207,16 +189,16 @@
 
 <!-- JavaScript
 ============================ -->
-<script src="assets/vendor/jquery/jquery.min.js"></script> 
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"}></script> 
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script> 
 <!-- Highlight JS -->
-<script src="assets/vendor/highlight.js/highlight.min.js"></script> 
+<script src="{% static 'assets/vendor/highlight.js/highlight.min.js' %}"></script> 
 <!-- Easing --> 
-<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script> 
+<script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script> 
 <!-- Magnific Popup --> 
-<script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script> 
+<script src="{% static 'assets/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script> 
 <!-- Custom Script -->
-<script src="assets/js/theme.js"></script>
+<script src="{% static 'assets/js/theme.js' %}"></script>
 
 </body>
 </html>
