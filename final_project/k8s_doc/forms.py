@@ -9,11 +9,11 @@ HTML에서 form이란  <form> ... </form> 태그 내에서 우리의 웹사이�
 데이터를 입력할 수 있도록 하고 서버로 데이터를 보내주는 역할을 제공
 """
 
-class CommentForm(forms.Form) :
+class CommentForm(forms.Form):
     comment_content = forms.CharField(label="댓글", max_length=500, required=True)
 
 
-class LoginForm(forms.Form) :
+class LoginForm(forms.Form):
     login_id = forms.CharField(label="아이디", max_length=100, required=True)
     login_pw = forms.CharField(label="패스워드", max_length=100, required=True , widget=forms.PasswordInput)    
 

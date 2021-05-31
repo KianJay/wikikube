@@ -6,12 +6,14 @@ from k8s_doc.models import Comment, Post, Bookmark #User
 from k8s_doc.forms import CommentForm, LoginForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from .forms import CreateUserForm
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 
 
 """
@@ -75,11 +77,11 @@ def viewPost(request, post_id):
     #     return HttpResponseRedirect("/board/login")
     # 로그인을 안해도 페이지 열람가능
     post = Post.objects.get(pk=post_id)
-    # comments = Comment.objects.filter(post=post.id)
+    comments = Comment.objects.filter(post_id=post_id)
     # content = post.content
     # imgSrc = "my_app/" + post.content
     # context = {'content': content, 'comments': comments}
-    context = {'post':post}
+    context = {'post': post, 'comments': comments}
     return render(request, "postDetail.html", context)
 
 
@@ -115,6 +117,22 @@ def index(request):
     # return render(request, 'index.html', context)
     return render(request, 'index.html')
 
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('index')
+        else:
+            messages.error(request, 'Please correct the error below.')
+
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {'form':form})
 
 # def login(request):
 #     # username = request.POST['login_name']
