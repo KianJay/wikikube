@@ -78,8 +78,8 @@ def viewPost(request, post_id):
     return render(request, "postDetail.html", context)
 
 
-def viewIndex(request):
-    return render(request, 'index.html')
+def viewLogin(request):
+    return render(request, 'login.html')
 
 # def test(request):
 #     return render(request, 'test.html')
