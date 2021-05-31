@@ -8,7 +8,7 @@ urlpatterns = [
     path('editComment/<int:comment_id>/', views.editComment, name='editComment'),
     path('deleteComment/<int:comment_id>', views.deleteComment, name='deleteComment'),
     path('login/', auth_views.LoginView.as_view(), name="login"),
-    path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+    path('logout/', auth_views.LogoutView, {'next_page' : ''}),
     # path('viewIndex/', views.viewIndex, name='viewIndex'),
     path('signup', views.CreateUserView.as_view(), name="signup"),
     path('login/done', views.RegisteredView.as_view(), name="create_user_done"),

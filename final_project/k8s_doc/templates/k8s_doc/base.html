@@ -86,11 +86,16 @@
           </ul>
           
         </div>
+
         <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
-          <a class="btn btn-outline-dark my-2 my-sm-0" href="login.html">Login</a>
-          
+          {% if user.is_active %}
+            <a class="nav-link">{{user.username}}</a>
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'logout' %}?next=/docs/index">logout</a>
+          {% else %}
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'login' %}"> Login</a>
+          {% endif %}
         </ul>
-        
+
       </div>
       
     </nav>
