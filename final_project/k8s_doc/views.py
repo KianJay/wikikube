@@ -22,7 +22,7 @@ def addComment(request, post_id):
     form = CommentForm(request.POST)
 
     if not request.user:              # 로그인이 안돼있을 경우
-        return HttpResponseRedirect("accounts/login/")
+        return render(request, 'login.html')
     else :
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
             user_id = request.session.get('loginid')        # 유저 아이디 호출
@@ -47,7 +47,7 @@ def editComment(request, comment_id):
             return redirect('docs/postView/' + str(post_id))             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
         else :
             return render(request, 'editComment.html')
-    else :
+    else:
         """
         자바스크립트 알람을 통해서 1회성 메시지를 남기는 messages
         HttpRequest를 통해 남기며 1회성이기 때문에 새로고침하면 사라짐
@@ -81,8 +81,8 @@ def viewPost(request, post_id):
 def viewIndex(request):
     return render(request, 'index.html')
 
-def test(request):
-    return render(request, 'test.html')
+# def test(request):
+#     return render(request, 'test.html')
 
 
 # joeunvit
@@ -95,6 +95,7 @@ class CreateUserView(CreateView):
     form_class = CreateUserForm
 
     success_url = reverse_lazy('create_user_done')
+
 
 class RegisteredView(TemplateView):
     template_name = 'registration/signup_done.html'
@@ -134,7 +135,6 @@ class RegisteredView(TemplateView):
 #     else:
 #         messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
 #         return redirect('/accounts/login/')
-
 
 
 '''  
