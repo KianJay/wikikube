@@ -93,7 +93,7 @@
 
           <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
             {% if user.is_active %}
-            <a class="nav-link">{{user.username}}</a>
+            <a class="nav-link">{{user.username}}</a> <!-- href 걸어서 회원정보 확인 페이지 넣기 ? -->
             <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'logout' %}?next=/docs/index">logout</a>
             {% else %}
             <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'signup' %}"> Sign up</a>&nbsp&nbsp

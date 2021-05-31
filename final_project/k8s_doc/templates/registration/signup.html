@@ -6,9 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    
     <!-- 부트스트랩 추가 (Add Bootstrap) -->
     <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <!-- jquery toggle 
+    <script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script>  -->
   </head>
 
   <body>
@@ -74,10 +78,9 @@
 
         {% if form.errors %}
         <p style="color:red">잘못 입력하셨습니다. 양식에 맞게 작성해주세요.</p>
-        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">작성요령</button>
-        <div id="demo" class="collapse" style="font-size: 0.8rem;">
+        <div style="font-size: 0.8rem;">
           < ID > </br>
-          - 150 characters of fewer. Letters, digits and @ . + = _ only.</br>
+          - 150 characters of fewer. Letters, digits and @ . + = _ only.</br></br>
           < Password ></br>
           - Your password can't be too similar to your other personal information.</br>
           - Your password must contain at least 8 characters.</br>
