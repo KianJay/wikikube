@@ -5,11 +5,12 @@
     <!-- Docs Content
 	============================ -->
   <div class="idocs-content">
+    {% load doc_filter %}
   <p>title :</p>{{ post.title }} 
   <br>
   <p>category :</p>{{ post.category }}
   <br>
-  <p>content :</p>{{ post.content }}
+  <p>content :</p>{{ post.content|formatted_markdown }}
 </div>
     
   <!-- Content end --> 
