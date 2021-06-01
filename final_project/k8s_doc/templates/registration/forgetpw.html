@@ -1,0 +1,78 @@
+{% load static %}
+<html>
+  <head>
+    <!-- <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- 부트스트랩 추가 (Add Bootstrap) -->
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+  </head>
+
+  <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+
+        <div class="fadeIn first">
+          <a href="{% url 'index' %}" >  <img src="{% static 'assets/images/logo.png' %}" id="icon" alt="User Icon" /></a>
+        </div>
+
+        <!-- forget pw form -->
+        <form class="form-horizontal" method="post" action="{% url 'forgetpw' %}">
+          {% csrf_token %}
+      
+          <div class="form-group">
+            <!-- name -->
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+              <input id="first_name" name="first_name" placeholder="first_name" class="fadeIn second form-control" type="text">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- name -->
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+              <input id="last_name" name="last_name" placeholder="last_name" class="fadeIn second form-control" type="text">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!-- E-mail -->
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+              <input id="email" name="email" placeholder="email address" class="fadeIn third form-control" type="email">
+            </div>
+          </div>
+
+          <div class="controls">
+
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p style="color:red">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if form.errors %}
+            <p style="color:red">잘못 입력하셨습니다. 양식에 맞게 작성해주세요.</p>
+            {% endif %}
+            <input name="recover-submit" class="btn btn-lg btn-primary btn-block fadeIn fourth" value="Reset Password" type="submit">
+          </div>
+
+          <!-- <input type="hidden" class="hide" name="token" id="token" value=""> -->
+   
+        </form>
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="{% url 'signup' %}">Sign Up</a>
+        <a class="underlineHover" href="{% url 'login' %}">Log In</a>
+      </div>
+
+      </div>
+    </div>
+  </body>
+</html>

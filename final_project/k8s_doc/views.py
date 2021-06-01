@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic.base import TemplateView
 from k8s_doc.models import Comment, Post, Bookmark #User
-from k8s_doc.forms import CommentForm, LoginForm
+from k8s_doc.forms import CommentForm, LoginForm, ForgetpwForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, update_session_auth_hash
@@ -131,9 +131,39 @@ def feedback(request):
     # return render(request, 'index.html', context)
     return render(request, 'feedback.html')
 
+def forgetpw(request):
+    # print(request.POST)
+    if request.method == 'POST':
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+
+        try:
+            user = User.objects.get(first_name=first_name, last_name=last_name, email=email)
+
+            if user:
+                # update_session_auth_hash(request, user)
+                context = {"user":user}
+                update_session_auth_hash(request, user)
+                form = PasswordChangeForm(user)
+                return render(request, 'registration/changepw.html', {'form':form})
+            # else:
+            #     messages.error(request, f'Please correct the error below')
+                
+                # return render(request, 'registration/forgetpw.html')
+        except:
+            messages.error(request, f"No matching user")
+            return render(request, 'registration/forgetpw.html')
+    else:
+        form = ForgetpwForm(request)
+    return render(request, 'registration/forgetpw.html')
+
+
+
 
 @login_required
 def change_password(request):
+    print(request)
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -146,7 +176,7 @@ def change_password(request):
 
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'registration/change_password.html', {'form':form})
+    return render(request, 'registration/changepw.html', {'form':form})
 
 # def login(request):
 #     # username = request.POST['login_name']

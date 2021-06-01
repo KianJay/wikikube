@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import fields
 
 """
 장고는 입력에 대한 처리를 할 수 있도록 폼(form) 기능을 제공
@@ -19,21 +20,33 @@ class LoginForm(forms.Form):
 
 
 class CreateUserForm(UserCreationForm):
-    name = forms.CharField(required=True) # 필드 추가
-    email = forms.CharField(max_length=30, required=True)
+    first_name = forms.CharField(required=True) # 필드 추가
+    last_name = forms.CharField(required=True) # 필드 추가
+    email = forms.EmailField(max_length=30, required=True)
     # dob = forms.DateField() # input_formats=['%Y-%m-%d']
 
     class Meta:
         model = User
-        fields = ("username", "name", 'email', "password1", "password2") #, 'dob'
+        fields = ("username", "first_name", 'last_name', 'email', "password1", "password2") #, 'dob'
 
     def save(self, commit=True): # 저장하는 부분 오버라이딩
         user = super(CreateUserForm, self).save(commit=False) # 본인의 부모를 호출해서 저장하겠다.
         
-        user.name = self.cleaned_data["name"]
+        user.first_name = self.cleaned_data["first_name"]
+        user.last_name = self.cleaned_data["last_name"]
         user.email = self.cleaned_data["email"]
         # user.dob = self.cleaned_data["date"]
 
         if commit:
             user.save()
         return user
+
+class ForgetpwForm(forms.Form):
+    first_name = forms.CharField(label="first_name", max_length=100, required=True)
+    last_name = forms.CharField(label="last_name", max_length=100, required=True)
+    email = forms.CharField(label="email", max_length=30, required=True)
+
+    class Meta:
+        fields = ['first_name', 'last_name', 'email']
+
+
