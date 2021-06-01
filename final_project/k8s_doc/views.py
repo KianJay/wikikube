@@ -54,7 +54,7 @@ def editComment(request, comment_id):
             # comment.com_create_date = timezone.now()
             comment.save()                                              # 댓글 저장
             post_id = comment.post_id
-            return redirect('docs/postView/' + str(post_id))             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
+            return redirect('docs:postView', post_id=post_id)             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
         else:
             return render(request, 'editComment.html')
     else:
@@ -74,7 +74,7 @@ def deleteComment(request, comment_id):
         comment.delete()
     else:
         messages.error(request, '댓글삭제권한이 없습니다')
-    return redirect('docs/postView/' + str(post_id))
+    return redirect('../../docs/postView/' + str(post_id))
 
 
 def viewPost(request, post_id):
