@@ -50,6 +50,7 @@
                     {% endfor %}
                     <form method = "post" action = "{% url 'docs:addComment'%}">
                         {% csrf_token %}
+                        <input type = "hidden" name = "user_id" value = "{{user.username}}">
                         <input type = "hidden" name = "post_id" value = "{{post.id}}">
                         <div class="bg-light p-2">
                             <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea" name="comment_content"></textarea></div>

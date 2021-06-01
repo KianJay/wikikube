@@ -23,10 +23,13 @@ is_valid() 함수가 호출되면 값이 유효하다면 참이 리턴되고 cle
 
 def addComment(request):
     form = CommentForm(request.POST)
+    # print()
+    # print(request.POST.get('user_id'))
+    # print()
 
-    if not request.user:              # 로그인이 안돼있을 경우
-        # return HttpResponseRedirect('docs/login/')
-        return render(request, 'login.html')
+    if not request.POST.get('user_id') :              # 로그인이 안돼있을 경우
+        return HttpResponseRedirect('../../accounts/login/')
+        # return render(request, 'login.html')
     else:
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
             post_id = request.POST.get('post_id', '').strip()
