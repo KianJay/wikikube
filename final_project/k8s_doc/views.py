@@ -21,7 +21,7 @@ Form 인스턴스는 is_valid() 함수를 갖고 있음. is_valid() 함수는 �
 is_valid() 함수가 호출되면 값이 유효하다면 참이 리턴되고 cleaned_data에 값이 저장
 """
 
-def addComment(request, post_id):
+def addComment(request):
     form = CommentForm(request.POST)
 
     if not request.user:              # 로그인이 안돼있을 경우
@@ -29,13 +29,15 @@ def addComment(request, post_id):
         return render(request, 'login.html')
     else:
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
-            user_id = request.session.get('loginid')        # 유저 아이디 호출
+            post_id = request.POST.get('post_id', '').strip()
+            user_id = request.user        # 유저 아이디 호출
+            post = Post.objects.get(pk=post_id)
 
             # 댓글 작성
             # POST를 통해 댓글 내용을 업로드하고, get으로 게시글의 id와 유저 id를 가져옴
-            comment = Comment.objects.create(comment_content=request.POST['comment_content'], com_board_url=Post.objects.get(pk=post_id), com_user=User.get_username())
+            comment = Comment.objects.create(comment_content=request.POST['comment_content'], post_id=Post.objects.get(pk=post_id), user_id=user_id)
             comment.save()                                  # 댓글 저장
-            return HttpResponseRedirect('docs/postView/' + str(post_id))
+            return redirect('docs:postView', post_id=post.id)
 
         else:
             return HttpResponseRedirect('docs/postView/' + str(post_id))

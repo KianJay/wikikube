@@ -48,10 +48,14 @@
                         </div>
                     </div>
                     {% endfor %}
-                    <div class="bg-light p-2">
-                        <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
-                        <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
-                    </div>
+                    <form method = "post" action = "{% url 'docs:addComment'%}">
+                        {% csrf_token %}
+                        <input type = "hidden" name = "post_id" value = "{{post.id}}">
+                        <div class="bg-light p-2">
+                            <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea" name="comment_content"></textarea></div>
+                            <div class="mt-2 text-right"><button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

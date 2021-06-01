@@ -6,8 +6,8 @@ from django.contrib.auth import views as auth_views
 app_name = 'docs'
 
 urlpatterns = [
-    path('postView/<int:post_id>', views.viewPost, name='viewPost'),
-    path('addComment/<int:post_id>/', views.addComment, name='addComment'),
+    path('postView/<int:post_id>', views.viewPost, name='postView'),
+    path('addComment/', views.addComment, name='addComment'),
     path('editComment/<int:comment_id>/', views.editComment, name='editComment'),
     path('deleteComment/<int:comment_id>', views.deleteComment, name='deleteComment'),
     path('feedback', views.feedback, name='feedback'),
