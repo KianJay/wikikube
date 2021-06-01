@@ -43,7 +43,7 @@ def addComment(request):
             return redirect('docs:postView', post_id=post.id)
 
         else:
-            return HttpResponseRedirect('docs/postView/' + str(post_id))
+            return redirect(request.META['HTTP_REFERER'])
 
 
 def editComment(request, comment_id):
@@ -55,7 +55,7 @@ def editComment(request, comment_id):
             comment.save()                                              # 댓글 저장
             post_id = comment.post_id
             return redirect('docs/postView/' + str(post_id))             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
-        else :
+        else:
             return render(request, 'editComment.html')
     else:
         """
