@@ -8,7 +8,7 @@
 <link href="{% static 'assets/images/favicon.png' %}" rel="icon" />
 <title>Documentation | Your ThemeForest item Name</title>
 <meta name="description" content="Your ThemeForest item Name and description">
-<meta name="author" content="harnishdesign.net">
+
 
 <!-- Stylesheet
 ============================== -->
@@ -16,12 +16,15 @@
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" />
 <!-- Font Awesome Icon -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}" />
-<!-- Magnific Popup -->{
+<!-- Magnific Popup -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/magnific-popup/magnific-popup.min.css' %}" />
 <!-- Highlight Syntax -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/highlight.js/styles/github.css' %}" />
 <!-- Custom Stylesheet -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/css/stylesheet.css' %}" />
+
+
+<link rel="stylesheet" href="{% static 'assets/css/feedback.css' %}">
 
 </head>
 
@@ -61,24 +64,10 @@
         
 		<div id="header-nav" class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
-            <li class="dropdown"> <a class="dropdown-toggle" href="#">Home</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Dropdown Action</a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="index.html">Action</a></li>
-                    <li><a class="dropdown-item" href="feature-header-dark.html">Another Action</a></li>
-                    <li><a class="dropdown-item" href="feature-header-primary.html">Something Else Here</a></li>
-                    <li><a class="dropdown-item" href="index-2.html">Another Link</a></li>
-                  </ul>
-                </li>
-                <li><a class="dropdown-item" href="#">Another Action</a>
-                <li><a class="dropdown-item" href="#">Something Else Here</a></li>
-              </ul>
-              
+            <li class="dropdown"> <a class="dropdown-toggle" href="#">Home</a> 
             </li>
-            <li><a target="_blank" href="https://themeforest.net/user/harnishdesign/portfolio?ref=HarnishDesign">Other Template</a></li>
-            <li><a target="_blank" href="https://themeforest.net/user/harnishdesign/#contact?ref=HarnishDesign">Support</a></li>
+            <li><a target="_blank" href="feedback.html">About</a></li>
+            <li><a target="_blank" href="{% url 'docs:feedback' %}">Feedback</a></li>
             <form class="form-inline">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
@@ -87,14 +76,17 @@
           
         </div>
 
-        <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
-          {% if user.is_active %}
-            <a class="nav-link">{{user.username}}</a>
+
+          <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+            {% if user.is_active %}
+            <a class="nav-link" href="{% url 'change_password' %}">{{user.username}}</a> <!-- href 걸어서 회원정보 확인 페이지 넣기 ? -->
             <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'logout' %}?next=/docs/index">logout</a>
-          {% else %}
+            {% else %}
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'signup' %}"> Sign up</a>&nbsp&nbsp
             <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'login' %}"> Login</a>
-          {% endif %}
-        </ul>
+          </ul>
+            {% endif %}
+        
 
       </div>
       
@@ -194,14 +186,14 @@
 
 <!-- JavaScript
 ============================ -->
-<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"}></script> 
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script> 
 <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script> 
 <!-- Highlight JS -->
 <script src="{% static 'assets/vendor/highlight.js/highlight.min.js' %}"></script> 
 <!-- Easing --> 
 <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script> 
-<!-- Magnific Popup --> 
-<script src="{% static 'assets/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script> 
+<!--jquery toggle --> 
+<script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script> 
 <!-- Custom Script -->
 <script src="{% static 'assets/js/theme.js' %}"></script>
 

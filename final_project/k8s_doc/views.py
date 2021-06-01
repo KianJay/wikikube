@@ -6,12 +6,14 @@ from k8s_doc.models import Comment, Post, Bookmark #User
 from k8s_doc.forms import CommentForm, LoginForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from .forms import CreateUserForm
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 
 
 """
@@ -19,24 +21,29 @@ Form 인스턴스는 is_valid() 함수를 갖고 있음. is_valid() 함수는 �
 is_valid() 함수가 호출되면 값이 유효하다면 참이 리턴되고 cleaned_data에 값이 저장
 """
 
-def addComment(request, post_id):
+def addComment(request):
     form = CommentForm(request.POST)
+    # print()
+    # print(request.POST.get('user_id'))
+    # print()
 
-    if not request.user:              # 로그인이 안돼있을 경우
-        # return HttpResponseRedirect('docs/login/')
-        return render(request, 'login.html')
+    if not request.POST.get('user_id') :              # 로그인이 안돼있을 경우
+        return HttpResponseRedirect('../../accounts/login/')
+        # return render(request, 'login.html')
     else:
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
-            user_id = request.session.get('loginid')        # 유저 아이디 호출
+            post_id = request.POST.get('post_id', '').strip()
+            user_id = request.user        # 유저 아이디 호출
+            post = Post.objects.get(pk=post_id)
 
             # 댓글 작성
             # POST를 통해 댓글 내용을 업로드하고, get으로 게시글의 id와 유저 id를 가져옴
-            comment = Comment.objects.create(comment_content=request.POST['comment_content'], com_board_url=Post.objects.get(pk=post_id), com_user=User.get_username())
+            comment = Comment.objects.create(comment_content=request.POST['comment_content'], post_id=Post.objects.get(pk=post_id), user_id=user_id)
             comment.save()                                  # 댓글 저장
-            return HttpResponseRedirect('docs/postView/' + str(post_id))
+            return redirect('docs:postView', post_id=post.id)
 
         else:
-            return HttpResponseRedirect('docs/postView/' + str(post_id))
+            return redirect(request.META['HTTP_REFERER'])
 
 
 def editComment(request, comment_id):
@@ -48,7 +55,7 @@ def editComment(request, comment_id):
             comment.save()                                              # 댓글 저장
             post_id = comment.post_id
             return redirect('docs/postView/' + str(post_id))             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
-        else :
+        else:
             return render(request, 'editComment.html')
     else:
         """
@@ -75,9 +82,11 @@ def viewPost(request, post_id):
     #     return HttpResponseRedirect("/board/login")
     # 로그인을 안해도 페이지 열람가능
     post = Post.objects.get(pk=post_id)
-    comment_list = Comment.objects.all()
-    imgSrc = "my_app/" + post.content
-    context = { "post":post, "imgSrc": imgSrc, "comment_list":comment_list }
+    comments = Comment.objects.filter(post_id=post_id)
+    # content = post.content
+    # imgSrc = "my_app/" + post.content
+    # context = {'content': content, 'comments': comments}
+    context = {'post': post, 'comments': comments}
     return render(request, "postDetail.html", context)
 
 
@@ -96,7 +105,6 @@ def viewLogin(request):
 class CreateUserView(CreateView):
     template_name = 'registration/signup.html'
     form_class = CreateUserForm
-
     success_url = reverse_lazy('create_user_done')
 
 
@@ -106,8 +114,39 @@ class RegisteredView(TemplateView):
 
 
 def index(request):
+    # post_list = Post.objects.all().order_by('-id')[0:10]
+    # post = post_list[0]
+    # context = {"post":post}
+
+    # context = {"post_list" : post_list}
+    # return render(request, 'index.html', context)
     return render(request, 'index.html')
 
+def feedback(request):
+    # post_list = Post.objects.all().order_by('-id')[0:10]
+    # post = post_list[0]
+    # context = {"post":post}
+
+    # context = {"post_list" : post_list}
+    # return render(request, 'index.html', context)
+    return render(request, 'feedback.html')
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('index')
+        else:
+            messages.error(request, 'Please correct the error below.')
+
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/change_password.html', {'form':form})
 
 # def login(request):
 #     # username = request.POST['login_name']

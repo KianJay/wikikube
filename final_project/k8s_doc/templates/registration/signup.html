@@ -3,12 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    
     <!-- 부트스트랩 추가 (Add Bootstrap) -->
     <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <!-- jquery toggle 
+    <script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script>  -->
   </head>
 
   <body>
@@ -21,29 +25,42 @@
         <form class="form-horizontal" method="post" action="{% url 'signup' %}">
           {% csrf_token %}
           <div class="control-group">
-            <!-- Username -->
-            <label class="control-label"  for="username">Username</label>
+            <!-- Username(ID) -->
+            <label class="control-label" for="username">ID</label>
             <div class="controls">
               <input type="text" id="username" name="username" class="input-xlarge form-control" value="{{ form.subject.value|default_if_none:''}}">
-              
             </div>
           </div>
       
           <div class="control-group">
-            <!-- E-mail -->
+            <!-- name -->
             <label class="control-label" for="name">name</label>
             <div class="controls">
               <input type="text" id="name" name="name" class="input-xlarge form-control">
-
             </div>
           </div>
+
+          <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="email">e-mail</label>
+            <div class="controls">
+              <input type="text" id="email" name="email" class="input-xlarge form-control">
+            </div>
+          </div>
+
+          <!-- <div class="control-group"> -->
+            <!-- date of birth -->
+            <!-- <label class="control-label" for="dob">date of birth</label>
+            <div class="controls">
+              <input type="date" id="dob" name="dob" class="input-xlarge form-control">
+            </div>
+          </div> -->
       
           <div class="control-group">
             <!-- Password-->
             <label class="control-label" for="password1">Password</label>
             <div class="controls">
               <input type="password" id="password1" name="password1" class="input-xlarge form-control">
-
             </div>
           </div>
       
@@ -55,9 +72,33 @@
             </div>
           </div>
           <div class="controls">
+            {% if form.errors %}
+            <p style="color:red;">양식에 맞게 작성해주세요.</p>
+            {% endif %}
             <input type="submit" class="fadeIn fourth" value="register">
+            
           </div>
+   
         </form>
+
+<<<<<<< HEAD
+        {% if form.errors %}
+        <p style="color:red">잘못 입력하셨습니다. 양식에 맞게 작성해주세요.</p>
+        <div style="font-size: 0.8rem;">
+          < ID > </br>
+          - 150 characters of fewer. Letters, digits and @ . + = _ only.</br></br>
+          < Password ></br>
+          - Your password can't be too similar to your other personal information.</br>
+          - Your password must contain at least 8 characters.</br>
+          - Your password can't be a commonly used password.</br>
+          - Your password can't be entirely numeric.&nbsp;
+        </div>
+      </br>
+        {% endif %}
+=======
+
+>>>>>>> 41772074bac84c81990445bbd5b0aea98eeadd03
+
       </div>
     </div>
   </body>
