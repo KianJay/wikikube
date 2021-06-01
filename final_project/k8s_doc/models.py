@@ -27,8 +27,8 @@ class Post(models.Model):
     # writer_id = models.ForeignKey(User, on_delete=SET_DEFAULT, default="")
     post_time = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.content
+    def __int__(self):
+        return self.id
 
 class Comment(models.Model):
     # 고유번호는 comment.id로 참조 : id = models.AutoField(primary_key=True)
