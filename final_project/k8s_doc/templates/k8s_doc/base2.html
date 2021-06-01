@@ -9,33 +9,20 @@
 <title>Documentation | Your ThemeForest item Name</title>
 <meta name="description" content="Your ThemeForest item Name and description">
 
-
 <!-- Stylesheet
 ============================== -->
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" />
 
-<!-- Highlight Syntax -->
-<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/highlight.js/styles/github.css' %}" />
 <!-- Custom Stylesheet -->
 <link rel="stylesheet" type="text/css" href="{% static 'assets/css/stylesheet.css' %}" />
-
-
-<link rel="stylesheet" href="{% static 'assets/css/feedback.css' %}">
 
 </head>
 
 <body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
 
 <!-- Preloader -->
-<div class="preloader">
-  <div class="lds-ellipsis">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-</div>
+
 <!-- Preloader End --> 
 
 <!-- Document Wrapper   
@@ -94,6 +81,61 @@
   
   <!-- Content
   ============================ -->
+  <div id="content" role="main">
+
+    <!-- Sidebar Navigation
+    ============================ -->
+    <div class="sidebar bg-light">
+      <ul class="nav flex-column ">
+        <li class="nav-item"><a class="nav-link active" href="index.html">홈</a></li>
+        <li class="nav-item"><a class="nav-link " href="main.html">쿠버네티스 이해하기</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="test.html">Installation</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">HTML Structure</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Sass</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Color Schemes</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Customization</a></li>
+            <li class="nav-item"><a class="nav-link" href="test.html">Logo Settings</a></li>
+          </ul>
+        </li>
+          <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="#idocs_header">Header</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_navbar">Navbar</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_sidebar">Sidebar</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_footer">Footer</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_box_layout">Box Layout</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_content">Content</a>
+      <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#idocs_typography">Typography</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_code">Code</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_table">Table</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_icons">Icons</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_image">Image</a></li>
+      <li class="nav-item"><a class="nav-link" href="#idocs_video">Video</a></li>
+          </ul>
+    </li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_components">Components</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#idocs_accordion">Accordion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_tabs">Tabs</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_social_icon">Social Icon</a></li>
+            <li class="nav-item"><a class="nav-link" href="#idocs_helper_classes">Helper Classes</a></li>
+          </ul>
+        </li>
+    <li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_source_credits">Source & Credits</a></li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_support">Support</a></li>
+    <li class="nav-item"><a class="nav-link" href="#idocs_templates">More Templates</a></li>
+    <li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
+      <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="#v1-1">v1.1</a></li>
+            <li class="nav-item"><a class="nav-link" href="#v1-0">v1.0</a></li>
+          </ul>
+    </li>
+      </ul>
+    </div>
 
     <!-- Docs Content
 	============================ -->
@@ -108,12 +150,7 @@
   ============================ -->
   <footer id="footer" class="section bg-dark footer-text-light">
     <div class="container">
-      <ul class="social-icons social-icons-lg social-icons-muted justify-content-center mb-3">
-        <li><a data-toggle="tooltip" href="https://twitter.com/harnishdesign/" target="_blank" title="" data-original-title="Twitter"><i class="fab fa-twitter"></i></a></li>
-        <li><a data-toggle="tooltip" href="http://www.facebook.com/harnishdesign/" target="_blank" title="" data-original-title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-        <li><a data-toggle="tooltip" href="http://www.dribbble.com/harnishdesign/" target="_blank" title="" data-original-title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
-        <li><a data-toggle="tooltip" href="http://www.github.com/" target="_blank" title="" data-original-title="GitHub"><i class="fab fa-github"></i></a></li>
-      </ul>
+  
       <p class="text-center">Copyright &copy; 2020 <a href="http://www.harnishdesign.net/idocs-one-page-documentation-html-template/">iDocs</a>. All Rights Reserved.</p>
 	  <p class="text-2 text-center mb-0">Design &amp; Develop by <a class="btn-link" target="_blank" href="http://www.harnishdesign.net/">HarnishDesign</a>.</p>
     </div>
@@ -138,6 +175,7 @@
 <script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script> 
 <!-- Custom Script -->
 <script src="{% static 'assets/js/theme.js' %}"></script>
+
 <script src="{% static 'assets/js/comment.js' %}"></script>
 </body>
 </html>

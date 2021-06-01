@@ -634,6 +634,11 @@ hr {
     max-width: 1170px !important;
   }
 }
+@media (min-width: 1200px) {
+  .containers {
+    max-width: 1170px !important;
+  }
+}
 /*=== 3.1 Side Navigation ===*/
 .sidebar {
   position: fixed;
@@ -2396,6 +2401,7 @@ hr {
     margin-left: 0px;
   }
 }
+
 /*=== 6.1 Social Icons ===*/
 .social-icons {
   margin: 0;
@@ -2482,6 +2488,8 @@ hr {
     z-index: 1029;
   }
 }
+
+
 /* =================================== */
 /*  Extras
 /* =================================== */
