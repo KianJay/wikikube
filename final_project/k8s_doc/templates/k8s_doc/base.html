@@ -101,12 +101,7 @@
     <div class="sidebar bg-light">
       <ul class="nav flex-column ">
 
-<<<<<<< HEAD
-        <li class="nav-item"><a class="nav-link active " href="{% url 'index' %}">home</a></li>
-        <li class="nav-item"><a class="nav-link " href="kubernetes._main.html">쿠버네티스 이해하기</a>
-=======
         <li class="nav-item"><a class="nav-link {% if '/index' in request.path or '/' == request.path %}active{% endif %}" href="{% url 'index' %}">home</a></li>
->>>>>>> ca88104d5bf5254ff32f093ea4a6fb430b804300
 
         <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스 이해하기</a>
           <ul class="nav flex-column">
