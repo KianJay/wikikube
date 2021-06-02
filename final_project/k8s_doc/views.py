@@ -58,7 +58,7 @@ def movetoEditComment(request, comment_id):
         메시지 출력 방법은 https://ssungkang.tistory.com/entry/Djangomessage-framework-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 참고
         """
         messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
-        return redirect('docs/postView/' + str(comment.post_id))
+        return redirect('docs:postView', str(comment.post_id))
 
 
 def editComment(request, comment_id):
@@ -81,7 +81,7 @@ def deleteComment(request, comment_id):
         comment.delete()
     else:
         messages.error(request, '댓글삭제권한이 없습니다')
-    return redirect('../../docs/postView/' + str(post_id))
+    return redirect('docs:postView', str(comment.post_id))
 
 
 def viewPost(request, post_id):
