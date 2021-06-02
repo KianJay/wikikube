@@ -6,18 +6,22 @@
 	============================ -->
   <div class="idocs-content">
 
-    {{ request.path }}
-    {% if '/kubernetes/kubernetes' in request.path %}
-    <p>correct</p>
-    {% else %}
-    <p>incorrect</p>
-    {% endif %}
-
     {% load doc_filter %}
-    {% for bookmark in bl %}
+    <!-- {% for bookmark in bl %}
       {{ bookmark }}
       <br>
+    {% endfor %} -->
+
+
+    {% for post,kotitle in zippedlist %}
+      <p>{{ post.category }}</p>
+      <p>{{ post.title }}</p>
+      <!-- {% with post.content|cut:'\n' as test %}
+        {{ test.0 }}
+      {% endwith %} -->
+      <p>{{ kotitle }}</p>
     {% endfor %}
+
 
   </div>
   <!-- Content end --> 

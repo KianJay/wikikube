@@ -14,7 +14,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.contrib import messages, auth
 from django.contrib.auth import authenticate, login as auth_login, update_session_auth_hash, get_user_model, REDIRECT_FIELD_NAME, logout as auth_logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm, UserCreationForm
@@ -46,7 +46,7 @@ def addComment(request):
     # print(request.POST.get('user_id'))
     # print()
 
-    if not request.user :              # 로그인이 안돼있을 경우
+    if request.user.is_authenticated:              # 로그인이 안돼있을 경우 not request.user
         return HttpResponseRedirect('../../accounts/login/')
         # return render(request, 'login.html')
     else:
@@ -117,7 +117,8 @@ def viewPost(request, category, title ):
     # content = post.content
     # imgSrc = "my_app/" + post.content
     # context = {'content': content, 'comments': comments}
-    if request.user:
+
+    if request.user.is_authenticated: # 사용자가 로그인 상태일 때
         if Bookmark.objects.filter(book_user=request.user, post_id=post.id) is not None:
             context = {'post': post, 'comments': comments, 'bookmark': Bookmark.objects.filter(book_user=request.user, post_id=post.id)}
             return render(request, "postDetail.html", context)
@@ -130,16 +131,27 @@ def viewPost(request, category, title ):
 def viewLogin(request):
     return render(request, 'login.html')
 
-
+@login_required
 def showBookmark(request):
-    if not request.user:              # 로그인이 안돼있을 경우
+    if not request.user.is_authenticated:              # 로그인이 안돼있을 경우
         return HttpResponseRedirect('../../accounts/login/')
     else:
         bl = Bookmark.objects.filter(book_user=request.user)
-        context = {'bl': bl}
+        # print(bl[0].post_id)
+        # print(type(bl[0].post_id))
+        # print(bl[0].post_id.title)
+
+        postlist = []
+        kotitlelist = []
+        for book in bl:
+            postlist.append(book.post_id)
+            test = book.post_id.content.split('\n')
+            kotitlelist.append(test[0])
+        zippedlist = zip(postlist,kotitlelist)
+        context = {'bl': bl, 'zippedlist':zippedlist}
         return render(request, 'bookmark.html', context)
 
-
+@login_required
 def addBookmark(request):
     post_id = request.POST['post_id']
     post = Post.objects.get(pk=post_id)
@@ -147,7 +159,7 @@ def addBookmark(request):
     bookmark.save()
     return redirect('docs:viewPost', post.category, post.title)
 
-
+@login_required
 def delBookmark(request):
     post_id = request.POST['post_id']
     post = Post.objects.get(pk=post_id)
