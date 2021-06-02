@@ -136,16 +136,7 @@ $('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 
 /*----
 feedback validation --*/
-verifyEmail = function() {
-	var emailVal = $("#email").val();
-	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	if (emailVal.match(regExp) != null) {
-	  alert('제출 되었습니다');
-	}
-	else {
-	  alert('이메일 양식에 맞춰주세요.');
-	}
-  };
+
 /*------------------------
    Scroll to top
 -------------------------- */
