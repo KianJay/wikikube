@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+
 from django.contrib import admin
 from django.urls import path, include
 from k8s_doc import views
@@ -26,6 +27,11 @@ urlpatterns = [
     path('accounts/signup', views.CreateUserView.as_view(), name="signup"),
     path('accounts/change_password', views.change_password, name='change_password'),
     path('accounts/forgetpw', views.forgetpw, name="forgetpw"),
+    # path('send_email/', views.send_email, name='send_email'),
+    path('reset_password/', views.UserPasswordResetView.as_view(), name="reset_password"),
+    path('reset_password_done/', views.UserPasswordResetDoneView.as_view(), name="reset_password_done"),
+    path('reset_password_confirm/<uidb64>/<token>/', views.UserPasswordResetConfirmView.as_view(), name="reset_password_confirm"),
+    path('reset_password_complete/', views.UserPasswordResetCompleteView.as_view(), name="reset_password_complete"),
 
     # path('accounts/signup/done', views.RegisteredView.as_view(), name="create_user_done"),
     # path('', views.index, name="create_user_done"),

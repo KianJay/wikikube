@@ -6,35 +6,8 @@
 	============================ -->
   <div class="idocs-content">
 
-    {{ request.path }}
-    {% if '/kubernetes/kubernetes' in request.path %}
-    <p>correct</p>
-    {% else %}
-    <p>incorrect</p>
-    {% endif %}
-
     {% load doc_filter %}
-  <p>title :</p>{{ post.title }}
-  <br>
-  <p>category :</p>{{ post.category }}
-  <br>
-
-  <p>content :</p>{{ post.content|formatted_markdown }}
-      {% if request.user %}
-          {% if bookmark %}
-            <form method = "post" action = "{% url 'docs:delBookmark' %}">
-                {% csrf_token %}
-                    <input type = "hidden" name = "post_id" value = "{{post.id}}">
-                  <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크 해제</button>
-              </form>
-          {% else %}
-            <form method = "post" action = "{% url 'docs:addBookmark' %}">
-                {% csrf_token %}
-                    <input type = "hidden" name = "post_id" value = "{{post.id}}">
-                  <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크</button>
-            </form>
-          {% endif %}
-      {% endif %}
+    {{ post.content|formatted_markdown }}
 
    <!-- Comments 
 	============================ -->

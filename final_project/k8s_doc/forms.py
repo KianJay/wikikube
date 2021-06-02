@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.forms import fields
 
 """
@@ -41,10 +41,9 @@ class CreateUserForm(UserCreationForm):
             user.save()
         return user
 
-class ForgetpwForm(forms.Form):
+class ForgetpwForm(PasswordResetForm):
     first_name = forms.CharField(label="first_name", max_length=100, required=True)
     last_name = forms.CharField(label="last_name", max_length=100, required=True)
-    email = forms.CharField(label="email", max_length=30, required=True)
 
     class Meta:
         fields = ['first_name', 'last_name', 'email']

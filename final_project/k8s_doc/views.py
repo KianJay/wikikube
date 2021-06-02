@@ -1,21 +1,39 @@
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, resolve_url, redirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+from django.utils.decorators import method_decorator
+from django.utils.http import is_safe_url, urlsafe_base64_decode
+# from django.views.generic import TemplateView
+from django.views import generic, View
 from django.views.generic.base import TemplateView
-from k8s_doc.models import Comment, Post, Bookmark #User
-from k8s_doc.forms import CommentForm, LoginForm, ForgetpwForm
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, update_session_auth_hash
-from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
+from django.views.decorators.http import require_POST
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.contrib import messages, auth
+from django.contrib.auth import authenticate, login as auth_login, update_session_auth_hash, get_user_model, REDIRECT_FIELD_NAME, logout as auth_logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm, UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from .forms import CreateUserForm
 from django.urls import reverse_lazy, reverse
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.decorators import login_required
 from django.core.mail.message import EmailMessage
+from django.core.exceptions import ValidationError
+from django.conf import settings
+from django.template import RequestContext
 
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
+
+
+from k8s_doc.models import Comment, Post, Bookmark #User
+from k8s_doc.forms import CommentForm, LoginForm, ForgetpwForm
 
 """
 Form 인스턴스는 is_valid() 함수를 갖고 있음. is_valid() 함수는 입력받은 폼에 대한 유효성 검사를 실행
@@ -173,25 +191,18 @@ def feedback(request):
     return render(request, 'feedback.html')
 
 def forgetpw(request):
-    # print(request.POST)
     if request.method == 'POST':
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
-
         try:
             user = User.objects.get(first_name=first_name, last_name=last_name, email=email)
-
             if user:
                 # update_session_auth_hash(request, user)
                 context = {"user":user}
                 update_session_auth_hash(request, user)
                 form = PasswordChangeForm(user)
                 return render(request, 'registration/changepw.html', {'form':form})
-            # else:
-            #     messages.error(request, f'Please correct the error below')
-                
-                # return render(request, 'registration/forgetpw.html')
         except:
             messages.error(request, f"No matching user")
             return render(request, 'registration/forgetpw.html')
@@ -199,14 +210,41 @@ def forgetpw(request):
         form = ForgetpwForm(request)
     return render(request, 'registration/forgetpw.html')
 
+class UserPasswordResetView(PasswordResetView):
+    template_name = 'registration/forgetpw.html'
+    success_url = reverse_lazy('reset_password_done')
+    form_class = ForgetpwForm
+    
+    def form_valid(self, form):
+        if User.objects.filter(email=self.request.POST.get("email"), first_name = self.request.POST.get("first_name"), last_name = self.request.POST.get("last_name")).exists():
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, f"No matching user")
+            return render(self.request, 'registration/forgetpw.html')
+                        
+class UserPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'registration/resetpassworddone.html'
 
-def send_email(request):
-    subject = "message"
-    to = ["id@gmail.com"]
-    from_email = "id@gmail.com"
-    message = "메지시 테스트"
-    EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
+UserModel = get_user_model()
+INTERNAL_RESET_URL_TOKEN = 'set-password'
+INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
 
+
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    form_class = SetPasswordForm
+    success_url=reverse_lazy('reset_password_complete')
+    template_name = 'registration/password_reset_confirm.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class UserPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'registration/resetpasswordcomplete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['login_url'] = resolve_url(settings.LOGIN_URL)
+        return context
 
 
 
@@ -226,6 +264,14 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'registration/changepw.html', {'form':form})
+
+# def send_email(request):
+#     subject = "message"
+#     to = ["wikikubernetes@gmail.com"]
+#     from_email = "wikikubernetes@gmail.com"
+#     message = "email test"
+#     EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
+
 
 # def login(request):
 #     # username = request.POST['login_name']
