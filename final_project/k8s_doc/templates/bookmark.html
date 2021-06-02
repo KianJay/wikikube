@@ -1,0 +1,24 @@
+{% extends 'k8s_doc/base.html' %}
+  
+{% block content %}
+
+    <!-- Docs Content
+	============================ -->
+  <div class="idocs-content">
+
+    {{ request.path }}
+    {% if '/kubernetes/kubernetes' in request.path %}
+    <p>correct</p>
+    {% else %}
+    <p>incorrect</p>
+    {% endif %}
+
+    {% load doc_filter %}
+    {% for bookmark in bookmarks %}
+      {{ bookmark }}
+      <br>
+    {% endfor %}
+
+  </div>
+  <!-- Content end --> 
+{% endblock %}
