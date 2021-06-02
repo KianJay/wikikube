@@ -101,54 +101,51 @@
     <div class="sidebar bg-light">
       <ul class="nav flex-column ">
 
-        <li class="nav-item"><a class="nav-link active" href="{% url 'index' %}">home</a></li>
-        <li class="nav-item"><a class="nav-link ">쿠버네티스 이해하기</a>
+        <li class="nav-item"><a class="nav-link {% if '/index' in request.path or '/' == request.path %}active{% endif %}" href="{% url 'index' %}">home</a></li>
 
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes' in request.path %}active{% endif %}">쿠버네티스 이해하기</a>
           <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="test.html">Installation</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">HTML Structure</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Sass</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Color Schemes</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Customization</a></li>
-            <li class="nav-item"><a class="nav-link" href="test.html">Logo Settings</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스란</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/elements' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='elements' %}">쿠버네티스 구성 요소</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/terminology' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='terminology' %}">쿠버네티스 용어 정리</a></li>
           </ul>
         </li>
+
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/environment' in request.path %}active{% endif %}">실습 환경 구축</a>
           <ul class="nav flex-column">
-      <li class="nav-item"><a class="nav-link" href="#idocs_header">Header</a></li>
-      <li class="nav-item"><a class="nav-link" href="#idocs_navbar">Navbar</a></li>
-      <li class="nav-item"><a class="nav-link" href="#idocs_sidebar">Sidebar</a></li>
-      <li class="nav-item"><a class="nav-link" href="#idocs_footer">Footer</a></li>
-      <li class="nav-item"><a class="nav-link" href="#idocs_box_layout">Box Layout</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/mac' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='mac' %}">macOS에 가상환경 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/linux' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='linux' %}">리눅스에 가상환경 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/windows' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='windows' %}">윈도우에 가상환경 설치</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="#idocs_content">Content</a>
-      <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="#idocs_typography">Typography</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_code">Code</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_table">Table</a></li>
-      <li class="nav-item"><a class="nav-link" href="#idocs_icons">Icons</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_image">Image</a></li>
-      <li class="nav-item"><a class="nav-link" href="#idocs_video">Video</a></li>
-          </ul>
-    </li>
-        <li class="nav-item"><a class="nav-link" href="#idocs_components">Components</a>
+
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/examples' in request.path %}active{% endif %}">간단한 예제</a>
           <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="#idocs_accordion">Accordion</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_tabs">Tabs</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_social_icon">Social Icon</a></li>
-            <li class="nav-item"><a class="nav-link" href="#idocs_helper_classes">Helper Classes</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/kub_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}">kubespray 사용한 쿠버네티스 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/apache_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='apache_installation' %}">kubernetes에 Apache 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/mysql_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='mysql_installation' %}">kubernetes에 mysql 설치</a></li>
           </ul>
         </li>
-    <li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
+
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/lb' in request.path %}active{% endif %}" href="#idocs_components">부하분산 실습 및 예제</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/metallb' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='metallb' %}">MetalLb 설치 및 실습</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/ingress' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='ingress' %}">Ingress 설치 및 실습</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/hostpath' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='hostpath' %}">hostpath 설치 및 실습</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#idocs_faq">FAQ</a></li>
         <li class="nav-item"><a class="nav-link" href="#idocs_source_credits">Source & Credits</a></li>
         <li class="nav-item"><a class="nav-link" href="#idocs_support">Support</a></li>
-    <li class="nav-item"><a class="nav-link" href="#idocs_templates">More Templates</a></li>
-    <li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
-      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="#idocs_templates">More Templates</a></li>
+        <li class="nav-item"><a class="nav-link" href="#idocs_changelog">Changelog</a>
+          <ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link" href="#v1-1">v1.1</a></li>
             <li class="nav-item"><a class="nav-link" href="#v1-0">v1.0</a></li>
           </ul>
-    </li>
+        </li>
+
       </ul>
     </div>
 
