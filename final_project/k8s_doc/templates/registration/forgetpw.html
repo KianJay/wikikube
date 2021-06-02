@@ -20,7 +20,7 @@
         </div>
 
         <!-- forget pw form -->
-        <form class="form-horizontal" method="post" action="{% url 'forgetpw' %}">
+        <form class="form-horizontal" method="post" action="{% url 'reset_password' %}">
           {% csrf_token %}
       
           <div class="form-group">

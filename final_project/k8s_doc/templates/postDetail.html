@@ -6,20 +6,8 @@
 	============================ -->
   <div class="idocs-content">
 
-    {{ request.path }}
-    {% if '/kubernetes/kubernetes' in request.path %}
-    <p>correct</p>
-    {% else %}
-    <p>incorrect</p>
-    {% endif %}
-
     {% load doc_filter %}
-  <p>title :</p>{{ post.title }}
-  <br>
-  <p>category :</p>{{ post.category }}
-  <br>
-
-  <p>content :</p>{{ post.content|formatted_markdown }}
+    {{ post.content|formatted_markdown }}
 
    <!-- Comments 
 	============================ -->
