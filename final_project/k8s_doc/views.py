@@ -14,6 +14,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.core.mail.message import EmailMessage
 
 
 """
@@ -172,6 +173,14 @@ def forgetpw(request):
     else:
         form = ForgetpwForm(request)
     return render(request, 'registration/forgetpw.html')
+
+
+def send_email(request):
+    subject = "message"
+    to = ["id@gmail.com"]
+    from_email = "id@gmail.com"
+    message = "메지시 테스트"
+    EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
 
 
 
