@@ -28,7 +28,7 @@ def addComment(request):
     # print(request.POST.get('user_id'))
     # print()
 
-    if not request.POST.get('user_id') :              # 로그인이 안돼있을 경우
+    if not request.user :              # 로그인이 안돼있을 경우
         return HttpResponseRedirect('../../accounts/login/')
         # return render(request, 'login.html')
     else:
@@ -88,6 +88,7 @@ def deleteComment(request, comment_id):
         messages.error(request, '댓글삭제권한이 없습니다')
     return redirect('docs:postView', post.category, post.title)
 
+
 def viewPost(request, category, title ):
     # if not request.session.get("loginuser"):
     #     return HttpResponseRedirect("/board/login")
@@ -98,8 +99,13 @@ def viewPost(request, category, title ):
     # content = post.content
     # imgSrc = "my_app/" + post.content
     # context = {'content': content, 'comments': comments}
-    context = {'post': post, 'comments': comments}
-    return render(request, "postDetail.html", context)
+    if request.user:
+        if Bookmark.objects.filter(book_user=request.user, post_id=post.id) is not None:
+            context = {'post': post, 'comments': comments, 'bookmark': Bookmark.objects.filter(book_user=request.user, post_id=post.id)}
+            return render(request, "postDetail.html", context)
+    else:
+        context = {'post': post, 'comments': comments}
+        return render(request, "postDetail.html", context)
     # return HttpResponseRedirect(reverse('docs:viewPost', kwargs={'category': category, 'title': title}))
 
 
@@ -108,17 +114,34 @@ def viewLogin(request):
 
 
 def showBookmark(request):
-
-
-    return render(request, 'bookmark.html')
+    if not request.user:              # 로그인이 안돼있을 경우
+        return HttpResponseRedirect('../../accounts/login/')
+    else:
+        bl = Bookmark.objects.filter(book_user=request.user)
+        context = {'bl': bl}
+        return render(request, 'bookmark.html', context)
 
 
 def addBookmark(request):
-    return render(request, "postDetail.html")
+    post_id = request.POST.get('post_id', '').strip()
+    post = Post.objects.get(pk=post_id)
+    if request.method == 'POST':
+
+        bookmark = Bookmark.objects.create(book_user=request.user, post_id=post.id)
+        bookmark.save()
+
+    return redirect('docs:postView', post.category, post.title)
 
 
 def delBookmark(request):
-    return render(request, "postDetail.html")
+    post_id = request.POST.get('post_id', '').strip()
+    post = Post.objects.get(pk=post_id)
+    if request.method == 'POST':
+
+        bookmark = Bookmark.objects.get(book_user=request.user, post_id=post.id)
+        bookmark.delete()
+
+    return redirect('docs:postView', post.category, post.title)
 
 
 # joeunvit

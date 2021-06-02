@@ -15,9 +15,6 @@ class User(models.Model):
     def __str__(self):
         return self.user_name
 '''
-class Bookmark(models.Model):
-    book_user =  models.ForeignKey(User, on_delete=CASCADE, null=False)
-    book_board_url = models.CharField(max_length=500, null=False)
 
 # 게시글에 대한 작성자확인이 필요할까? 모든 게시글은 admin이 작성할 것인데
 class Post(models.Model):
@@ -37,6 +34,13 @@ class Comment(models.Model):
     user_id = models.ForeignKey(User, on_delete=CASCADE, null=False)
     post_id = models.ForeignKey(Post, on_delete=CASCADE, null=False)    # 게시글 고유번호
     com_create_date = models.DateTimeField(auto_now_add=True, null=False)
+
+    def __str__(self):
+        return str(self.id)
+
+class Bookmark(models.Model):
+    book_user = models.ForeignKey(User, on_delete=CASCADE, null=False)
+    post_id = models.ForeignKey(Post, on_delete=CASCADE, null=True)    # 게시글 고유번호
 
     def __str__(self):
         return str(self.id)

@@ -20,15 +20,20 @@
   <br>
 
   <p>content :</p>{{ post.content|formatted_markdown }}
-
-      {% if  request.user in book_user %}
-        <form method = "post" action = "{% url 'docs:addBookmark' %}">
-              <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크</button>
-        </form>
-      {% else %}
-          <form method = "post" action = "{% url 'docs:delBookmark' %}">
-              <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크 해제</button>
-          </form>
+      {% if request.user %}
+          {% if bookmark %}
+            <form method = "post" action = "{% url 'docs:delBookmark' %}">
+                {% csrf_token %}
+                    <input type = "hidden" name = "post_id" value = "{{post.id}}">
+                  <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크 해제</button>
+              </form>
+          {% else %}
+            <form method = "post" action = "{% url 'docs:addBookmark' %}">
+                {% csrf_token %}
+                    <input type = "hidden" name = "post_id" value = "{{post.id}}">
+                  <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크</button>
+            </form>
+          {% endif %}
       {% endif %}
 
    <!-- Comments 
