@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic.base import TemplateView
@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from .forms import CreateUserForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -77,18 +77,19 @@ def deleteComment(request, comment_id):
         messages.error(request, '댓글삭제권한이 없습니다')
     return redirect('../../docs/postView/' + str(post_id))
 
-
-def viewPost(request, post_id):
+def viewPost(request, category, title ):
     # if not request.session.get("loginuser"):
     #     return HttpResponseRedirect("/board/login")
     # 로그인을 안해도 페이지 열람가능
-    post = Post.objects.get(pk=post_id)
-    comments = Comment.objects.filter(post_id=post_id)
+    # post = Post.objects.get(category=category, title=title)
+    post = get_object_or_404(Post, category=category, title=title)
+    comments = Comment.objects.filter(post_id=post)
     # content = post.content
     # imgSrc = "my_app/" + post.content
     # context = {'content': content, 'comments': comments}
     context = {'post': post, 'comments': comments}
     return render(request, "postDetail.html", context)
+    # return HttpResponseRedirect(reverse('docs:viewPost', kwargs={'category': category, 'title': title}))
 
 
 def viewLogin(request):

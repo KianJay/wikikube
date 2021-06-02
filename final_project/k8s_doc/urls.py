@@ -1,12 +1,12 @@
 from django.urls import path
 from k8s_doc import views
-# from . import views
+from . import views
 from django.contrib.auth import views as auth_views
 
 app_name = 'docs'
 
 urlpatterns = [
-    path('postView/<int:post_id>', views.viewPost, name='postView'),
+    path('viewPost/<str:category>/<str:title>/', views.viewPost, name='viewPost'),
     path('addComment/', views.addComment, name='addComment'),
     path('editComment/<int:comment_id>/', views.editComment, name='editComment'),
     path('deleteComment/<int:comment_id>', views.deleteComment, name='deleteComment'),
