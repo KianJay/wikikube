@@ -37,9 +37,9 @@
               <span><h4>쿠버네티스 이해하기</h4></span><p></p>
             </strong>
               <a href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스란 test</a><p></p>
-              <a href="kubernetes._second.html">쿠버네티스 구성 요소</a><p></p>
-              <a href="kubernetes._third.html">쿠버네티스 용어 정리</a><p></p>
-              <a href="kubernetes._main.html" class="btn btn-primary">바로 가기</a><p></p>
+              <a href="{% url 'docs:viewPost' category='kubernetes' title='elements' %}">쿠버네티스 구성 요소</a><p></p>
+              <a href="{% url 'docs:viewPost' category='kubernetes' title='terminology' %}">쿠버네티스 용어 정리</a><p></p>
+              <a href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}" class="btn btn-primary">바로 가기</a><p></p>
             </div>
           </div>
         </div>
@@ -49,10 +49,10 @@
               <strong>
                 <span><h4>실습 환경 구축</h4></span><p></p>
               </strong>
-                <a href="https://naver.com">macOS에 가상환경 설치 </a><p></p>
-                <a href="https://naver.com">리눅스에 가상환경 설치</a><p></p>
-                <a href="https://naver.com">윈도우에 가상환경 설치</a><p></p>
-                <a href="https://naver.com" class="btn btn-primary">바로 가기</a><p></p>
+                <a href="{% url 'docs:viewPost' category='environment' title='mac' %}">macOS에 가상환경 설치 </a><p></p>
+                <a href="{% url 'docs:viewPost' category='environment' title='linux' %}">리눅스에 가상환경 설치</a><p></p>
+                <a href="{% url 'docs:viewPost' category='environment' title='windows' %}">윈도우에 가상환경 설치</a><p></p>
+                <a href="{% url 'docs:viewPost' category='environment' title='mac' %}" class="btn btn-primary">바로 가기</a><p></p>
             </div>
           </div>
           <hr>
@@ -63,10 +63,10 @@
               <strong>
                 <span><h4>간단한 예제</h4></span><p></p>
               </strong>
-                <a href="https://naver.com">kubespray 사용한 쿠버네티스 설치 </a><p></p>
-                <a href="https://naver.com">kubernetes에 Apache 설치 </a><p></p>
-                <a href="https://naver.com">kubernetes에 mysql 설치</a><p></p>
-                <a href="https://naver.com" class="btn btn-primary">바로 가기</a><p></p>  
+                <a href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}">kubespray 사용한 쿠버네티스 설치 </a><p></p>
+                <a href="{% url 'docs:viewPost' category='examples' title='apache_installation' %}">kubernetes에 Apache 설치 </a><p></p>
+                <a href="{% url 'docs:viewPost' category='examples' title='mysql_installation' %}">kubernetes에 mysql 설치</a><p></p>
+                <a href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}" class="btn btn-primary">바로 가기</a><p></p>
             </div>
           </div>
         </div>
@@ -76,10 +76,10 @@
               <strong>
                 <span><h4>부하분산 실습 및 예제</h4></span><p></p>
               </strong>
-                <a href="https://naver.com">MetalLb 설치 및 실습</a><p></p>
-                <a href="https://naver.com">Ingress 설치 및 실습</a><p></p>
-                <a href="https://naver.com">hostpath 설치 및 실습</a><p></p>
-                <a href="https://naver.com" class="btn btn-primary">바로 가기</a><p></p> 
+                <a href="{% url 'docs:viewPost' category='lb' title='metallb' %}">MetalLb 설치 및 실습</a><p></p>
+                <a href="{% url 'docs:viewPost' category='lb' title='ingress' %}">Ingress 설치 및 실습</a><p></p>
+                <a href="{% url 'docs:viewPost' category='lb' title='hostpath' %}">hostpath 설치 및 실습</a><p></p>
+                <a href="{% url 'docs:viewPost' category='lb' title='metallb' %}" class="btn btn-primary">바로 가기</a><p></p>
            </div>
           </div>
         </div>
