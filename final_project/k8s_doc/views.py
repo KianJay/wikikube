@@ -46,6 +46,21 @@ def addComment(request):
             return redirect(request.META['HTTP_REFERER'])
 
 
+def movetoEditComment(request, comment_id):
+    comment = Comment.objects.get(pk=comment_id)  # 댓글 호출
+    if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
+        return render(request, 'editComment.html')
+    else:
+        """
+        자바스크립트 알람을 통해서 1회성 메시지를 남기는 messages
+        HttpRequest를 통해 남기며 1회성이기 때문에 새로고침하면 사라짐
+        메시지 출력 방법은 https://ssungkang.tistory.com/entry/Djangomessage-framework-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 참고
+        """
+        messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
+        return redirect('docs/postView/' + str(comment.post_id))
+
+
+
 def editComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)                        # 댓글 호출
     if comment.user_id == request.user:               # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
