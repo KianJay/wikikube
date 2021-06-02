@@ -21,6 +21,16 @@
 
   <p>content :</p>{{ post.content|formatted_markdown }}
 
+      {% if  request.user in book_user %}
+        <form method = "post" action = "{% url 'docs:addBookmark' %}">
+              <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크</button>
+        </form>
+      {% else %}
+          <form method = "post" action = "{% url 'docs:delBookmark' %}">
+              <button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">북마크 해제</button>
+          </form>
+      {% endif %}
+
    <!-- Comments 
 	============================ -->
 

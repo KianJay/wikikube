@@ -108,10 +108,16 @@ def viewLogin(request):
 
 
 def showBookmark(request):
+
+
     return render(request, 'bookmark.html')
 
 
 def addBookmark(request):
+    return render(request, "postDetail.html")
+
+
+def delBookmark(request):
     return render(request, "postDetail.html")
 
 
