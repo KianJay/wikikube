@@ -136,16 +136,16 @@ $('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 
 /*----
 feedback validation --*/
-verifyEmail = function() {
-	var emailVal = $("#email").val();
-	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	if (emailVal.match(regExp) != null) {
-	  alert('제출 되었습니다');
-	}
-	else {
-	  alert('이메일 양식에 맞춰주세요.');
-	}
-  };
+$.post($("#contact-us-form").attr('action'), JSON.stringify({
+    name: $("#contact-us-form input[name='name']").val(),
+    email: $("#contact-us-form input[name='email']").val(),
+    phone: $("#contact-us-form input[name='phone']").val(),
+    message: $("#contact-us-form textarea[name='message']").val(),
+    'g-recaptcha-response': $("#contact-us-form textarea[name='g-recaptcha-response']").val()
+}), function (data) {
+    $(".thanks").show();
+    $("#contact-us-form button").hide();
+}, 'json');
 /*------------------------
    Scroll to top
 -------------------------- */

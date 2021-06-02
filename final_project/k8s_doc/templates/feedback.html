@@ -6,12 +6,12 @@
   <div class="row">
       <div class="col-md-12">
           <div class="well well-sm">
-              <form class="form-horizontal" method="post">
+              <form action="feedback" class="form-horizontal" method="post" id="contact-us-form">
                 {% csrf_token %}
                   <fieldset>
                       <legend class="text-left header">Feedback</legend>
 
-                      <div class="form-group" onload='document.form1.text1.focus()' >
+                      <div class="form-group"  >
                           <span class="col-md-1 col-md-offset-2 text-center"></span>
                           <div class="col-md-8">
                               <input id="fname" name="name" type="text" placeholder="Name" class="form-control">
@@ -33,8 +33,11 @@
 
                       <div class="form-group">
                           <div class="col-md-12 text-center">
-                              <button type="submit" class="btn btn-lg" name="Validate" id="validate" onClick="verifyEmail()">Submit</button>
+                              <button type="submit" class="btn btn-lg" name="Validate" id="validate"
+                              data-sitekey="6LdrWS0UAAAAAPAokGKpRhrObJkaaCX0EMsEiofN"
+                              data-callback="onContctUsSubmit" data-badge="inline">Submit</button>
                           </div>
+       
                       </div>
                   </fieldset>
               </form>
