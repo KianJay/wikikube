@@ -47,17 +47,10 @@ def addComment(request):
             return redirect(request.META['HTTP_REFERER'])
 
 
-def editComment(request, comment_id):
-    comment = Comment.objects.get(pk=comment_id)                        # 댓글 호출
-    if comment.user_id == request.user:               # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
-        if request.method == "POST":
-            comment.comment_content = request.POST['comment_content']   # 작성한 댓글 내용 업로드
-            # comment.com_create_date = timezone.now()
-            comment.save()                                              # 댓글 저장
-            post_id = comment.post_id
-            return redirect('docs:postView', post_id=post_id)             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
-        else:
-            return render(request, 'editComment.html')
+def movetoEditComment(request, comment_id):
+    comment = Comment.objects.get(pk=comment_id)  # 댓글 호출
+    if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
+        return render(request, 'editComment.html', {'comment': comment})
     else:
         """
         자바스크립트 알람을 통해서 1회성 메시지를 남기는 messages
@@ -65,7 +58,20 @@ def editComment(request, comment_id):
         메시지 출력 방법은 https://ssungkang.tistory.com/entry/Djangomessage-framework-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 참고
         """
         messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
-        return redirect('docs/postView/' + str(comment.post_id))
+        return redirect('docs:postView', str(comment.post_id))
+
+
+def editComment(request, comment_id):
+    comment = Comment.objects.get(pk=comment_id)                        # 댓글 호출
+
+    if request.method == "POST":
+        comment.comment_content = request.POST['comment_content']   # 작성한 댓글 내용 업로드
+        # comment.com_create_date = timezone.now()
+        comment.save()                                              # 댓글 저장
+        post_id = comment.post_id
+        return redirect('docs:postView', post_id=post_id)             # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
+    else:
+        return render(request, 'editComment.html')
 
 
 def deleteComment(request, comment_id):
@@ -75,7 +81,7 @@ def deleteComment(request, comment_id):
         comment.delete()
     else:
         messages.error(request, '댓글삭제권한이 없습니다')
-    return redirect('../../docs/postView/' + str(post_id))
+    return redirect('docs:postView', str(comment.post_id))
 
 def viewPost(request, category, title ):
     # if not request.session.get("loginuser"):

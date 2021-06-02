@@ -14,6 +14,7 @@ from pathlib import Path
 import os.path
 import json
 from django.core.exceptions import ImproperlyConfigured
+from django.contrib.messages import constants as messages_constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.ㅅ
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,6 +60,8 @@ EMAIL_USE_TLS = True
 
 # 사이트와 관련한 자동응답을 받을 이메일 주소
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+MESSAGE_LEVEL = messages_constants.DEBUG
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
