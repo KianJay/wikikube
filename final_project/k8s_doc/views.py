@@ -123,7 +123,7 @@ def showBookmark(request):
 
 
 def addBookmark(request):
-    post_id = request.POST.get('post_id', '').strip()
+    post_id = request.POST['post_id']
     post = Post.objects.get(pk=post_id)
     if request.method == 'POST':
 
@@ -134,7 +134,7 @@ def addBookmark(request):
 
 
 def delBookmark(request):
-    post_id = request.POST.get('post_id', '').strip()
+    post_id = request.POST['post_id']
     post = Post.objects.get(pk=post_id)
     if request.method == 'POST':
 
