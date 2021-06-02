@@ -18,33 +18,7 @@
         <div class="d-flex justify-content-center row">
             
             <div class="col-md-8">
-                <p>
-    
-                    <span class="btn" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
-                      댓글
-                    </span>
-                  </p>
-                  <div class="collapse" id="collapse">
-            
-                <div class="d-flex flex-column comment-section">
-                    {% for comment in comments %}
-                    <div class="bg-white p-2">
-                        <div class="d-flex flex-row user-info">
-                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{comment.user_id}}</span><span class="date text-black-50">{{comment.com_create_date}}</span></div>
-                        </div>
-                        <div class="mt-2" > 
-                            <p class="comment-text" id="comment">{{comment.comment_content}}</p>
-                        </div>
-                    </div>
-                    <div class="bg-white">
-                        <div class="d-flex flex-row fs-12">
-                
-                            <div class="like p-2 cursor"></i><span class="ml-1">수정</span></div>
-                           
-                            <div class="like p-2 cursor"></i><span class="ml-1">삭제</span></div>
-                        </div>
-                    </div>
-                    {% endfor %}
+             
                     <form method = "post" action = "{% url 'docs:addComment'%}">
                         {% csrf_token %}
                         <input type = "hidden" name = "user_id" value = "{{user.username}}">
@@ -57,9 +31,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-</div>
 
 <script src="assets/vendor/jquery/jquery.min.js"></script> 
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
