@@ -43,7 +43,9 @@
                     <div class="bg-white">
                         <div class="d-flex flex-row fs-12">
                 
-                            <div class="like p-2 cursor"></i><span class="ml-1">수정</span></div>
+                            <div class="like p-2 cursor">
+                                <input type = "hidden" name = "comment_id" value = "{{comment.id}}">
+                                <a  style="text-decoration: none" href="{% url 'docs:toEditComment' comment.id %}"  class="ml-1">수정</a></div>
                            
                             <div class="like p-2 cursor">
                                 <input type = "hidden" name = "comment_id" value = "{{comment.id}}">

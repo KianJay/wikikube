@@ -16,18 +16,16 @@
     <div class="container mt-5" >
         <div class="d-flex justify-content-center row">
             <div class="col-md-8">
-                    <form method = "post" action = "{% url 'docs:addComment'%}">
+                    <form method = "post" action = "{% url 'docs:editComment' comment.id %}">
                         {% csrf_token %}
-                        <input type = "hidden" name = "user_id" value = "{{user.username}}">
-                        <input type = "hidden" name = "post_id" value = "{{post.id}}">
                         <div class="bg-light p-2">
-                            <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea" name="comment_content"></textarea></div>
-                            <div class="mt-2 text-right"><button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                            <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea" name="comment_content"> {{comment.comment_content}} </textarea></div>
+                            <div class="mt-2 text-right"><button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">수정하기</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
                         </div>
                     </form>
-                </div>
             </div>
         </div>
+    </div>
 
 <script src="assets/vendor/jquery/jquery.min.js"></script> 
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
@@ -41,5 +39,3 @@
 <script src="assets/js/theme.js"></script>
 
 <script src="assets/js/comment.js"></script>
-
-{% endblock %}
