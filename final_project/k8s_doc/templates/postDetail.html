@@ -5,6 +5,14 @@
     <!-- Docs Content
 	============================ -->
   <div class="idocs-content">
+
+    {{ request.path }}
+    {% if '/kubernetes/kubernetes' in request.path %}
+    <p>correct</p>
+    {% else %}
+    <p>incorrect</p>
+    {% endif %}
+
     {% load doc_filter %}
   <p>title :</p>{{ post.title }}
   <br>
