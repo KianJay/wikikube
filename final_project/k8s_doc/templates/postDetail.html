@@ -14,12 +14,12 @@
 	============================ -->
 
 
-    <div class="container mt-5" >
+    <!-- <div class="container mt-5" > -->
 
         <div class="d-flex justify-content-center row">
             <div class="col-md-12">
                     <span class="btn" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
-                      댓글
+                      댓글 펼치기
                     </span>
                     {% if request.user %}
                     {% if bookmark %}
@@ -32,7 +32,7 @@
                       <form method = "post" action = "{% url 'docs:addBookmark' %}">
                           {% csrf_token %}
                               <input type = "hidden" name = "post_id" value = "{{post.id}}">
-                            <button type="submit" class="btn-info btn-sm shadow-none " type="button">북마크</button>
+                            <button type="submit" class="btn-info btn-sm shadow-none " type="button">북마크에 추가</button>
                       </form>
                     {% endif %}
                 {% endif %}
@@ -82,7 +82,7 @@
             {% endif %}
         </div>
     </div>
-    </div>
+    <!-- </div> -->
 </div>
 
   <!-- Content end --> 

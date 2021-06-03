@@ -1,9 +1,11 @@
+{% load static %}
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css" href="/front/assets/vendor/bootstrap/css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" type="text/css" href="(% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" /> -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<link href="front/assets/images/favicon.png" rel="icon" />
+<link href="{% static 'assets/images/favicon.png' %}" rel="icon" />
 <div class="idocs-content">
-  <a class="logo ml-md-3 "  href="index" title="wikikube"> <img src="front/assets/images/logo.png" height="auto" width="160px" alt="wikikube"/> </a> 
+  <a class="logo ml-md-3 "  href="index" title="wikikube"> <img src="{% static 'assets/images/logo.png' %}" height="auto" width="160px" alt="wikikube"/> </a> 
 <div class="container mt-5">
  
   <div class="row">
@@ -42,7 +44,7 @@
                       <div class="form-group">
                         
                               <input type="submit" name="submit" id="submit" value="Submit" class="btn" ></input>
-                            <a href="index" type="cancel" class="btn" name="cancel" id="cancel">Cancel</a>
+                            <a href="{% url 'index' %}" type="cancel" class="btn" name="cancel" id="cancel">Cancel</a>
                             <div id="response"></div>
                
                         </div>
