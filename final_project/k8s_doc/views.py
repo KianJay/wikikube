@@ -40,13 +40,14 @@ Form 인스턴스는 is_valid() 함수를 갖고 있음. is_valid() 함수는 �
 is_valid() 함수가 호출되면 값이 유효하다면 참이 리턴되고 cleaned_data에 값이 저장
 """
 
+@login_required
 def addComment(request):
     form = CommentForm(request.POST)
     # print()
     # print(request.POST.get('user_id'))
     # print()
 
-    if request.user.is_authenticated:              # 로그인이 안돼있을 경우 not request.user
+    if not request.user.is_authenticated:              # 로그인이 안돼있을 경우 not request.user
         return HttpResponseRedirect('../../accounts/login/')
         # return render(request, 'login.html')
     else:
@@ -64,47 +65,52 @@ def addComment(request):
         else:
             return redirect(request.META['HTTP_REFERER'])
 
-
+@login_required
 def movetoEditComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)  # 댓글 호출
     post_id = comment.post_id
-    post = Post.objects.get(pk=post_id)
-    if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
-        return render(request, 'editComment.html', {'comment': comment})
-    else:
-        """
-        자바스크립트 알람을 통해서 1회성 메시지를 남기는 messages
-        HttpRequest를 통해 남기며 1회성이기 때문에 새로고침하면 사라짐
-        메시지 출력 방법은 https://ssungkang.tistory.com/entry/Djangomessage-framework-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 참고
-        """
+    # post = Post.objects.get(pk=post_id)
+
+    if not request.user.is_authenticated:
         messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
-        return redirect('docs:viewPost', post.category, post.title)
+        return redirect('docs:viewPost', post_id.category, post_id.title)
+    else:
+        if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
+            return render(request, 'editComment.html', {'comment': comment})
+        else:
+            """
+            자바스크립트 알람을 통해서 1회성 메시지를 남기는 messages
+            HttpRequest를 통해 남기며 1회성이기 때문에 새로고침하면 사라짐
+            메시지 출력 방법은 https://ssungkang.tistory.com/entry/Djangomessage-framework-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 참고
+            """
+            messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
+            return redirect('docs:viewPost', post_id.category, post_id.title)
 
-
+@login_required
 def editComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)                        # 댓글 호출
     post_id = comment.post_id
-    post = Post.objects.get(pk=post_id)
+    # post = Post.objects.get(pk=post_id)
 
     if request.method == "POST":
         comment.comment_content = request.POST['comment_content']   # 작성한 댓글 내용 업로드
         # comment.com_create_date = timezone.now()
         comment.save()                                              # 댓글 저장
         post_id = comment.post_id
-        return redirect('docs:viewPost', post.category, post.title) # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
+        return redirect('docs:viewPost', post_id.category, post_id.title) # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
     else:
         return render(request, 'editComment.html')
 
-
+@login_required
 def deleteComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)
     post_id = comment.post_id
-    post = Post.objects.get(pk=post_id)
+    # post = Post.objects.get(pk=post_id)
     if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
         comment.delete()
     else:
         messages.error(request, '댓글삭제권한이 없습니다')
-    return redirect('docs:viewPost', post.category, post.title)
+    return redirect('docs:viewPost', post_id.category, post_id.title)
 
 
 def viewPost(request, category, title ):
@@ -228,9 +234,10 @@ class UserPasswordResetView(PasswordResetView):
     form_class = ForgetpwForm
     
     def form_valid(self, form):
-        if User.objects.filter(email=self.request.POST.get("email"), first_name = self.request.POST.get("first_name"), last_name = self.request.POST.get("last_name")).exists():
+        try:
+            User.objects.get(email=self.request.POST.get("email"), first_name = self.request.POST.get("first_name"), last_name = self.request.POST.get("last_name"))
             return super().form_valid(form)
-        else:
+        except:
             messages.error(self.request, f"No matching user")
             return render(self.request, 'registration/forgetpw.html')
                         
@@ -257,8 +264,6 @@ class UserPasswordResetCompleteView(PasswordResetCompleteView):
         context = super().get_context_data(**kwargs)
         context['login_url'] = resolve_url(settings.LOGIN_URL)
         return context
-
-
 
 @login_required
 def change_password(request):
