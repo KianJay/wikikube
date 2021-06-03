@@ -14,12 +14,14 @@
 
 
     {% for post,kotitle in zippedlist %}
-      <p>{{ post.category }}</p>
-      <p>{{ post.title }}</p>
+      <a href="{% url 'docs:viewPost' post.category post.title %}">
+      <!--      <p>{{ post.category }}</p>-->
+      <!--      <p>{{ post.title }}</p>-->
       <!-- {% with post.content|cut:'\n' as test %}
         {{ test.0 }}
       {% endwith %} -->
-      <p>{{ kotitle }}</p>
+        <p>{{ kotitle|formatted_markdown }}</p>
+      </a>
     {% endfor %}
 
 

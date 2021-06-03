@@ -146,7 +146,7 @@ def showBookmark(request):
         for book in bl:
             postlist.append(book.post_id)
             test = book.post_id.content.split('\n')
-            kotitlelist.append(test[0])
+            kotitlelist.append(test[0].strip('#'))
         zippedlist = zip(postlist,kotitlelist)
         context = {'bl': bl, 'zippedlist':zippedlist}
         return render(request, 'bookmark.html', context)
