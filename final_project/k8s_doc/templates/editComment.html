@@ -23,9 +23,9 @@
                             <div class="form-group">
                                 <!-- <input type="submit" name="submit" id="submit" value="Submit" class="btn" ></input> -->
                               <input type="submit" class="btn" name="submit" id="submit" value="Edit">
-                              <input type="button" class="btn" name="cancel" id="cancel" value="Cancel">                
+                              <input type="button" class="btn" name="cancel" id="cancel" onclick="location.href='{% url 'docs:viewPost' comment.post_id.category comment.post_id.title %}' " value="Cancel">
                             </div>
-  
+
                         </fieldset>
                     </form>
                 </div>
