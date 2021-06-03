@@ -121,7 +121,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Submit" class="btn" ></input>
-              <div id="response"></div>
+              <p id="result-text"></p>
             </div>
           </div>
         </div>
@@ -211,20 +211,15 @@
 <script src="{% static 'assets/js/theme.js' %}"></script>
 
 <!-- Feedback Script -->
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer> </script>
-<script type="text/javascript">
-    var onloadCallback = function() {
-      grecaptcha.render('html_element', {
-        'sitekey' : '6LfPFggbAAAAAAjfr7I6jQ7D6YAkqCOjNmOzZqCm'
-      });
-    };
+
+<script>
     // submit endpoint
     const form = document.querySelector("form");
     form.addEventListener("submit", (event) => {
       // prevent the form submit from refreshing the page
     event.preventDefault();
     
-      const { name, email, message } = event.target;
+    const { name, email, message } = event.target;
     
         // Use your API endpoint URL you copied from the previous step
       const endpoint =
@@ -251,9 +246,14 @@
         })
         .catch((error) => {
           document.getElementById("result-text").innerText =
-            "An unkown error occured.";
+            "An unknown error occured.";
         })
     });
+
+    function create_post() {
+    console.log("create post is working!") // sanity check
+    console.log($("submit").val())
+};
     </script>
 </body>
 </html>
