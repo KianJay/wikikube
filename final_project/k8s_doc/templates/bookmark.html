@@ -12,18 +12,22 @@
       <br>
     {% endfor %} -->
 
-
+  <ol>
     {% for post,kotitle in zippedlist %}
-      <a href="{% url 'docs:viewPost' post.category post.title %}">
+      <!-- {{ forloop.counter }}.&nbsp -->
       <!--      <p>{{ post.category }}</p>-->
       <!--      <p>{{ post.title }}</p>-->
       <!-- {% with post.content|cut:'\n' as test %}
         {{ test.0 }}
       {% endwith %} -->
-        <p>{{ kotitle|formatted_markdown }}</p>
+
+      <a href="{% url 'docs:viewPost' post.category post.title %}">
+        <li>
+          <p>{{ kotitle }}</p>
+        </li>
       </a>
     {% endfor %}
-
+  </ol>
 
   </div>
   <!-- Content end --> 
