@@ -4,12 +4,8 @@
 * Written by: 	 Harnish Design - (http://www.harnishdesign.net)
 * Description:   Main Custom Script File
 ================================================================
-*/
-//Feedback modal
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-async defer> 
-</script>
-    var onloadCallback = function() {
+*///Feedback modal
+var onloadCallback = function() {
       grecaptcha.render('html_element', {
         'sitekey' : '6LfPFggbAAAAAAjfr7I6jQ7D6YAkqCOjNmOzZqCm'
       });
