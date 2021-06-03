@@ -1,11 +1,12 @@
-<!-- Bootstrap -->
+ <!--
 <link rel="stylesheet" type="text/css" href="/front/assets/vendor/bootstrap/css/bootstrap.min.css" />
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <link href="front/assets/images/favicon.png" rel="icon" />
 <div class="idocs-content">
   <a class="logo ml-md-3 "  href="index" title="wikikube"> <img src="front/assets/images/logo.png" height="auto" width="160px" alt="wikikube"/> </a> 
 <div class="container mt-5">
- 
+
   <div class="row">
       <div class="col-md-12">
           <div class="well well-sm">
@@ -54,6 +55,44 @@
       </div>
   </div>
 </div>
+    -->
+
+    <div id="content" role="main">
+      <!-- Feedback Modal -->
+      <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header"  >
+              <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <form method="post" id="contact-us-form" name="form" >
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Recipient:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="name" placeholder="Name">
+                    {% csrf_token %}
+                  </div>
+                  <div class="form-group">
+                    <label for="recipient-email" class="col-form-label">Email:</label>
+                    <input id="email" name="email" type="text" maxlength="50" class="form-control" placeholder="E-mail address">
+                </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label" name="message" rows="12" >Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Submit" class="btn" ></input>
+                <div id="response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
 async defer> 
@@ -104,3 +143,4 @@ async defer>
         })
     });
     </script>
+ 

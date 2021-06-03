@@ -64,7 +64,8 @@
             <li class="dropdown"> <a class="dropdown-toggle" href="#">Home</a> 
             </li>
             <li><a target="_blank" href="feedback.html">About</a></li>
-            <li><a  href="{% url 'docs:feedback' %}">Feedback</a></li>
+           <li><a data-toggle="modal" data-target="#Modal" data-whatever="@feedback">Feedback</a></li>
+          
             <form class="form-inline">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
@@ -95,7 +96,40 @@
   <!-- Content
   ============================ -->
   <div id="content" role="main">
-
+  	<!-- Feedback Modal -->
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header"  >
+            <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" id="contact-us-form" name="form" >
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name" name="name" placeholder="Name">
+                  {% csrf_token %}
+                </div>
+                <div class="form-group">
+                  <label for="recipient-email" class="col-form-label">Email:</label>
+                  <input id="email" name="email" type="text" maxlength="50" class="form-control" placeholder="E-mail address">
+              </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label" name="message" rows="12" >Message:</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary" name="submit" id="submit" value="Submit" class="btn" ></input>
+              <div id="response"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Sidebar Navigation
     ============================ -->
     <div class="sidebar bg-light">
@@ -155,7 +189,7 @@
   <footer id="footer" class="section bg-dark footer-text-light">
     <div class="container">
   
-      <p class="text-center">Copyright &copy; 2020 <a href="http://www.harnishdesign.net/idocs-one-page-documentation-html-template/">WiKiKube</a>. All Rights Reserved.</p>
+      <p class="text-center">Copyright &copy; 2020 <a href="#">WiKiKube</a>. All Rights Reserved.</p>
 
     </div>
   </footer>
@@ -180,5 +214,55 @@
 <!-- Custom Script -->
 <script src="{% static 'assets/js/theme.js' %}"></script>
 
+<!-- Feedback Script -->
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+async defer> 
+</script>
+<script type="text/javascript">
+    var onloadCallback = function() {
+      grecaptcha.render('html_element', {
+        'sitekey' : '6LfPFggbAAAAAAjfr7I6jQ7D6YAkqCOjNmOzZqCm'
+      });
+    };
+  </script>
+<script>
+
+    // submit endpoint
+    const form = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+      // prevent the form submit from refreshing the page
+    event.preventDefault();
+    
+      const { name, email, message } = event.target;
+    
+        // Use your API endpoint URL you copied from the previous step
+      const endpoint =
+        "https://9gptd31rq4.execute-api.ap-northeast-2.amazonaws.com/default/sendEmail";
+      // We use JSON.stringify here so the data can be sent as a string via HTTP
+        const body = JSON.stringify({
+        senderName: name.value,
+        senderEmail: email.value,
+        message: message.value
+      });
+      const requestOptions = {
+        method: "POST",
+        body
+      };
+    
+      fetch(endpoint, requestOptions)
+        .then((response) => {
+          if (!response.ok) throw new Error("Error in fetch");
+          return response.json();
+        })
+        .then((response) => {
+          document.getElementById("result-text").innerText =
+            "Email sent successfully!";
+        })
+        .catch((error) => {
+          document.getElementById("result-text").innerText =
+            "An unkown error occured.";
+        })
+    });
+    </script>
 </body>
 </html>
