@@ -217,7 +217,7 @@
 ///Feedback
 function submitToAPI(e) {
        e.preventDefault();
-       var URL = "https://mfrk3mnyxi.execute-api.ap-northeast-2.amazonaws.com/default/feedback";
+       var URL = "https://zrp1x1mfq3.execute-api.ap-northeast-2.amazonaws.com/feedback-1";
 
             var Namere = /[A-Za-z]{1}[A-Za-z]/;
             if (!Namere.test($("#name-input").val())) {
@@ -247,7 +247,7 @@ function submitToAPI(e) {
 
        $.ajax({
          type: "POST",
-         url : "https://mfrk3mnyxi.execute-api.ap-northeast-2.amazonaws.com/default/feedback",
+         url : "https://zrp1x1mfq3.execute-api.ap-northeast-2.amazonaws.com/feedback-1",
          dataType: "json",
          crossDomain: "true",
          contentType: "application/json; charset=utf-8",
