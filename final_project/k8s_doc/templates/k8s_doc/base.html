@@ -219,7 +219,7 @@ function submitToAPI(e) {
        e.preventDefault();
        var URL = "https://zrp1x1mfq3.execute-api.ap-northeast-2.amazonaws.com/feedback-1";
 
-            var Namere = /[A-Za-z]{1}[A-Za-z]/;
+            var Namere = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/; ;
             if (!Namere.test($("#name-input").val())) {
                          alert ("Name can not less than 2 letters");
                 return;
