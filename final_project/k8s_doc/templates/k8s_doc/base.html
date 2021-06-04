@@ -120,7 +120,8 @@
               </form>
             </div>
             <div class="modal-footer">
-              <div class="g-recaptcha" data-sitekey="6Lc7cVMUAAAAAM1yxf64wrmO8gvi8A1oQ_ead1ys" class="form-control"></div>
+       
+              <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" class="form-control"></div>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" class="btn btn-primary" name="submit" value="Submit" class="btn" onClick="submitToAPI(event)" ></input>
              
@@ -213,7 +214,9 @@
 <script src="{% static 'assets/js/theme.js' %}"></script>
 
 <!-- Feedback Script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
+  
 ///Feedback
 function submitToAPI(e) {
        e.preventDefault();
