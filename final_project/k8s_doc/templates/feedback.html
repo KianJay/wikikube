@@ -11,8 +11,8 @@
   <div class="row">
       <div class="col-md-12">
           <div class="well well-sm">
-              <form class="form-horizontal" method="post" id="contact-us-form" name="form">
-          
+              <form class="form-horizontal" method="post" id="contact-us-form" name="form" action ="{% url 'docs:feedback' %}">
+                {% csrf_token %}
                   <fieldset>
                       <h3 class="text-left header">Feedback</h3>
 
@@ -21,7 +21,7 @@
                           <div class="col-md-8">
                               <p>Name</p>
                               <input name="name" type="text" class="form-control"  placeholder="Name">
-                              {% csrf_token %}
+                              <!-- {% csrf_token %} -->
                           </div>
                       </div>
 
@@ -41,8 +41,8 @@
                       </div>
                       <div class="g-recaptcha" data-sitekey="6LfPFggbAAAAAAjfr7I6jQ7D6YAkqCOjNmOzZqCm"></div>
                       <p id="result-text"></p>
-                      <div class="form-group">
-                        
+
+                      <div class="form-group">  
                               <input type="submit" name="submit" id="submit" value="Submit" class="btn" ></input>
                             <a href="{% url 'index' %}" type="cancel" class="btn" name="cancel" id="cancel">Cancel</a>
                             <div id="response"></div>
@@ -57,8 +57,7 @@
   </div>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-async defer> 
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer> 
 </script>
 <script type="text/javascript">
     var onloadCallback = function() {
@@ -67,7 +66,7 @@ async defer>
       });
     };
   </script>
-<script>
+<!-- <script>
 
     // submit endpoint
     const form = document.querySelector("form");
@@ -105,4 +104,4 @@ async defer>
             "An unkown error occured.";
         })
     });
-    </script>
+    </script> -->
