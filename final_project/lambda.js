@@ -6,7 +6,7 @@ var SENDER = 'wikikubernetes@gmail.com';
 
 var response = {
  "isBase64Encoded": false,
- "headers": { 'Content-Type': '*', 'Access-Control-Allow-Origin': '*', },
+ "headers": { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', },
  "statusCode": 200,
  "body": "{\"result\": \"Success.\"}"
  };
