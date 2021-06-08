@@ -18,6 +18,9 @@ jobs:
         with:
           name: "secrets.json"
           json: ${{ secrets.SECRET_KEY }}, ${{ secrets.EMAIL_HOST_USER }}, ${{ secrets.EMAIL_HOST_PASSWORD }}
+      - run: pwd
+      - run: ls
+      - run: cat secrets.json
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
