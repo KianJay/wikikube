@@ -16,13 +16,13 @@ import json
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib.messages import constants as messages_constants
 import base64
-
+from os.path import dirname
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+#BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
+#dirname(dirname('/home/kristina/desire-directory/scripts/script.py'))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECRET_KEY를 secrets.json 파일에 넣어놓고 가져와서 씀
