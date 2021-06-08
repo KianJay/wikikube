@@ -14,6 +14,7 @@ jobs:
         with:
           name: "secrets.json"
           json: ${{ secrets.SECRET_KEY }}, ${{ secrets.EMAIL_HOST_USER }}, ${{ secrets.EMAIL_HOST_PASSWORD }}
+          dir: 'final_project/'
       - 
         name: Check out repository
         uses: actions/checkout@v2
@@ -40,4 +41,3 @@ jobs:
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-        
