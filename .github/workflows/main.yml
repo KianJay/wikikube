@@ -1,10 +1,8 @@
 name: wikikube Docker Image Build & Push
-
 on:
   push:
     tags:
       - 'v*'
-
 jobs:
   docker:
     runs-on: ubuntu-latest
