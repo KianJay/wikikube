@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - 
+        name: Check out repository
+        uses: actions/checkout@v2
+      - 
         name: create-json
         id: create-json
 # create-json module 
@@ -15,9 +18,6 @@ jobs:
         with:
           name: "secrets.json"
           json: ${{ secrets.SECRET_KEY }}, ${{ secrets.EMAIL_HOST_USER }}, ${{ secrets.EMAIL_HOST_PASSWORD }}
-      - 
-        name: Check out repository
-        uses: actions/checkout@v2
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
