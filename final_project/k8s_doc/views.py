@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm, UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from .forms import CreateUserForm
+from .forms import CreateUserForm, Feedbackform
 from django.urls import reverse_lazy, reverse
 from django.core.mail.message import EmailMessage
 from django.core.exceptions import ValidationError
@@ -200,12 +200,9 @@ def index(request):
     return render(request, 'index.html')
 
 def feedback(request):
-    # post_list = Post.objects.all().order_by('-id')[0:10]
-    # post = post_list[0]
-    # context = {"post":post}
-
-    # context = {"post_list" : post_list}
-    # return render(request, 'index.html', context)
+    if request.method == 'POST':
+        print(request)
+    form_class = Feedbackform
     return render(request, 'feedback.html')
 
 def forgetpw(request):

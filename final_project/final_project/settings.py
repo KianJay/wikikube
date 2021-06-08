@@ -15,6 +15,7 @@ import os.path
 import json
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib.messages import constants as messages_constants
+import base64
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.ㅅ
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,7 @@ def get_secret(setting, secrets=secrets):
         error_msg = "Set the {} environment variable".format(setting)
         raise ImproperlyConfigured(error_msg)
 
-SECRET_KEY = get_secret("SECRET_KEY")
+SECRET_KEY = base64.b64decode(get_secret("SECRET_KEY"))
 
 # Email 전송
 # 메일을 호스트하는 서버
@@ -49,11 +50,11 @@ EMAIL_PORT = '587'
 
 # 발신할 이메일
 # EMAIL_HOST_USER = '구글아이디@gmail.com'
-EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
+EMAIL_HOST_USER = base64.b64decode(get_secret("EMAIL_HOST_USER"))
 
 # 발신할 메일의 비밀번호
 # EMAIL_HOST_PASSWORD = '구글비밀번호'
-EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_PASSWORD = base64.b64decode(get_secret("EMAIL_HOST_PASSWORD"))
 
 # TLS 보안 방법
 EMAIL_USE_TLS = True
