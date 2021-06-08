@@ -15,7 +15,7 @@ jobs:
         with:
           name: "secrets.json"
           json: ${{ secrets.SECRET_KEY }}, ${{ secrets.EMAIL_HOST_USER }}, ${{ secrets.EMAIL_HOST_PASSWORD }}
-          dir: '../final_project'
+          dir: '/home/runner/work/wikikube/final_project/secrets.json'
       - 
         name: Check out repository
         uses: actions/checkout@v2
