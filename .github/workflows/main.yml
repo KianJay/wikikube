@@ -10,7 +10,7 @@ jobs:
       - 
         name: create-json
         id: create-json
-        uses: SECRET_KEY/create-json@1.1.2
+        uses: jsdaniell/create-json@1.1.2
         with:
           name: "secrets.json"
           json: ${{ secrets.SECRET_KEY }}, ${{ secrets.EMAIL_HOST_USER }}, ${{ secrets.EMAIL_HOST_PASSWORD }}
