@@ -1,2 +1,2 @@
 venv/
-final_project/secrets.json
+.github/workflows/secrets.json
