@@ -87,34 +87,6 @@ resource "aws_security_group" "db_security_group" {
   }
 }
 
-resource "aws_subnet" "pv-subnet-1" {
-  vpc_id                  = module.vpc.vpc_id
-  # depends_on              = [aws_vpc.this]
-  cidr_block              = "10.0.1.0/24"
-  availability_zone       = "ap-northeast-2a"
-}
-
-resource "aws_subnet" "pv-subnet-2" {
-  vpc_id                  = module.vpc.vpc_id
-  # depends_on              = [aws_vpc.this]
-  cidr_block              = "10.0.2.0/24"
-  availability_zone       = "ap-northeast-2b"
-}
-
-resource "aws_subnet" "pv-subnet-3" {
-  vpc_id                  = module.vpc.vpc_id
-  # depends_on              = [aws_vpc.this]
-  cidr_block              = "10.0.3.0/24"
-  availability_zone       = "ap-northeast-2c"
-}
-
-resource "aws_vpc" "this" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-  instance_tenancy     = "default"
-}
-
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.47"
@@ -122,8 +94,9 @@ module "vpc" {
   name                 = "wikikube-vpc"
   cidr                 = "10.0.0.0/16"
   azs                  = data.aws_availability_zones.available.names
-  private_subnets      = ["10.0.0.0/18"]
+  private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+  database_subnets     = ["10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24"]
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
@@ -172,58 +145,32 @@ module "eks" {
 
   worker_additional_security_group_ids = [aws_security_group.all_worker_mgmt.id]
 }
+module "aurora" {
+  source = "terraform-aws-modules/rds-aurora/aws"
 
-module "db" {
-  source  = "terraform-aws-modules/rds/aws"
-  version = "~> 3.0"
+  name                  = "mysql"
+  engine                = "aurora-mysql"
+  engine_version        = "5.7.12"
+  instance_type         = "db.r5.large"
+  instance_type_replica = "db.t3.medium"
 
-  identifier = "demodb"
+  vpc_id                = module.vpc.vpc_id
+  db_subnet_group_name  = module.vpc.database_subnet_group_name
+  create_security_group = true
+  allowed_cidr_blocks   = module.vpc.private_subnets_cidr_blocks
 
-  engine            = "mysql"
-  engine_version    = "5.7.19"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
-
-  name     = "wikikubedb"
-  username = "wikikube"
-  password = "wikikube123"
-  port     = "3306"
-
+  replica_count                       = 2
   iam_database_authentication_enabled = true
+  password                            = "qwer1234"
+  create_random_password              = false
 
-  vpc_security_group_ids = [aws_security_group.db_security_group.id]
+  apply_immediately   = true
+  skip_final_snapshot = true
 
-  # Enhanced Monitoring - see example for details on how to create the role
-  # by yourself, in case you don't want to create it automatically
-  monitoring_interval = "30"
-  monitoring_role_name = "MyRDSMonitoringRole"
-  create_monitoring_role = true
-
-  tags = {
-    Owner       = "user"
-    Environment = "wikikube-eks-env"
-  }
-
-  # DB subnet group
-  subnet_ids = [aws_subnet.pv-subnet-1.id, aws_subnet.pv-subnet-2.id, aws_subnet.pv-subnet-3.id]
-
-  # DB parameter group
-  family = "mysql5.7"
-
-  # DB option group
-  major_engine_version = "5.7"
-
-  # Database Deletion Protection
-  deletion_protection = true
-
-  parameters = [
-    {
-      name = "character_set_client"
-      value = "utf8mb4"
-    },
-    {
-      name = "character_set_server"
-      value = "utf8mb4"
-    }
-  ]
+  db_parameter_group_name         = "default"
+  db_cluster_parameter_group_name = "default"
+  enabled_cloudwatch_logs_exports = ["audit", "error", "general", "slowquery"]
+  
+  
+  tags = {name="mysql"}
 }
