@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: kianjay/wikikube:test55
+          tags: kianjay/wikikube:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
