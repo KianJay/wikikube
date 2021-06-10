@@ -17,10 +17,10 @@ from django.core.exceptions import ImproperlyConfigured
 from django.contrib.messages import constants as messages_constants
 import base64
 from os.path import dirname
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-#BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR2 = Path(__file__).resolve().parent.parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -28,7 +28,7 @@ BASE_DIR2 = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECRET_KEY를 secrets.json 파일에 넣어놓고 가져와서 씀
-secret_file = os.path.join(BASE_DIR2, 'secrets.json')
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
 
 with open(secret_file) as f:
     secrets = json.loads(f.read())
