@@ -88,22 +88,22 @@ resource "aws_security_group" "db_security_group" {
 }
 
 resource "aws_subnet" "pv-subnet-1" {
-  vpc_id                  = aws_vpc.this.id
-  depends_on              = [aws_vpc.this]
+  vpc_id                  = module.vpc.vpc_id
+  # depends_on              = [aws_vpc.this]
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "ap-northeast-2a"
 }
 
 resource "aws_subnet" "pv-subnet-2" {
-  vpc_id                  = aws_vpc.this.id
-  depends_on              = [aws_vpc.this]
+  vpc_id                  = module.vpc.vpc_id
+  # depends_on              = [aws_vpc.this]
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "ap-northeast-2b"
 }
 
 resource "aws_subnet" "pv-subnet-3" {
-  vpc_id                  = aws_vpc.this.id
-  depends_on              = [aws_vpc.this]
+  vpc_id                  = module.vpc.vpc_id
+  # depends_on              = [aws_vpc.this]
   cidr_block              = "10.0.3.0/24"
   availability_zone       = "ap-northeast-2c"
 }
@@ -122,7 +122,7 @@ module "vpc" {
   name                 = "wikikube-vpc"
   cidr                 = "10.0.0.0/16"
   azs                  = data.aws_availability_zones.available.names
-  private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  private_subnets      = ["10.0.0.0/18"]
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
   enable_nat_gateway   = true
   single_nat_gateway   = true
