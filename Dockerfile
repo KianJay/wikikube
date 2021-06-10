@@ -4,8 +4,10 @@ RUN mkdir /wikikube
 WORKDIR /wikikube
 COPY secrets.json /wikikube
 COPY . .
-
 RUN pip install -r ./requirements.txt
 WORKDIR ./final_project
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 EXPOSE 8000
+
+# 도커 볼륨 또는 시크릿 
+# 
