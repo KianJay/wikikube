@@ -1,0 +1,109 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    
+    <!-- 부트스트랩 추가 (Add Bootstrap) -->
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <!-- jquery toggle 
+    <script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script>  -->
+  </head>
+
+  <body>
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+
+        <div class="fadeIn first">
+          <a href="{% url 'index' %}" >  <img src="{% static 'assets/images/logo.png' %}" id="icon" alt="User Icon" /></a>
+        </div>
+        <form class="form-horizontal" method="post" action="{% url 'signup' %}">
+          {% csrf_token %}
+          <div class="control-group">
+            <!-- Username(ID) -->
+            <label class="control-label" for="username">ID</label>
+            <div class="controls">
+              <input type="text" id="username" name="username" class="input-xlarge form-control" value="{{ form.subject.value|default_if_none:''}}">
+            </div>
+          </div>
+      
+          <div class="control-group">
+            <!-- name -->
+            <label class="control-label" for="first_name">First name</label>
+            <div class="controls">
+              <input type="text" id="first_name" name="first_name" class="input-xlarge form-control">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <!-- name -->
+            <label class="control-label" for="last_name">Last name</label>
+            <div class="controls">
+              <input type="text" id="last_name" name="last_name" class="input-xlarge form-control">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="email">e-mail</label>
+            <div class="controls">
+              <input type="email" id="email" name="email" class="input-xlarge form-control">
+            </div>
+          </div>
+
+          <!-- <div class="control-group"> -->
+            <!-- date of birth -->
+            <!-- <label class="control-label" for="dob">date of birth</label>
+            <div class="controls">
+              <input type="date" id="dob" name="dob" class="input-xlarge form-control">
+            </div>
+          </div> -->
+      
+          <div class="control-group">
+            <!-- Password-->
+            <label class="control-label" for="password1">Password</label>
+            <div class="controls">
+              <input type="password" id="password1" name="password1" class="input-xlarge form-control">
+            </div>
+          </div>
+      
+          <div class="control-group">
+            <!-- Password -->
+            <label class="control-label"  for="password2">Password (Confirm)</label>
+            <div class="controls">
+              <input type="password" id="password2" name="password2" class="input-xlarge form-control">
+            </div>
+          </div>
+          <div class="controls">
+            {% if form.errors %}
+            <p style="color:red">You entered it incorrectly. Please fill out the form.</p>
+            <div style="font-size: 0.8rem; color:red;">
+              < ID > </br>
+              - 150 characters of fewer. Letters, digits and @ . + = _ only.</br></br>
+              < Password ></br>
+              - Your password can't be too similar to your other personal information.</br>
+              - Your password must contain at least 8 characters.</br>
+              - Your password can't be a commonly used password.</br>
+              - Your password can't be entirely numeric.&nbsp;
+            </div>
+          </br>
+            {% endif %}
+            <input type="submit" class="fadeIn fourth" value="register">
+            
+          </div>
+        </form>
+
+        <div id="formFooter">
+          <a class="underlineHover" href="{% url 'index' %}">Home</a>
+          <a class="underlineHover" href="{% url 'login' %}">Log In</a>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

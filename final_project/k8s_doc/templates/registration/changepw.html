@@ -1,0 +1,49 @@
+{% extends 'k8s_doc/base.html' %}
+
+{% block content %}
+<div class="idocs-content" style="padding-top: 100px;">
+<h2 style="text-align:center;">Change password</h2>
+<form method="post" style="text-align:center; justify-content:center;" class="form-inline">
+  {% csrf_token %}
+  <!-- {{ form }} -->
+  
+  <table>
+    <tr>
+      <td style="width: 10rem;"><label for="id_old_password">Old password :</label></td>
+      <td><input class="form-control mr-sm-2" type="password" autofocus required id="id_old_password" name="old_password"></td>
+    </tr>
+    <tr>
+      <td><label for="id_new_password1">New password :</label></td>
+      <td><input class="form-control mr-sm-2" type="password" required id="id_new_password1" name="new_password1"></td>
+    </tr>
+    <tr>
+      <td><label for="id_new_password2">Confirm password :</label></td>
+      <td><input class="form-control mr-sm-2" type="password" required id="id_new_password2" name="new_password2"></td>
+    </tr>
+    <tr><td colspan="2"></br></br></td></tr>
+    <tr>
+      <!-- <td></td> -->
+      <td colspan="2"><button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Save changes</button></td>
+    </tr>  
+    <tr>
+      <td colspan="2">
+        {% if messages %}
+      </br>
+        <div class="messages">
+            {% for message in messages %}
+            <p style="color:red">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if form.errors %}
+        <p style="color:red">잘못 입력하셨습니다. 양식에 맞게 작성해주세요.</p>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+
+  
+</form>
+</div>
+{% endblock %}

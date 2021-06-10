@@ -1,0 +1,80 @@
+
+{% extends 'k8s_doc/base.html' %}
+  
+{% block content %}
+
+<div class="idocs-content">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well well-sm">
+                    <form class="form-horizontal" method="post" action = "{% url 'docs:editComment' comment.id %}">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h3 class="text-left header">Edit comment</h3>
+
+                            <div class="form-group"  >
+                                <span class="col-md-1 col-md-offset-2 text-center"></span>
+                                <div class="col-md-8">
+                                    <textarea class="form-control ml-1 shadow-none textarea" name="comment_content"> {{comment.comment_content}} </textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <!-- <input type="submit" name="submit" id="submit" value="Submit" class="btn" ></input> -->
+                              <input type="submit" class="btn" name="submit" id="submit" value="Edit">
+                              <input type="button" class="btn" name="cancel" id="cancel" onclick="location" href="{% url 'docs:viewPost' comment.post_id.category comment.post_id.title %}' " value="Cancel">
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+<!-- Stylesheet
+============================== -->
+<!-- Bootstrap -->
+<!-- <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css" /> -->
+<!-- Font Awesome Icon -->
+<!-- <link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css" /> -->
+
+<!-- Highlight Syntax -->
+<!-- <link rel="stylesheet" type="text/css" href="assets/vendor/highlight.js/styles/github.css" /> -->
+<!-- Custom Stylesheet -->
+<!-- <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css" /> -->
+
+    <!-- Docs Content
+	============================ -->
+<!-- 
+    <div class="container mt-5" >
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                    <form method = "post" action = "{% url 'docs:editComment' comment.id %}">
+                        {% csrf_token %}
+                        <div class="bg-light p-2">
+                            <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea" name="comment_content"> {{comment.comment_content}} </textarea></div>
+                            <div class="mt-2 text-right"><button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">수정하기</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div> -->
+
+<!-- <script src="assets/vendor/jquery/jquery.min.js"></script> 
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+Highlight JS -->
+<!-- <script src="assets/vendor/highlight.js/highlight.min.js"></script>  -->
+<!-- Easing --> 
+<!-- <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>  -->
+<!--jquery toggle --> 
+<!-- <script src="assets/vendor/jquery/toggle.js"></script>  -->
+<!-- Custom Script -->
+<!-- <script src="assets/js/theme.js"></script> -->
+
+<!-- <script src="assets/js/comment.js"></script> -->
+

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+{% load static %}
+<link href="{% static 'assets/images/favicon.png' %}" rel="icon" />
+<title>Documentation | Your ThemeForest item Name</title>
+<meta name="description" content="Your ThemeForest item Name and description">
+
+<!-- Stylesheet
+============================== -->
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" />
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}" />
+<!-- Magnific Popup -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/magnific-popup/magnific-popup.min.css' %}" />
+<!-- Highlight Syntax -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/highlight.js/styles/github.css' %}" />
+<!-- Custom Stylesheet -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/stylesheet.css' %}" />
+
+
+<link rel="stylesheet" href="{% static 'assets/css/comment.css' %}">
+
+
+</head>
+
+<body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="lds-ellipsis">
+ 
+  </div>
+</div>
+<!-- Preloader End --> 
+
+<!-- Document Wrapper   
+=============================== -->
+<div id="main-wrapper"> 
+  
+  <!-- Header
+  ============================ -->
+  <header id="header" class="sticky-top"> 
+    <!-- Navbar -->
+    <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+      <div class="container-fluid">
+        <!-- Sidebar Toggler -->
+		<button id="sidebarCollapse" class="navbar-toggler d-block d-md-none" type="button"></span><span class="w-75"></span><span></span></button>
+		
+		<!-- Logo --> 
+        <a class="logo ml-md-3 "  href="{% url 'index' %}" title="iDocs Template"> <img src="{% static 'assets/images/logo.png' %}" height="auto" width="160px" alt="iDocs Template"/> </a> 
+		<span class="text-2 ml-2">v1.0</span> 
+        <!-- Logo End -->
+        
+		<!-- Navbar Toggler -->
+		<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#header-nav"><span></span><span></span><span></span></button>
+        
+		<div id="header-nav" class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            <li class="dropdown"> <a class="dropdown-toggle" href="#">▲ Top</a> <!--Home-->
+            </li>
+            <li><a target="_blank" >About</a></li> <!--href="feedback.html" ppt나 동기/기술설명, 팀원소개 등 정보 넣을 예정-->
+            <li><a type="button" data-toggle="modal" data-target="#Modal" data-whatever="@feeback" >Feedback</a></li>
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </ul>   
+        </div>
+          <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+            {% if user.is_active %}
+            <a class="nav-link" href="{% url 'change_password' %}">{{user.username}}</a> <!-- href 걸어서 회원정보 확인 페이지 넣기 ? -->
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'logout' %}?next=/docs/index">logout</a>
+            {% else %}
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'signup' %}"> Sign up</a>&nbsp&nbsp
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="{% url 'login' %}"> Login</a>
+          </ul>
+            {% endif %}
+        
+
+      </div>
+      
+    </nav>
+    <!-- Navbar End --> 
+  </header>
+  <!-- Header End --> 
+  
+  <!-- Content
+  ============================ -->
+
+  	<!-- Feedback Modal -->
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header"  >
+            <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form id="contact-form" method="post" >
+                <div class="form-group">
+                  <label for="name-input" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="name-input" placeholder="Name">
+                  {% csrf_token %}
+                </div>
+                <div class="form-group">
+                  <label for="email-input" class="col-form-label">Email:</label>
+                  <input id="email-input"  type="text" maxlength="50" class="form-control" placeholder="E-mail address">
+              </div>
+                <div class="form-group">
+                  
+                  <label for="description-input" class="col-form-label" name="message" rows="12" >Message:</label>
+                  <textarea class="form-control" id="description-input"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" class="form-control"></div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary" name="submit" value="Submit" class="btn" onClick="submitToAPI(event)" ></input>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Sidebar Navigation
+    ============================ -->
+    <div class="sidebar bg-light">
+      <ul class="nav flex-column ">
+
+        <li class="nav-item"><a class="nav-link {% if '/index' in request.path or '/' == request.path %}active{% endif %}" href="{% url 'index' %}">홈</a></li>
+
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스 이해하기</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스란</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/elements' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='elements' %}">쿠버네티스 구성 요소</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/terminology' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='terminology' %}">쿠버네티스 용어 정리</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/environment' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='mac' %}">실습 환경 구축</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/mac' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='mac' %}">macOS에 가상환경 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/linux' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='linux' %}">리눅스에 가상환경 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/windows' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='windows' %}">윈도우에 가상환경 설치</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/examples' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}">간단한 예제</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/kub_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}">kubespray 사용한 쿠버네티스 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/apache_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='apache_installation' %}">kubernetes에 Apache 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/mysql_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='mysql_installation' %}">kubernetes에 mysql 설치</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/lb' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='metallb' %}">부하분산 실습 및 예제</a>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/metallb' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='metallb' %}">MetalLb 설치 및 실습</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/ingress' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='ingress' %}">Ingress 설치 및 실습</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/hostpath' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='hostpath' %}">hostpath 설치 및 실습</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link {% if '/showBookmark' in request.path %}active{% endif %}" href="{% url 'docs:showBookmark' %}">북마크 목록</a>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Docs Content
+	============================ -->
+
+  {% block content %}
+
+  {% endblock %}
+
+  <!-- Content end --> 
+  
+  <!-- Footer
+  ============================ -->
+  <footer id="footer" class="section bg-dark footer-text-light">
+    <div class="container">
+  
+      <p class="text-center">Copyright &copy; 2021 <a href="{% url 'index' %}">WiKiKube</a>. All Rights Reserved.</p>
+
+    </div>
+  </footer>
+  <!-- Footer end -->
+  
+</div>
+<!-- Document Wrapper end --> 
+
+<!-- Back To Top --> 
+<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+
+<!-- JavaScript
+============================ -->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script> 
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script> 
+<!-- Highlight JS -->
+<script src="{% static 'assets/vendor/highlight.js/highlight.min.js' %}"></script> 
+<!-- Easing --> 
+<script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script> 
+<!--jquery toggle --> 
+<script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script> 
+<!-- Custom Script -->
+<script src="{% static 'assets/js/theme.js' %}"></script>
+
+<!-- Feedback Script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+  
+///Feedback
+function submitToAPI(e) {
+       e.preventDefault();
+       var URL = "https://zrp1x1mfq3.execute-api.ap-northeast-2.amazonaws.com/feedback-1";
+
+            var Namere = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/; ;
+            if (!Namere.test($("#name-input").val())) {
+                         alert ("Name can not be less than 2 letters");
+                return;
+            
+            }
+            if ($("#email-input").val()=="") {
+                alert ("Please enter your email id");
+                return;
+            }
+
+            var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+            if (!reeamil.test($("#email-input").val())) {
+                alert ("Please enter valid email address");
+                return;
+            }
+
+       var name = $("#name-input").val();
+       var email = $("#email-input").val();
+       var desc = $("#description-input").val();
+       var data = {
+          name : name,
+          email : email,
+          desc : desc
+        };
+
+       $.ajax({
+         type: "POST",
+         url : "https://zrp1x1mfq3.execute-api.ap-northeast-2.amazonaws.com/feedback-1",
+         dataType: "json",
+         crossDomain: "true",
+         contentType: "application/json; charset=utf-8",
+         data: JSON.stringify(data),
+
+         
+         success: function () {
+           // clear form and show a success message
+           alert("Successfull");
+           document.getElementById("contact-form").reset();
+           console.log("done")
+       location.reload();
+         },
+         error: function () {
+           // show an error message
+           console.log("not done")
+           alert("UnSuccessfull");
+         }});
+     }
+    </script>
+</body>
+</html>

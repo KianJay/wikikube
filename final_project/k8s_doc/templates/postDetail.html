@@ -1,0 +1,89 @@
+{% extends 'k8s_doc/base.html' %}
+  
+{% block content %}
+
+    <!-- Docs Content
+	============================ -->
+  <div class="idocs-content">
+
+    {% load doc_filter %}
+    {{ post.content|formatted_markdown }}
+
+ 
+   <!-- Comments 
+	============================ -->
+
+
+    <!-- <div class="container mt-5" > -->
+
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-12">
+                    <span class="btn" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                      댓글 펼치기
+                    </span>
+                    {% if request.user %}
+                    {% if bookmark %}
+                      <form method = "post" action = "{% url 'docs:delBookmark' %}">
+                          {% csrf_token %}
+                              <input type = "hidden" name = "post_id" value = "{{post.id}}">
+                              <button type="submit" class="btn-info btn-sm shadow-none" type="button">북마크 해제</button>
+                        </form>
+                    {% else %}
+                      <form method = "post" action = "{% url 'docs:addBookmark' %}">
+                          {% csrf_token %}
+                              <input type = "hidden" name = "post_id" value = "{{post.id}}">
+                            <button type="submit" class="btn-info btn-sm shadow-none " type="button">북마크에 추가</button>
+                      </form>
+                    {% endif %}
+                {% endif %}
+                  <div class="collapse" id="collapse">
+            
+                <div class="d-flex flex-column comment-section">
+                    {% for comment in comments %}
+                    <div class="bg-white p-2">
+                        <div class="d-flex flex-row user-info">
+                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{comment.user_id}}</span><span class="date text-black-50">{{comment.com_create_date}}</span></div>
+                        </div>
+                        <div class="mt-2" > 
+                            <p class="comment-text" id="comment">{{comment.comment_content}}</p>
+                        </div>
+                    </div>
+                    <div class="bg-white">
+                        <div class="d-flex flex-row fs-12">
+                
+                            <div class="like p-2 cursor">
+                                <input type = "hidden" name = "comment_id" value = "{{comment.id}}">
+                                <a  style="text-decoration: none" href="{% url 'docs:toEditComment' comment.id %}"  class="ml-1">수정</a>
+                            </div>
+                           
+                            <div class="like p-2 cursor">
+                                <input type = "hidden" name = "comment_id" value = "{{comment.id}}">
+                                <a  style="text-decoration: none" href="{% url 'docs:deleteComment' comment.id %}"  class="ml-1">삭제</a></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <form method = "post" action = "{% url 'docs:addComment' %}">
+                        {% csrf_token %}
+                        <input type = "hidden" name = "user_id" value = "{{user.username}}">
+                        <input type = "hidden" name = "post_id" value = "{{post.id}}">
+                        <div class="bg-light p-2">
+                            <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea" name="comment_content"></textarea></div>
+                            <div class="mt-2 text-right"><button type="submit" class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div{% if message.tags %} class="{{ message.tags }}"{% endif %}><b>{{ message }}</b></div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    <!-- </div> -->
+</div>
+
+  <!-- Content end --> 
+{% endblock %}
