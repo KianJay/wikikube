@@ -1,0 +1,27 @@
+{% extends 'k8s_doc/base.html' %}
+  
+{% block content %}
+
+    <!-- Docs Content
+	============================ -->
+  <div class="idocs-content" style="margin-top: 5rem;">
+
+    {% load doc_filter %}
+    <!-- {% for bookmark in bl %}
+      {{ bookmark }}
+      <br>
+    {% endfor %} -->
+
+  <ol>
+    {% if object_list %}
+    {% for post in object_list %}
+        <h2><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h2>
+    {% endfor %}
+    {% elif search_term %}<!-- 검색란이 공란인지 확인-->
+        <b><i>Search Word({{ search_term }}) Not Found</i></b>
+    {% endif %}
+  </ol>
+
+  </div>
+  <!-- Content end --> 
+{% endblock %}
