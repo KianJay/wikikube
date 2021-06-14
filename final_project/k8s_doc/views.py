@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, resolve_url, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import timezone
@@ -7,7 +8,7 @@ from django.utils.http import is_safe_url, urlsafe_base64_decode
 # from django.views.generic import TemplateView
 from django.views import generic, View
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, FormView
 from django.views.generic.detail import DetailView
 from django.views.decorators.http import require_POST
 from django.views.decorators.debug import sensitive_post_parameters
@@ -19,7 +20,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm, UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from .forms import CreateUserForm, Feedbackform
+from .forms import CreateUserForm, Feedbackform, PostSearchForm
 from django.urls import reverse_lazy, reverse
 from django.core.mail.message import EmailMessage
 from django.core.exceptions import ValidationError
@@ -278,6 +279,22 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'registration/changepw.html', {'form':form})
+
+
+class SearchFormView(FormView):
+    form_class = PostSearchForm
+    template_name = 'docs/search.html'
+
+    def form_valid(self, form):
+        searchWord = form.cleaned_data['search_word']
+        post_list = Post.objects.filter(Q(title=searchWord) | Q(content=searchWord)).distinct()
+
+        context = {}
+        context['form'] = form
+        context['search_term'] = searchWord
+        context['object_list'] = post_list
+
+        return render(self.request, self.template_name, context)
 
 # def send_email(request):
 #     subject = "message"

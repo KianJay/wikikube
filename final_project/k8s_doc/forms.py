@@ -115,10 +115,15 @@ class ForgetpwForm(PasswordResetForm):
                 user_email, html_email_template_name=html_email_template_name,
             )
 
+
 class Feedbackform(forms.Form):
     name = forms.CharField(label="name", max_length=500)
     email = forms.EmailField(label="email", max_length=500)
     message = forms.CharField(label="message", max_length=500)
 
     class Meta:
-        fields = ['name', 'email', 'message']    
+        fields = ['name', 'email', 'message']
+
+
+class PostSearchForm(forms.Form):
+    search_word = forms.CharField(label='Search Word')

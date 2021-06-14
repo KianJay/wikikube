@@ -10,17 +10,6 @@ jobs:
       - 
         name: Check out repository
         uses: actions/checkout@v2
-      - 
-        name: create-json
-        id: create-json
-# create-json module 
-        uses: jsdaniell/create-json@1.1.2
-        with:
-          name: "secrets.json"
-          json: ${{ secrets.SECRET_KEY }}, ${{ secrets.EMAIL_HOST_USER }}, ${{ secrets.EMAIL_HOST_PASSWORD }}
-      - run: pwd
-      - run: ls
-      - run: cat secrets.json
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
