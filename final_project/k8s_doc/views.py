@@ -298,11 +298,11 @@ def change_password(request):
 
 def search(request):
 
-    q = request.POST.get('q', "")
+    q = request.GET.get('q', "")
     print(q)
 
     if q:
-        posts = Post.objects.all().filter(Q(title=q) | Q(content=q)).distinct()
+        posts = Post.objects.all().filter(Q(title_icontains=q) | Q(content_icontains=q)).distinct()
         return render(request, 'search.html', {'posts': posts, 'q': q})
 
     else:

@@ -65,9 +65,10 @@
             </li>
             <li><a target="_blank" >About</a></li> <!--href="feedback.html" ppt나 동기/기술설명, 팀원소개 등 정보 넣을 예정-->
             <li><a type="button" data-toggle="modal" data-target="#Modal" data-whatever="@feeback" >Feedback</a></li>
-            <form action="{% url 'docs:search' %}" method="post" class="form-inline">
+            <form action="{% url 'docs:search' %}" method="get" class="form-inline">
               {% csrf_token %}
-              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{ q }}">
+              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{q}}">
+<!--              <input type="hidden" id="q" name="q" value="{{ q }}">-->
               <a href="{% url 'docs:search' %}" role="button" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</a>
 <!--                  <button id="submit" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
             </form>
