@@ -69,7 +69,7 @@
               {% csrf_token %}
               <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{q}}">
 <!--              <input type="hidden" id="q" name="q" value="{{ q }}">-->
-              <a href="{% url 'docs:search' %}" role="button" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</a>
+              <a href="{% url 'docs:search' %}" role="button" class="btn btn-outline-dark my-2 my-sm-0" type="submit" type="button">Search</a>
 <!--                  <button id="submit" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
             </form>
           </ul>   
