@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 {% load static %}
 <link href="{% static 'assets/images/favicon.png' %}" rel="icon" />
-<title>Documentation | Your ThemeForest item Name</title>
+<title>WiKiKube</title>
 <meta name="description" content="Your ThemeForest item Name and description">
 
 <!-- Stylesheet
@@ -61,7 +61,7 @@
         
 		<div id="header-nav" class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
-            <li class="dropdown"> <a class="dropdown-toggle" href="#">▲ Top</a> <!--Home-->
+            <li class="dropdown"> <a href="{% url 'index' %}">Home</a><!--Home-->
             </li>
             <li><a target="_blank" >About</a></li> <!--href="feedback.html" ppt나 동기/기술설명, 팀원소개 등 정보 넣을 예정-->
             <li><a type="button" data-toggle="modal" data-target="#Modal" data-whatever="@feeback" >Feedback</a></li>
@@ -197,7 +197,8 @@
 <!-- Document Wrapper end --> 
 
 <!-- Back To Top --> 
-<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)">    <li class="dropdown"> ▲ Top<!--Home-->
+</li>/a> 
 
 <!-- JavaScript
 ============================ -->
