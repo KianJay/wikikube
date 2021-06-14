@@ -65,11 +65,12 @@
             </li>
             <li><a target="_blank" >About</a></li> <!--href="feedback.html" ppt나 동기/기술설명, 팀원소개 등 정보 넣을 예정-->
             <li><a type="button" data-toggle="modal" data-target="#Modal" data-whatever="@feeback" >Feedback</a></li>
-
-            <form action="{% url 'docs:search' %}" method="POST" class="form-inline">
+            <form action="{% url 'docs:search' %}" method="get" class="form-inline">
               {% csrf_token %}
-              <input class="form-control mr-sm-2" name="searched" type="search" placeholder="Search" aria-label="Search" value="search">
-              <button href="{% url 'docs:search' %}" class="btn btn-outline-dark my-2 my-sm-0" type="submit" >Search</button>
+              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{q}}">
+<!--              <input type="hidden" id="q" name="q" value="{{ q }}">-->
+              <button href="{% url 'docs:search' %}" role="button" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+
 <!--                  <button id="submit" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
 
             </form>
@@ -212,10 +213,11 @@
 <script src="{% static 'assets/vendor/highlight.js/highlight.min.js' %}"></script> 
 <!-- Easing --> 
 <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script> 
-<!--jquery toggle --> 
+<!--jquery toggle--> 
 <script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script> 
 <!-- Custom Script -->
 <script src="{% static 'assets/js/theme.js' %}"></script>
+<script src="{% static 'assets/vendor/magnific-popup/jquery.magnific-popup.min.js' %}" > </script>
 
 <!-- Feedback Script -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>

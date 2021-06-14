@@ -296,29 +296,19 @@ def change_password(request):
 #
 #         return render(self.request, self.template_name, context)
 
+
+ 
 def search(request):
-    if request.method == "POST":
-        searched = request.POST.get("searcehd", "")
-        return render(request, 'search.html', {})    
+
+    q = request.GET.get('q', "")
+    print(q)
+
+    if q:
+        posts = Post.objects.all().filter(Q(title_icontains=q) | Q(content_icontains=q)).distinct()
+        return render(request, 'search.html', {'posts': posts, 'q': q})
 
     else:
-        return render(request, 'search.html', {})
-
-
-#def search(request):
-#
-#    query = request.GET.get('query'," ")
-#    print(query)
-#    if query:
-#            posts= Post.objects.filter(ititle_contatins=query)
-#    return render(request, 'search.html', {'posts':posts})
-   # if q:
-   #     posts = Post.objects.all().filter(Q(title=q) | Q(content=q)).distinct()
-   #     return render(request, 'search.html', {'posts': posts, 'q': q})
-#
-   # else:
-    #    return render(request, 'search.html')
-
+        return render(request, 'search.html')
 # def send_email(request):
 #     subject = "message"
 #     to = ["wikikubernetes@gmail.com"]

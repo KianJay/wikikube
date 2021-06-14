@@ -11,12 +11,12 @@
       {{ bookmark }}
       <br>
     {% endfor %} -->
-  {% if searched %}
-  <h1>검색어: {{searched}} </h1>
+
+  {% if not posts %}
+
+        <h1>검색 결과가 없습니다</h1>
+
   {% else %}
-  <h1>검색어를 입력해주세요 .</h1>
-  {% endif %}
-  
 
         {% for post in posts.all %}
         <div class="container">
@@ -29,7 +29,7 @@
         <br>
         {% endfor %}
 
-
+  {% endif %}
 
   </div>
   <!-- Content end --> 
