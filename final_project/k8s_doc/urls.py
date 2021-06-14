@@ -15,7 +15,7 @@ urlpatterns = [
     path('showBookmark', views.showBookmark, name='showBookmark'),
     path('addBookmark', views.addBookmark, name='addBookmark'),
     path('delBookmark', views.delBookmark, name='delBookmark'),
-    path('search/', views.SearchFormView.as_view(), name='search')
+    path('search/', views.search, name='search')
     # path('login/', auth_views.LoginView.as_view(), name="login"),
     # path('logout/', auth_views.LogoutView, {'next_page' : ''}),
     # path('viewIndex/', views.viewIndex, name='viewIndex'),

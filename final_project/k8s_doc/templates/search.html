@@ -11,16 +11,25 @@
       {{ bookmark }}
       <br>
     {% endfor %} -->
+  {% if searched %}
+  <h1>검색어: {{searched}} </h1>
+  {% else %}
+  <h1>검색어를 입력해주세요 .</h1>
+  {% endif %}
+  
 
-  <ol>
-    {% if object_list %}
-    {% for post in object_list %}
-        <h2><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h2>
-    {% endfor %}
-    {% elif search_term %}<!-- 검색란이 공란인지 확인-->
-        <b><i>Search Word({{ search_term }}) Not Found</i></b>
-    {% endif %}
-  </ol>
+        {% for post in posts.all %}
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ post.title }}</h1>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+
 
   </div>
   <!-- Content end --> 

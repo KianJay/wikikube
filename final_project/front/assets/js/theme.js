@@ -3,8 +3,7 @@
 * Template:  	 iDocs - One Page Documentation HTML Template
 * Written by: 	 Harnish Design - (http://www.harnishdesign.net)
 * Description:   Main Custom Script File
-================================================================
-*///Feedback modal
+
 var onloadCallback = function() {
       grecaptcha.render('html_element', {
         'sitekey' : '6LfPFggbAAAAAAjfr7I6jQ7D6YAkqCOjNmOzZqCm'
@@ -47,6 +46,9 @@ var onloadCallback = function() {
             "An unkown error occured.";
         })
     });
+
+================================================================
+*///Feedback modal
 
 (function ($) {
 	"use strict";
@@ -198,10 +200,10 @@ $('#back-to-top').on("click", function() {
 
 })(jQuery)
 
-const searchButton = document.getElementById('search-button');
-const searchInput = document.getElementById('search-input');
-searchButton.addEventListener('click', () => {
-  const inputValue = searchInput.value;
-  alert(inputValue);
-});
+//const searchButton = document.getElementById('search-button');
+//const searchInput = document.getElementById('search-input');
+//searchButton.addEventListener('click', () => {
+//  const inputValue = searchInput.value;
+//  alert(inputValue);
+//});
 

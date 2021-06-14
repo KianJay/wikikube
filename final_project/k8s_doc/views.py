@@ -281,20 +281,43 @@ def change_password(request):
     return render(request, 'registration/changepw.html', {'form':form})
 
 
-class SearchFormView(FormView):
-    form_class = PostSearchForm
-    template_name = 'docs/search.html'
+# class SearchFormView(FormView):
+#     form_class = PostSearchForm
+#     template_name = 'docs/search.html'
+#
+#     def form_valid(self, form):
+#         searchWord = form.cleaned_data['search_word']
+#         post_list = Post.objects.filter(Q(title=searchWord) | Q(content=searchWord)).distinct()
+#
+#         context = {}
+#         context['form'] = form
+#         context['search_term'] = searchWord
+#         context['object_list'] = post_list
+#
+#         return render(self.request, self.template_name, context)
 
-    def form_valid(self, form):
-        searchWord = form.cleaned_data['search_word']
-        post_list = Post.objects.filter(Q(title=searchWord) | Q(content=searchWord)).distinct()
+def search(request):
+    if request.method == "POST":
+        searched = request.POST.get("searcehd", "")
+        return render(request, 'search.html', {})    
 
-        context = {}
-        context['form'] = form
-        context['search_term'] = searchWord
-        context['object_list'] = post_list
+    else:
+        return render(request, 'search.html', {})
 
-        return render(self.request, self.template_name, context)
+
+#def search(request):
+#
+#    query = request.GET.get('query'," ")
+#    print(query)
+#    if query:
+#            posts= Post.objects.filter(ititle_contatins=query)
+#    return render(request, 'search.html', {'posts':posts})
+   # if q:
+   #     posts = Post.objects.all().filter(Q(title=q) | Q(content=q)).distinct()
+   #     return render(request, 'search.html', {'posts': posts, 'q': q})
+#
+   # else:
+    #    return render(request, 'search.html')
 
 # def send_email(request):
 #     subject = "message"
