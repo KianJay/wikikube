@@ -281,20 +281,32 @@ def change_password(request):
     return render(request, 'registration/changepw.html', {'form':form})
 
 
-class SearchFormView(FormView):
-    form_class = PostSearchForm
-    template_name = 'docs/search.html'
+# class SearchFormView(FormView):
+#     form_class = PostSearchForm
+#     template_name = 'docs/search.html'
+#
+#     def form_valid(self, form):
+#         searchWord = form.cleaned_data['search_word']
+#         post_list = Post.objects.filter(Q(title=searchWord) | Q(content=searchWord)).distinct()
+#
+#         context = {}
+#         context['form'] = form
+#         context['search_term'] = searchWord
+#         context['object_list'] = post_list
+#
+#         return render(self.request, self.template_name, context)
 
-    def form_valid(self, form):
-        searchWord = form.cleaned_data['search_word']
-        post_list = Post.objects.filter(Q(title=searchWord) | Q(content=searchWord)).distinct()
+def search(request):
 
-        context = {}
-        context['form'] = form
-        context['search_term'] = searchWord
-        context['object_list'] = post_list
+    q = request.POST.get('q', "")
+    print(q)
 
-        return render(self.request, self.template_name, context)
+    if q:
+        posts = Post.objects.all().filter(Q(title=q) | Q(content=q)).distinct()
+        return render(request, 'search.html', {'posts': posts, 'q': q})
+
+    else:
+        return render(request, 'search.html')
 
 # def send_email(request):
 #     subject = "message"

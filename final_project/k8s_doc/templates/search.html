@@ -12,15 +12,24 @@
       <br>
     {% endfor %} -->
 
-  <ol>
-    {% if object_list %}
-    {% for post in object_list %}
-        <h2><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h2>
-    {% endfor %}
-    {% elif search_term %}<!-- 검색란이 공란인지 확인-->
-        <b><i>Search Word({{ search_term }}) Not Found</i></b>
-    {% endif %}
-  </ol>
+  {% if not posts %}
+
+        <h1>검색 결과가 없습니다</h1>
+
+  {% else %}
+
+        {% for post in posts.all %}
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ post.title }}</h1>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+  {% endif %}
 
   </div>
   <!-- Content end --> 
