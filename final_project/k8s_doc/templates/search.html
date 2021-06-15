@@ -12,17 +12,18 @@
       <br>
     {% endfor %} -->
 
-  {% if not posts %}
+  {% if not zippedlist %}
 
-        <h1>검색 결과가 없습니다</h1>
+        <h2>검색 결과가 없습니다</h2>
 
   {% else %}
 
-        {% for post in posts.all %}
+        {% for post,contentlist in zippedlist %}
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <h1>{{ post.title }}</h1>
+                    <h2><a href="{%url 'docs:viewPost' post.category post.title %}">{{ post.title }}</a></h2>
+                    <p>{{ contentlist }}</p>
                 </div>
             </div>
         </div>

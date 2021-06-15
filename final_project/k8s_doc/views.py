@@ -304,8 +304,13 @@ def search(request):
     print(q)
 
     if q:
-        posts = Post.objects.all().filter(Q(title_icontains=q) | Q(content_icontains=q)).distinct()
-        return render(request, 'search.html', {'posts': posts, 'q': q})
+        posts = Post.objects.filter(Q(title__icontains=q) | Q(content__icontains=q)).distinct()
+        contentlist = []
+        for post in posts:
+            test = post.content.split('\n')
+            contentlist.append(test[0].strip('#'))
+        zippedlist = zip(posts, contentlist)
+        return render(request, 'search.html', {'zippedlist': zippedlist, 'q': q})
 
     else:
         return render(request, 'search.html')
