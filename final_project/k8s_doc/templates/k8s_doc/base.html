@@ -40,6 +40,7 @@
 
 <!-- Document Wrapper   
 =============================== -->
+
 <div id="main-wrapper"> 
   
   <!-- Header
@@ -65,15 +66,7 @@
             </li>
             <li><a target="_blank" >About</a></li> <!--href="feedback.html" ppt나 동기/기술설명, 팀원소개 등 정보 넣을 예정-->
             <li><a type="button" data-toggle="modal" data-target="#Modal" data-whatever="@feeback" >Feedback</a></li>
-            <form action="{% url 'docs:search' %}" method="get" class="form-inline">
-              {% csrf_token %}
-              <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{q}}">
-<!--              <input type="hidden" id="q" name="q" value="{{ q }}">-->
-              <button href="{% url 'docs:search' %}" role="button" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
 
-<!--                  <button id="submit" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
-
-            </form>
           </ul>   
         </div>
           <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
@@ -91,6 +84,7 @@
       
     </nav>
     <!-- Navbar End --> 
+    
   </header>
   <!-- Header End --> 
   
@@ -128,6 +122,7 @@
               <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" class="form-control"></div>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" class="btn btn-primary" name="submit" value="Submit" class="btn" onClick="submitToAPI(event)" ></input>
+            
             </div>
           </div>
         </div>
@@ -175,6 +170,14 @@
         </li>
 
       </ul>
+      
+      <form action="{% url 'docs:search' %}" method="get" class="form-inline col" >
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{q}}">
+<!--              <input type="hidden" id="q" name="q" value="{{ q }}">-->
+        <button href="{% url 'docs:search' %}" role="button" class="btn btn-outline-dark my-3 my-sm-1" type="submit">Search</button>
+      </form>
+
     </div>
 
     <!-- Docs Content
