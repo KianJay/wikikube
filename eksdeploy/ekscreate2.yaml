@@ -70,7 +70,7 @@ managedNodeGroups:
     #   - private-two
     #   - private-three
     ssh:
-      publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCp72ykuZi7O2+2w/fvHOBzjTm+R5JaAgx99lwdNkJrAFLxgBH+ou21imWGWBgEsA6JIGyZafXANIxyW2HtWCqN01LpDNinkta03+yFfIag9aOmTK4aew8c7z0S0Muh1saW2TSVYwLJIfO2B/TypkftBCDDd8/Ys5e50uzzN2wKW4phNxUHYAYtt2P3I6Dr9Zv/u030HitbJD48ZwkZ1JguMpw6iSP6todNszqwfygv6mFH+fKVcND2n3YIgxBskAabVsVuFOyCreECqgJeXOzERDEsvgCWNFngQ/dj5MyTdbjknGet8sXE04XvY2OF9o+hkRTNRzBGaxydUT+Mm6zApg5tunzSYre0ZDhPLXHvvQMLCeFwKL3/wjbGd4EEx0QqpJ1eQaq1UV8x7QqIunJ/4RxSfaV9REO8vpQHrZrnQox2qy6u1+cZqlloc6rXJ9FkXNqjRQhrxS4A+y55mnMbV7C2PyiCbI7om63QoggrKa1eaL4mnTYdWVFVRogOuSk= go23m@LAPTOP-H2F54QE9"
+      publicKey: # deleted for safety      
 
 cloudWatch:
   clusterLogging:
