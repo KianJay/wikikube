@@ -186,8 +186,8 @@ class CreateUserView(CreateView):
     success_url = reverse_lazy('create_user_done')
 
 
-class RegisteredView(TemplateView):
-    template_name = 'registration/signup_done.html'
+# class RegisteredView(TemplateView):
+#     template_name = 'registration/signup_done.html'
 
 
 
@@ -200,31 +200,31 @@ def index(request):
     # return render(request, 'index.html', context)
     return render(request, 'index.html')
 
-def feedback(request):
-    if request.method == 'POST':
-        print(request)
-    form_class = Feedbackform
-    return render(request, 'feedback.html')
+# def feedback(request):
+#     if request.method == 'POST':
+#         print(request)
+#     form_class = Feedbackform
+#     return render(request, 'feedback.html')
 
-def forgetpw(request):
-    if request.method == 'POST':
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        email = request.POST.get("email")
-        try:
-            user = User.objects.get(first_name=first_name, last_name=last_name, email=email)
-            if user:
-                # update_session_auth_hash(request, user)
-                context = {"user":user}
-                update_session_auth_hash(request, user)
-                form = PasswordChangeForm(user)
-                return render(request, 'registration/changepw.html', {'form':form})
-        except:
-            messages.error(request, f"No matching user")
-            return render(request, 'registration/forgetpw.html')
-    else:
-        form = ForgetpwForm(request)
-    return render(request, 'registration/forgetpw.html')
+# def forgetpw(request):
+#     if request.method == 'POST':
+#         first_name = request.POST.get("first_name")
+#         last_name = request.POST.get("last_name")
+#         email = request.POST.get("email")
+#         try:
+#             user = User.objects.get(first_name=first_name, last_name=last_name, email=email)
+#             if user:
+#                 # update_session_auth_hash(request, user)
+#                 context = {"user":user}
+#                 update_session_auth_hash(request, user)
+#                 form = PasswordChangeForm(user)
+#                 return render(request, 'registration/changepw.html', {'form':form})
+#         except:
+#             messages.error(request, f"No matching user")
+#             return render(request, 'registration/forgetpw.html')
+#     else:
+#         form = ForgetpwForm(request)
+#     return render(request, 'registration/forgetpw.html')
 
 class UserPasswordResetView(PasswordResetView):
     template_name = 'registration/forgetpw.html'
