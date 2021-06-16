@@ -1,0 +1,105 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: wikikube-cluster
+  region: ap-northeast-2
+  version: "1.18"
+
+# availabilityZones: 
+#   - ap-northeast-2a
+#   - ap-northeast-2b
+#   - ap-northeast-2c
+#   - ap-northeast-2d
+
+iam:
+  withOIDC: true
+  serviceAccounts:
+    - metadata:
+        name: aws-load-balancer-controller
+        namespace: kube-system
+      wellKnownPolicies:
+        awsLoadBalancerController: true
+    - metadata:
+        name: ebs-csi-controller-sa
+        namespace: kube-system
+      wellKnownPolicies:
+        ebsCSIController: true
+    - metadata:
+        name: cluster-autoscaler
+        namespace: kube-system
+      wellKnownPolicies:
+        autoScaler: true
+    
+managedNodeGroups:
+  - name: wikikube-nodegroup-1
+    instanceType: t3.medium
+    minSize: 1
+    desiredCapacity: 1
+    maxSize: 2
+    privateNetworking: true
+    # availabilityZones:
+    #   - ap-northeast-2a
+    #   - ap-northeast-2c
+    #   - ap-northeast-2d
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        albIngress: true
+        cloudWatch: true
+        ebs: true
+    ssh:
+      publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCp72ykuZi7O2+2w/fvHOBzjTm+R5JaAgx99lwdNkJrAFLxgBH+ou21imWGWBgEsA6JIGyZafXANIxyW2HtWCqN01LpDNinkta03+yFfIag9aOmTK4aew8c7z0S0Muh1saW2TSVYwLJIfO2B/TypkftBCDDd8/Ys5e50uzzN2wKW4phNxUHYAYtt2P3I6Dr9Zv/u030HitbJD48ZwkZ1JguMpw6iSP6todNszqwfygv6mFH+fKVcND2n3YIgxBskAabVsVuFOyCreECqgJeXOzERDEsvgCWNFngQ/dj5MyTdbjknGet8sXE04XvY2OF9o+hkRTNRzBGaxydUT+Mm6zApg5tunzSYre0ZDhPLXHvvQMLCeFwKL3/wjbGd4EEx0QqpJ1eQaq1UV8x7QqIunJ/4RxSfaV9REO8vpQHrZrnQox2qy6u1+cZqlloc6rXJ9FkXNqjRQhrxS4A+y55mnMbV7C2PyiCbI7om63QoggrKa1eaL4mnTYdWVFVRogOuSk= go23m@LAPTOP-H2F54QE9"
+  - name: wikikube-nodegroup-2
+    instanceType: t3.small
+    minSize: 1
+    desiredCapacity: 2
+    maxSize: 3
+    privateNetworking: true
+    # availabilityZones:
+    #   - ap-northeast-2a
+    #   - ap-northeast-2c
+    #   - ap-northeast-2d
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        albIngress: true
+        cloudWatch: true
+        ebs: true
+    # subnets:
+    #   - private-two
+    #   - private-three
+    ssh:
+      publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCp72ykuZi7O2+2w/fvHOBzjTm+R5JaAgx99lwdNkJrAFLxgBH+ou21imWGWBgEsA6JIGyZafXANIxyW2HtWCqN01LpDNinkta03+yFfIag9aOmTK4aew8c7z0S0Muh1saW2TSVYwLJIfO2B/TypkftBCDDd8/Ys5e50uzzN2wKW4phNxUHYAYtt2P3I6Dr9Zv/u030HitbJD48ZwkZ1JguMpw6iSP6todNszqwfygv6mFH+fKVcND2n3YIgxBskAabVsVuFOyCreECqgJeXOzERDEsvgCWNFngQ/dj5MyTdbjknGet8sXE04XvY2OF9o+hkRTNRzBGaxydUT+Mm6zApg5tunzSYre0ZDhPLXHvvQMLCeFwKL3/wjbGd4EEx0QqpJ1eQaq1UV8x7QqIunJ/4RxSfaV9REO8vpQHrZrnQox2qy6u1+cZqlloc6rXJ9FkXNqjRQhrxS4A+y55mnMbV7C2PyiCbI7om63QoggrKa1eaL4mnTYdWVFVRogOuSk= go23m@LAPTOP-H2F54QE9"
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: 
+      - api
+      - audit
+      - authenticator
+      - controllerManager
+      - scheduler
+
+vpc:
+  cidr: 10.10.0.0/16
+  autoAllocateIPv6: true
+  # disable public access to endpoint and only allow private access
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: false
+  # subnets:
+  #   public:
+  #     public-one:
+  #       cidr: "10.0.4.0/24"
+  #     public-two:
+  #       cidr: "10.0.5.0/24"
+  #     public-three:
+  #       cidr: "10.0.6.0/24"
+  #   private:
+  #     private-one:
+  #       cidr: "10.0.1.0/24"
+  #     private-two:
+  #       cidr: "10.0.2.0/24"
+  #     private-three:
+  #       cidr: "10.0.3.0/24"
