@@ -2,7 +2,7 @@ name: wikikube Docker Image Build & Push
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 jobs:
   docker:
     runs-on: ubuntu-latest
