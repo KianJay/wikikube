@@ -15,8 +15,10 @@ import os.path
 import json
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib.messages import constants as messages_constants
-import base64
 from os.path import dirname
+import boto3
+import base64
+from botocore.exceptions import ClientError
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,19 +30,73 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECRET_KEY를 secrets.json 파일에 넣어놓고 가져와서 씀
-secret_file = os.path.join(BASE_DIR, 'secrets.json')
+# secret_file = os.path.join(BASE_DIR, 'secrets.json')
+#
+# with open(secret_file) as f:
+#     secrets = json.loads(f.read())
 
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
+def get_secret():
 
-def get_secret(setting, secrets=secrets):
+    secret_name = "wikikube-secret"
+    region_name = "ap-northeast-2"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    # In this sample we only handle the specific exceptions for the 'GetSecretValue' API.
+    # See https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    # We rethrow the exception by default.
+
     try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        if e.response['Error']['Code'] == 'DecryptionFailureException':
+            # Secrets Manager can't decrypt the protected secret text using the provided KMS key.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'InternalServiceErrorException':
+            # An error occurred on the server side.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'InvalidParameterException':
+            # You provided an invalid value for a parameter.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'InvalidRequestException':
+            # You provided a parameter value that is not valid for the current state of the resource.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+        elif e.response['Error']['Code'] == 'ResourceNotFoundException':
+            # We can't find the resource that you asked for.
+            # Deal with the exception here, and/or rethrow at your discretion.
+            raise e
+    else:
+        # Decrypts secret using the associated KMS CMK.
+        # Depending on whether the secret is a string or binary, one of these fields will be populated.
+        if 'SecretString' in get_secret_value_response:
+            secret = get_secret_value_response['SecretString']
+        else:
+            decoded_binary_secret = base64.b64decode(get_secret_value_response['SecretBinary'])
 
-SECRET_KEY = get_secret("SECRET_KEY")
+    return json.loads(secret)  # returns the secret as dictionary
+
+# def get_secret(setting, secrets=secrets):
+#     try:
+#         return secrets[setting]
+#     except KeyError:
+#         error_msg = "Set the {} environment variable".format(setting)
+#         raise ImproperlyConfigured(error_msg)
+
+
+sec = get_secret()
+
+SECRET_KEY = sec["SECRET_KEY"]
 
 # Email 전송
 # 메일을 호스트하는 서버
@@ -51,11 +107,11 @@ EMAIL_PORT = '587'
 
 # 발신할 이메일
 # EMAIL_HOST_USER = '구글아이디@gmail.com'
-EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
+EMAIL_HOST_USER = sec["EMAIL_HOST_USER"]
 
 # 발신할 메일의 비밀번호
 # EMAIL_HOST_PASSWORD = '구글비밀번호'
-EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_PASSWORD = sec["EMAIL_HOST_PASSWORD"]
 
 # TLS 보안 방법
 EMAIL_USE_TLS = True
@@ -153,13 +209,22 @@ WSGI_APPLICATION = 'final_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+DATABASES = {
+'default': {
+ 'ENGINE': 'django.db.backends.mysql',
+ 'NAME': 'wikikube_db', # DB name
+ 'USER': 'admin',
+ 'PASSWORD': 'wikikube1214',
+ 'HOST': 'wikikube-db-1.ckaj95iexfk8.ap-northeast-2.rds.amazonaws.com', # AWS RDS endpoint
+ }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 {% load static %}
 <link href="{% static 'assets/images/favicon.png' %}" rel="icon" />
-<title>Documentation | Your ThemeForest item Name</title>
+<title>WiKiKube</title>
 <meta name="description" content="Your ThemeForest item Name and description">
 
 <!-- Stylesheet
@@ -40,6 +40,7 @@
 
 <!-- Document Wrapper   
 =============================== -->
+
 <div id="main-wrapper"> 
   
   <!-- Header
@@ -61,15 +62,11 @@
         
 		<div id="header-nav" class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
-            <li class="dropdown"> <a class="dropdown-toggle" href="#">▲ Top</a> <!--Home-->
+            <li class="dropdown"> <a href="{% url 'index' %}">Home</a><!--Home-->
             </li>
             <li><a target="_blank" >About</a></li> <!--href="feedback.html" ppt나 동기/기술설명, 팀원소개 등 정보 넣을 예정-->
             <li><a type="button" data-toggle="modal" data-target="#Modal" data-whatever="@feeback" >Feedback</a></li>
-            <form action="{% url 'docs:search' %}" method="post" class="form-inline"> {% csrf_token %}
-              {{ form.as_table }}
-              <input class="form-control mr-sm-2" name="search_term" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="submit">Search</button>
-            </form>
+
           </ul>   
         </div>
           <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
@@ -87,6 +84,7 @@
       
     </nav>
     <!-- Navbar End --> 
+    
   </header>
   <!-- Header End --> 
   
@@ -124,6 +122,7 @@
               <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" class="form-control"></div>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" class="btn btn-primary" name="submit" value="Submit" class="btn" onClick="submitToAPI(event)" ></input>
+            
             </div>
           </div>
         </div>
@@ -171,6 +170,14 @@
         </li>
 
       </ul>
+      
+      <form action="{% url 'docs:search' %}" method="get" class="form-inline col" >
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search" value="{{q}}">
+<!--              <input type="hidden" id="q" name="q" value="{{ q }}">-->
+        <button href="{% url 'docs:search' %}" role="button" class="btn btn-outline-dark my-3 my-sm-1" type="submit">Search</button>
+      </form>
+
     </div>
 
     <!-- Docs Content
@@ -186,7 +193,7 @@
   ============================ -->
   <footer id="footer" class="section bg-dark footer-text-light">
     <div class="container">
-  
+      <a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
       <p class="text-center">Copyright &copy; 2021 <a href="{% url 'index' %}">WiKiKube</a>. All Rights Reserved.</p>
 
     </div>
@@ -197,9 +204,11 @@
 <!-- Document Wrapper end --> 
 
 <!-- Back To Top --> 
-<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+<a id="back-to-top" data-toggle="tooltip" title="Back to Top" href="javascript:void(0)">    <li class="dropdown"> ▲ Top<!--Home-->
+</li>/a> 
 
 <!-- JavaScript
+  
 ============================ -->
 <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script> 
 <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script> 
@@ -207,10 +216,11 @@
 <script src="{% static 'assets/vendor/highlight.js/highlight.min.js' %}"></script> 
 <!-- Easing --> 
 <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script> 
-<!--jquery toggle --> 
+<!--jquery toggle--> 
 <script src="{% static 'assets/vendor/jquery/toggle.js' %}"></script> 
 <!-- Custom Script -->
 <script src="{% static 'assets/js/theme.js' %}"></script>
+<script src="{% static 'assets/vendor/magnific-popup/jquery.magnific-popup.min.js' %}" > </script>
 
 <!-- Feedback Script -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
