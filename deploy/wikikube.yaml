@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wikikube
+spec:
+  selector:
+    matchLabels:
+      app: wikikube-pod
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: wikikube-pod
+    spec:
+      serviceAccountName: secret-read
+      containers:
+      - name: wikikube-pod
+        image: kianjay/wikikube:latest
+        ports:
+        - containerPort: 8000
