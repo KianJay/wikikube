@@ -1,8 +1,8 @@
-name: wikikube Docker Image Build & Push
+name: WiKiKube Push Docker Image Build & Slack
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
 jobs:
   docker:
     runs-on: ubuntu-latest
