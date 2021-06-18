@@ -3,10 +3,11 @@
 The purpose of this project is to build a web application and to demonstrate how we implement modern I.T Infrastructure. there is original K8s documentation in Korean. However, it has missing part of translations and lack of communications with Korean users. So, we decided to contribute to building Korean K8s community website for Korean users. The application is basically Kubernetes, also known as K8s, documentation in Korean that enumerates essential feature and its fundamental concepts providing sample hands-on tutorials to learn. Also, it can be communicated by user feedbacks and comments for better user experience.  
 
 ## Team Member
-* Duyoung Jang (Kian Jay) - Front-End & EKS, CI/CD, AWS Cloud Architect, Project Management  
-* Eunvit Jo - Full-Stack & EKS, CI/CD, AWS Cloud Architect, Cloud Security Engineering
-* Yunho Kang - Back-End & EKS, CI/CD, AWS Cloud Architect, DB Engineering
-* Wongyun Cho - Front-End & EKS, CI/CD, Monitoring, Cloud Security Engineering
+* Duyoung Jang (Kian Jay) - Front-End & EKS, CI/CD, AWS Cloud Architect, Project Management / https://github.com/KianJay
+* Eunvit Jo - Full-Stack & EKS, CI/CD, AWS Cloud Architect, Cloud Security Engineering / https://github.com/joeunlog
+* Yunho Kang - Back-End & EKS, CI/CD, AWS Cloud Architect, DB Engineering / https://github.com/kyh-cloud
+* Wongyun Cho - Front-End & EKS, CI/CD, Monitoring, Cloud Security Engineering / https://github.com/wgcho96
+
 
 ## Tools
 * Front-End: JavaScript, HTML5 and Bootstrap 
