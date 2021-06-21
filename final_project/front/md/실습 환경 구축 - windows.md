@@ -1,6 +1,6 @@
 # 실습 환경 구축
 
-
+<br>
 
 windows 패키지 관리자 chocolatey 설치
 
@@ -13,7 +13,7 @@ windows 패키지 관리자 chocolatey 설치
 * Vscode : 소스 코드 에디터 및 통합 개발 환경(IDE) vm 접속 및 vm(k8s)에서 사용하는 code 수정 에디터 입니다. 
 * Windows PowerShell : 시스템 관리 및 자동화 등을 목적으로 설계된 명령줄 쉘 스크립트팅 언어이며 linux 등에서 접해본 shell 과 상당히 유사하다.
 
-
+<br>
 
 **step1**
 
@@ -26,7 +26,7 @@ windows 패키지 관리자 chocolatey 설치
 2. Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 3. https://chocolatey.org/install ( 설치가 되지 않는다면 해당 url 에서 확인 )
 
-
+<br>
 
 **step2**
 
@@ -36,7 +36,7 @@ windows 패키지 관리자 chocolatey 설치
 
 1. choco install vagrant virtualbox vscode
 
-
+<br>
 
 **step3**
 

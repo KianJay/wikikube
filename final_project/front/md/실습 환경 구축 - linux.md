@@ -1,6 +1,6 @@
 # 실습 환경 구축
 
-
+<br>
 
 ubuntu-Linux 패키지 관리자 apt 사용하여 설치
 
@@ -9,7 +9,7 @@ ubuntu-Linux 패키지 관리자 apt 사용하여 설치
 * Virtual Box : VirtualBox 위에 시스템을 프로비저닝 하여 사용하기 위해 설치
 * Vagrant : vagrant 란 vm 관리 서비스 입니다.  code 및 스크립트 작성 된 파일 하나로 vm 생성 할 수 있는 도구 이다.
 
-  
+<br>
 
 
 **step1**
@@ -21,7 +21,7 @@ ubuntu-Linux 패키지 관리자 apt 사용하여 설치
 1. sudo apt update
 2. sudo apt install virtualbox
 
-
+<br>
 
 **step2**
 
@@ -32,7 +32,7 @@ ubuntu-Linux 패키지 관리자 apt 사용하여 설치
 1. curl -O https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.deb
 2. sudo apt install ./vagrant_2.2.6_x86_64.deb
 
-
+<br>
 
 **step3**
 

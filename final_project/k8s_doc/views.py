@@ -44,13 +44,9 @@ is_valid() 함수가 호출되면 값이 유효하다면 참이 리턴되고 cle
 @login_required
 def addComment(request):
     form = CommentForm(request.POST)
-    # print()
-    # print(request.POST.get('user_id'))
-    # print()
 
     if not request.user.is_authenticated:              # 로그인이 안돼있을 경우 not request.user
         return HttpResponseRedirect('../../accounts/login/')
-        # return render(request, 'login.html')
     else:
         if request.method == 'POST' or form.is_valid() :    # 유효성 검사 통과했을 경우
             post_id = request.POST.get('post_id', '').strip()
@@ -70,7 +66,6 @@ def addComment(request):
 def movetoEditComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)  # 댓글 호출
     post_id = comment.post_id
-    # post = Post.objects.get(pk=post_id)
 
     if not request.user.is_authenticated:
         messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
@@ -91,11 +86,9 @@ def movetoEditComment(request, comment_id):
 def editComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)                        # 댓글 호출
     post_id = comment.post_id
-    # post = Post.objects.get(pk=post_id)
 
     if request.method == "POST":
         comment.comment_content = request.POST['comment_content']   # 작성한 댓글 내용 업로드
-        # comment.com_create_date = timezone.now()
         comment.save()                                              # 댓글 저장
         post_id = comment.post_id
         return redirect('docs:viewPost', post_id.category, post_id.title) # 댓글 수정 후 댓글 작성된 게시글 페이지로 이동
@@ -106,7 +99,7 @@ def editComment(request, comment_id):
 def deleteComment(request, comment_id):
     comment = Comment.objects.get(pk=comment_id)
     post_id = comment.post_id
-    # post = Post.objects.get(pk=post_id)
+
     if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
         comment.delete()
     else:
@@ -115,15 +108,10 @@ def deleteComment(request, comment_id):
 
 
 def viewPost(request, category, title ):
-    # if not request.session.get("loginuser"):
-    #     return HttpResponseRedirect("/board/login")
     # 로그인을 안해도 페이지 열람가능
-    # post = Post.objects.get(category=category, title=title)
+
     post = get_object_or_404(Post, category=category, title=title)
     comments = Comment.objects.filter(post_id=post)
-    # content = post.content
-    # imgSrc = "my_app/" + post.content
-    # context = {'content': content, 'comments': comments}
 
     if request.user.is_authenticated: # 사용자가 로그인 상태일 때
         if Bookmark.objects.filter(book_user=request.user, post_id=post.id) is not None:
@@ -132,7 +120,6 @@ def viewPost(request, category, title ):
     else:
         context = {'post': post, 'comments': comments}
         return render(request, "postDetail.html", context)
-    # return HttpResponseRedirect(reverse('docs:viewPost', kwargs={'category': category, 'title': title}))
 
 
 def viewLogin(request):
@@ -144,9 +131,6 @@ def showBookmark(request):
         return HttpResponseRedirect('../../accounts/login/')
     else:
         bl = Bookmark.objects.filter(book_user=request.user)
-        # print(bl[0].post_id)
-        # print(type(bl[0].post_id))
-        # print(bl[0].post_id.title)
 
         postlist = []
         kotitlelist = []
@@ -185,46 +169,8 @@ class CreateUserView(CreateView):
     form_class = CreateUserForm
     success_url = reverse_lazy('create_user_done')
 
-
-# class RegisteredView(TemplateView):
-#     template_name = 'registration/signup_done.html'
-
-
-
 def index(request):
-    # post_list = Post.objects.all().order_by('-id')[0:10]
-    # post = post_list[0]
-    # context = {"post":post}
-
-    # context = {"post_list" : post_list}
-    # return render(request, 'index.html', context)
     return render(request, 'index.html')
-
-# def feedback(request):
-#     if request.method == 'POST':
-#         print(request)
-#     form_class = Feedbackform
-#     return render(request, 'feedback.html')
-
-# def forgetpw(request):
-#     if request.method == 'POST':
-#         first_name = request.POST.get("first_name")
-#         last_name = request.POST.get("last_name")
-#         email = request.POST.get("email")
-#         try:
-#             user = User.objects.get(first_name=first_name, last_name=last_name, email=email)
-#             if user:
-#                 # update_session_auth_hash(request, user)
-#                 context = {"user":user}
-#                 update_session_auth_hash(request, user)
-#                 form = PasswordChangeForm(user)
-#                 return render(request, 'registration/changepw.html', {'form':form})
-#         except:
-#             messages.error(request, f"No matching user")
-#             return render(request, 'registration/forgetpw.html')
-#     else:
-#         form = ForgetpwForm(request)
-#     return render(request, 'registration/forgetpw.html')
 
 class UserPasswordResetView(PasswordResetView):
     template_name = 'registration/forgetpw.html'
@@ -279,24 +225,6 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'registration/changepw.html', {'form':form})
-
-
-# class SearchFormView(FormView):
-#     form_class = PostSearchForm
-#     template_name = 'docs/search.html'
-#
-#     def form_valid(self, form):
-#         searchWord = form.cleaned_data['search_word']
-#         post_list = Post.objects.filter(Q(title=searchWord) | Q(content=searchWord)).distinct()
-#
-#         context = {}
-#         context['form'] = form
-#         context['search_term'] = searchWord
-#         context['object_list'] = post_list
-#
-#         return render(self.request, self.template_name, context)
-
-
  
 def search(request):
 
@@ -314,65 +242,3 @@ def search(request):
 
     else:
         return render(request, 'search.html')
-# def send_email(request):
-#     subject = "message"
-#     to = ["wikikubernetes@gmail.com"]
-#     from_email = "wikikubernetes@gmail.com"
-#     message = "email test"
-#     EmailMessage(subject=subject, body=message, to=to, from_email=from_email).send()
-
-
-# def login(request):
-#     # username = request.POST['login_name']
-#     # password = request.POST['login_pw']
-#     #
-#     # user = authenticate(request, username=username, password=password)
-#
-#     form = LoginForm(request.POST)
-#
-#     if form.is_valid():
-#         login_id = form.cleaned_data["login_id"]
-#         login_pw = form.cleaned_data["login_pw"]
-#         print(login_id, login_pw)
-#
-#         # if user is not None:
-#         #     login(request, user)
-#         #     return HttpResponseRedirect("/doc/viewIndex/")
-#
-#         try:
-#             user = User.objects.get(pk=login_id, user_password=login_pw)
-#             print(user)
-#             if user:
-#                 request.session["loginuser"] = user.user_name
-#                 request.session["loginid"] = user.user_id
-#                 return HttpResponseRedirect("/doc/viewIndex/")
-#             else:
-#                 messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
-#                 return redirect('/accounts/login/')
-#
-#         except(User.DoesNotExist):
-#             messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
-#             return redirect('/accounts/login/')
-#     else:
-#         messages.warning(request, "아이디 또는 비밀번호가 틀렸습니다")
-#         return redirect('/accounts/login/')
-
-
-'''  
-    if request.method == 'POST':
-        
-        if User.objects.filter(user_id=request.POST['login_id']).exists(): # 아이디 중복 체크 
-            messages.warning(request, "이미 존재하는 아이디입니다.")
-            return redirect('signup.html')
-
-        elif request.POST['login_pw'] == request.POST['pw_confirm']: # 비밀번호, 비밀번호 재입력란 일치하면 (아이디 중복 아니고)
-            user = User.objects.create(user_id=request.POST['login_id'], user_name=request.POST['login_name'], user_password=request.POST['login_pw'], user_dob=request.POST['login_birth'])
-            user.save()
-            return render(request, "login.html")
-
-        else: # 비밀번호, 비밀번호 재입력란 일치하지 않으면
-            messages.warning(request, "비밀번호가 서로 다릅니다")
-            return redirect('signup.html')
-
-    return render(request, 'signup.html')
-'''

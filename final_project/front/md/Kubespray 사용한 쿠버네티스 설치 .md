@@ -6,6 +6,8 @@
 
 ---
 
+<br>
+
 #### 테스트 환경
 
 * Master 1
@@ -17,11 +19,11 @@ Master & etcd : 192.168.201.11
 worker : 192.168.201.21 ~ 23
 ```
 
+<br>
 
+![kubespray 사용한 쿠버네티스 설치](./image/kubespray 사용한 쿠버네티스 설치 이미지1.PNG)
 
-사진 첨부예정
-
-
+<br>
 
 ##### Kubespray 받기 버전작성()
 
@@ -33,9 +35,7 @@ worker : 192.168.201.21 ~ 23
 4. sudo pip3 install -r requirements.txt
 ```
 
-[kubespray](url)참고
-
-
+<br>
 
 ##### SSH 키 인증 구성
 
@@ -46,6 +46,8 @@ ssh-copy-id vagrant@192.168.201.21
 ssh-copy-id vagrant@192.168.201.22
 ssh-copy-id vagrant@192.168.201.23
 ```
+
+<br>
 
 ##### 인벤토리 구성
 
@@ -77,6 +79,8 @@ kube-master
 kube-node
 ```
 
+<br>
+
 ##### /etc/resolv.conf 수정
 
 ```
@@ -84,6 +88,8 @@ nameserver 169.254.25.10
 search default.svc.cluster.local svc.cluster.local cluster.local
 options ndots:5
 ```
+
+<br>
 
 ##### 쿠버네티스 배포 및 플레이북 실행
 
@@ -96,7 +102,7 @@ ansible-playbook -i inventory/mycluster/inventory.ini cluster.yml -b    #playboo
 
 자세한 내용은 **[Ansible 명령어](url)** 참조
 
-
+<br>
 
 ##### kubeconfig 파일 복사
 
@@ -109,6 +115,8 @@ mkdir $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+
+<br>
 
 ##### kubectl 자동완성 기능
 
