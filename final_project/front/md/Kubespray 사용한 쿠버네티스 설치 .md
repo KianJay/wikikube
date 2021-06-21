@@ -21,7 +21,7 @@ worker : 192.168.201.21 ~ 23
 
 <br>
 
-![kubespray 사용한 쿠버네티스 설치](./image/kubespray 사용한 쿠버네티스 설치 이미지1.PNG)
+![image](https://user-images.githubusercontent.com/77868828/122776053-b4f17980-d2e5-11eb-92fa-04d7a0a3e9a3.png)
 
 <br>
 
