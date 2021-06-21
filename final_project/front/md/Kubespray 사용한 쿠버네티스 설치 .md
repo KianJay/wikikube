@@ -25,7 +25,7 @@ worker : 192.168.201.21 ~ 23
 
 <br>
 
-##### Kubespray 받기 버전작성()
+##### Kubespray 받기
 
 ```
 1. git clone --branch release-2.14 https://github.com/kubernetes-sigs/kubespray.git
