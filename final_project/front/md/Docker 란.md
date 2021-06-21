@@ -18,7 +18,13 @@
 
 <br>
 
-사진
+![docker 구조](./image/docker란 이미지1.png)
+
+<br>
+
+<img src="./image/docker란 이미지2.png" alt="docker 구조" style="zoom:80%;" />
+
+​														docker의 전체구조( 사진 자료=https://docs.docker.com/engine/docker-overview/)
 
 <br>
 
@@ -49,7 +55,9 @@
 
 <br>
 
-사진
+![docker 동작 구조](./image/docker란 이미지3.png)
+
+​																	docker 작동 구조(사진 자료=https://www.slideshare.net/rkawkxms/docker-container)
 
 <br>
 

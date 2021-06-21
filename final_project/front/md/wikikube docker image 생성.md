@@ -42,8 +42,6 @@ SHELL
 end
 ```
 
-위 내용은 [asad]<url> 참조
-
 <br>
 
 #### Step2
