@@ -34,12 +34,13 @@
           <div class="card">
             <div class="card-body">
               <strong>
-              <span><h4>쿠버네티스 이해하기</h4></span><p></p>
+              <span><h4>도커랑 쿠버네티스 이해하기</h4></span><p></p>
             </strong>
+              <a href="{% url 'docs:viewPost' category='docker' title='docker' %}">도커란</a><p></p>
+              <a href="{% url 'docs:viewPost' category='docker' title='commands' %}">도커 명령어</a><p></p>
               <a href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스란</a><p></p>
-              <a href="{% url 'docs:viewPost' category='kubernetes' title='elements' %}">쿠버네티스 구성 요소</a><p></p>
-              <a href="{% url 'docs:viewPost' category='kubernetes' title='terminology' %}">쿠버네티스 용어 정리</a><p></p>
-              <a href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}" class="btn btn-primary">바로 가기</a><p></p>
+              <a href="{% url 'docs:viewPost' category='kubernetes' title='commands' %}">kubectl 명령어</a><p></p>
+              <a href="{% url 'docs:viewPost' category='docker' title='docker' %}" class="btn btn-primary">바로 가기</a><p></p>
             </div>
           </div>
         </div>
@@ -49,6 +50,7 @@
               <strong>
                 <span><h4>실습 환경 구축</h4></span><p></p>
               </strong>
+                <a href="{% url 'docs:viewPost' category='environment' title='vagrant' %}">vagrant란 </a><p></p>
                 <a href="{% url 'docs:viewPost' category='environment' title='mac' %}">macOS에 가상환경 설치 </a><p></p>
                 <a href="{% url 'docs:viewPost' category='environment' title='linux' %}">리눅스에 가상환경 설치</a><p></p>
                 <a href="{% url 'docs:viewPost' category='environment' title='windows' %}">윈도우에 가상환경 설치</a><p></p>
@@ -68,7 +70,7 @@
               </strong>
                 <a href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}">kubespray 사용한 쿠버네티스 설치 </a><p></p>
                 <a href="{% url 'docs:viewPost' category='examples' title='apache_installation' %}">kubernetes에 Apache 설치 </a><p></p>
-                <a href="{% url 'docs:viewPost' category='examples' title='mysql_installation' %}">kubernetes에 mysql 설치</a><p></p>
+                <a href="{% url 'docs:viewPost' category='examples' title='image' %}">wikikube docker image 생성</a><p></p>
                 <a href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}" class="btn btn-primary">바로 가기</a><p></p>
             </div>
           </div>
@@ -79,10 +81,10 @@
               <strong>
                 <span><h4>부하분산 실습 및 예제</h4></span><p></p>
               </strong>
-                <a href="{% url 'docs:viewPost' category='lb' title='metallb' %}">MetalLb 설치 및 실습</a><p></p>
-                <a href="{% url 'docs:viewPost' category='lb' title='ingress' %}">Ingress 설치 및 실습</a><p></p>
-                <a href="{% url 'docs:viewPost' category='lb' title='hostpath' %}">hostpath 설치 및 실습</a><p></p>
-                <a href="{% url 'docs:viewPost' category='lb' title='metallb' %}" class="btn btn-primary">바로 가기</a><p></p>
+                <a>MetalLb 설치 및 실습</a><p></p>
+                <a>Ingress 설치 및 실습</a><p></p>
+                <a>hostpath 설치 및 실습</a><p></p>
+                <a class="btn btn-primary">바로 가기</a><p></p>
            </div>
           </div>
         </div>

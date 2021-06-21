@@ -134,16 +134,18 @@
 
         <li class="nav-item"><a class="nav-link {% if '/index' in request.path or '/' == request.path %}active{% endif %}" href="{% url 'index' %}">홈</a></li>
 
-        <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스 이해하기</a>
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='docker' title='docker' %}">도커랑 쿠버네티스 이해하기</a>
           <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/docker/docker' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='docker' title='docker' %}">도커란</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/docker/commands' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='docker' title='commands' %}">도커 명령어</a></li>
             <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='kubernetes' %}">쿠버네티스란</a></li>
-            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/elements' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='elements' %}">쿠버네티스 구성 요소</a></li>
-            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/terminology' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='terminology' %}">쿠버네티스 용어 정리</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes/commands' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='kubernetes' title='commands' %}">kubectl 명령어</a></li>
           </ul>
         </li>
 
         <li class="nav-item"><a class="nav-link {% if '/viewPost/environment' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='mac' %}">실습 환경 구축</a>
           <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/vagrant' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='vagrant' %}">vagrant란</a></li>
             <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/mac' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='mac' %}">macOS에 가상환경 설치</a></li>
             <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/linux' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='linux' %}">리눅스에 가상환경 설치</a></li>
             <li class="nav-item"><a class="nav-link {% if '/viewPost/environment/windows' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='environment' title='windows' %}">윈도우에 가상환경 설치</a></li>
@@ -154,15 +156,15 @@
           <ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/kub_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='kub_installation' %}">kubespray 사용한 쿠버네티스 설치</a></li>
             <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/apache_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='apache_installation' %}">kubernetes에 Apache 설치</a></li>
-            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/mysql_installation' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='mysql_installation' %}">kubernetes에 mysql 설치</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/examples/image' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='examples' title='image' %}">wikikube docker image 생성</a></li>
           </ul>
         </li>
 
-        <li class="nav-item"><a class="nav-link {% if '/viewPost/lb' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='metallb' %}">부하분산 실습 및 예제</a>
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/lb' in request.path %}active{% endif %}">부하분산 실습 및 예제</a>
           <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/metallb' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='metallb' %}">MetalLb 설치 및 실습</a></li>
-            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/ingress' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='ingress' %}">Ingress 설치 및 실습</a></li>
-            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/hostpath' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='lb' title='hostpath' %}">hostpath 설치 및 실습</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/metallb' in request.path %}active{% endif %}">MetalLb 설치 및 실습</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/ingress' in request.path %}active{% endif %}">Ingress 설치 및 실습</a></li>
+            <li class="nav-item"><a class="nav-link {% if '/viewPost/lb/hostpath' in request.path %}active{% endif %}">hostpath 설치 및 실습</a></li>
           </ul>
         </li>
 
