@@ -18,11 +18,11 @@
 
 <br>
 
-![docker 구조](./image/docker란 이미지1.png)
+![image](https://user-images.githubusercontent.com/77868828/122772176-10ba0380-d2e2-11eb-8ca3-e8822626008d.png)
 
 <br>
 
-<img src="./image/docker란 이미지2.png" alt="docker 구조" style="zoom:80%;" />
+![image](https://user-images.githubusercontent.com/77868828/122772206-1879a800-d2e2-11eb-9b93-c2743602553e.png)
 
 ​														docker의 전체구조( 사진 자료=https://docs.docker.com/engine/docker-overview/)
 
@@ -55,7 +55,7 @@
 
 <br>
 
-![docker 동작 구조](./image/docker란 이미지3.png)
+![image](https://user-images.githubusercontent.com/77868828/122772242-216a7980-d2e2-11eb-935b-d46e9ae652df.png)
 
 ​																	docker 작동 구조(사진 자료=https://www.slideshare.net/rkawkxms/docker-container)
 
