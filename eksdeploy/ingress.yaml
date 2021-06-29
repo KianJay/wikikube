@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    external-dns.alpha.kubernetes.io/hostname: wikikube.com
+    kubernetes.io/ingress.class: alb
+  name: wikikube-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: wikikube-lb
+          servicePort: 80
+        path: /
