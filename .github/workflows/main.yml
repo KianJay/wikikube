@@ -28,8 +28,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-#          tags: kianjay/wikikube:latest
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: kianjay/wikikube:v1.0
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
