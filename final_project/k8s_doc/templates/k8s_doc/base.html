@@ -54,7 +54,7 @@
 		
 		<!-- Logo --> 
         <a class="logo ml-md-3 "  href="{% url 'index' %}" title="iDocs Template"> <img src="{% static 'assets/images/logo.png' %}" height="auto" width="160px" alt="iDocs Template"/> </a> 
-		<span class="text-2 ml-2">v1.0</span> 
+		<span class="text-2 ml-2">v1.7</span>
         <!-- Logo End -->
         
 		<!-- Navbar Toggler -->
@@ -134,7 +134,7 @@
 
         <li class="nav-item"><a class="nav-link {% if '/index' in request.path or '/' == request.path %}active{% endif %}" href="{% url 'index' %}">홈</a></li>
 
-        <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='docker' title='docker' %}">도커랑 쿠버네티스 이해하기</a>
+        <li class="nav-item"><a class="nav-link {% if '/viewPost/kubernetes' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='docker' title='docker' %}">도커/쿠버네티스 이해하기</a>
           <ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link {% if '/viewPost/docker/docker' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='docker' title='docker' %}">도커란</a></li>
             <li class="nav-item"><a class="nav-link {% if '/viewPost/docker/commands' in request.path %}active{% endif %}" href="{% url 'docs:viewPost' category='docker' title='commands' %}">도커 명령어</a></li>
