@@ -10,7 +10,7 @@
 
 <br>
 
-![vagrant란](./image/vagrant란 이미지1.png)
+![image](https://user-images.githubusercontent.com/77868828/123751698-f809a900-d8f2-11eb-9ab2-6332f835f4d2.png)
 
 vagrant 아키텍쳐(사진 자료=https://youngmind.tistory.com/entry/Vagrant-%EC%84%A4%EC%B9%98%EC%99%80-%EA%B5%AC%EC%84%B1)
 
