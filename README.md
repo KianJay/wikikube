@@ -1,7 +1,7 @@
 # WiKiKube
 ## Motivation & The Purpose
 The purpose of this project is to build a web application and to demonstrate how we implemented modern I.T Infrastructure. There is an original K8s documentation in Korean. However, it has missing parts of translation and lack of communication with Korean users. So, we've decided to contribute by building Korean K8s community website for Korean users. The application is basically Kubernetes, also known as K8s, documentation in Korean that enumerates essential features and its fundamental concepts, providing sample hands-on tutorials to learn. Also, it can be communicated by user feedbacks and comments for better user experience.  
-
+Deployed by Route 53 - www.wikikube.com
 ## Team Member
 * Duyoung Jang (Kian Jay) - Front-End & EKS, CI/CD, AWS Cloud Architect, Project Management / https://github.com/KianJay
 * Eunvit Jo - Full-Stack & EKS, CI/CD, AWS Cloud Architect, Cloud Security Engineering / https://github.com/joeunlog
