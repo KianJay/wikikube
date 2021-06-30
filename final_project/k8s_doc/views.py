@@ -26,6 +26,8 @@ from django.core.mail.message import EmailMessage
 from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.template import RequestContext
+import tkinter
+from tkinter import messagebox
 
 try:
     from django.utils import simplejson as json
@@ -74,12 +76,17 @@ def movetoEditComment(request, comment_id):
         if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
             return render(request, 'editComment.html', {'comment': comment})
         else:
+            root = tkinter.Tk()
+            root.withdraw()
+
+            messagebox.showerror('권한 없음', '댓글을 수정할 권한이 없습니다.')
+
             """
             자바스크립트 알람을 통해서 1회성 메시지를 남기는 messages
             HttpRequest를 통해 남기며 1회성이기 때문에 새로고침하면 사라짐
             메시지 출력 방법은 https://ssungkang.tistory.com/entry/Djangomessage-framework-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0 참고
             """
-            messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
+            # messages.error(request, '댓글수정권한이 없습니다')                   # 현재는 축약된 방법으로 메시지를 저장
             return redirect('docs:viewPost', post_id.category, post_id.title)
 
 @login_required
@@ -103,7 +110,10 @@ def deleteComment(request, comment_id):
     if comment.user_id == request.user:  # 현재 로그인된 아이디와 작성된 댓글의 아이디가 동일하다면
         comment.delete()
     else:
-        messages.error(request, '댓글삭제권한이 없습니다')
+        root = tkinter.Tk()
+        root.withdraw()
+
+        messagebox.showerror('권한 없음', '댓글을 삭제할 권한이 없습니다.')
     return redirect('docs:viewPost', post_id.category, post_id.title)
 
 
