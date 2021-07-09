@@ -12,7 +12,7 @@ The purpose of this project is to build a web application and to demonstrate how
 ## Tools
 * Front-End: JavaScript, HTML5 and Bootstrap 
 * Back-end: Python Django framework, AWS API Gateway, AWS Lambda
-* Infrastructure & CI/CD: EKS, Docker, Slack, Terraform, GitHub Action and Argo CD
+* Infrastructure & CI/CD: EKS, Docker, AWS CloudFormation Slack, GitHub Action and Argo CD
 * For research methods, We employ K8s, Docker, Argo CD, EKS Terraform, and Django Documentations
 
 ## WiKiKube Pages
